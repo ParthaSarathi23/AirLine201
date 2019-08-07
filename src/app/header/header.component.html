@@ -22,7 +22,9 @@
       <h1>Welcome to Possible Airline!</h1>
       <span class="menu-spacer"></span>
       <span class = "filler"></span>
-    <mat-form-field>
+      <button mat-button routerLink="login">Login/Signup</button>
+    <!-- <mat-form-field>
+        <button mat-button>Click me!</button>
       <mat-select placeholder = "My Account" 
          [(ngModel)] = "selectedValue" name = "userTypes">
          <mat-option *ngFor = "let usertype of userTypes" 
@@ -30,7 +32,7 @@
             {{usertype.display}}
          </mat-option>
       </mat-select>
-   </mat-form-field>
+   </mat-form-field> -->
     </mat-toolbar-row>
   
     <mat-toolbar-row>
