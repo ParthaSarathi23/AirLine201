@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn:boolean;
   email:string;
   password:string;
+  name:string;
   title = 'airline-app';
   selectedValue: string; 
    userTypes: UserType[] = [
@@ -28,7 +29,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn=false;
     this.airlineService.showLogoutEvent.subscribe(
-      (name:String)=>{
+      (name:string)=>{
+        this.name=name;
         console.log(name);
          this.isLoggedIn=true;
       }
