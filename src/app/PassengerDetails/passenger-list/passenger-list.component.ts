@@ -2,13 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { Passenger } from 'src/app/Entity/Passenger';
 import { AirlineService } from 'src/app/airline.service';
+import { CdkColumnDef } from '@angular/cdk/table';
 @Component({
   selector: 'app-passenger-list',
   templateUrl: './passenger-list.component.html',
   styleUrls: ['./passenger-list.component.scss']
 })
 export class PassengerListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'email', 'passport','address','dob','disability','food','seatnumber','ischeckedin','infants','ancilarservices'];
+  displayedColumns = ['id', 'name', 'email', 'passport','address','dob','disability','food','seatnumber','ischeckedin','infants','ancilarservices','remove'];
   // passenger: Passenger[]= ;
   dataSource: MatTableDataSource<Passenger>;
 
