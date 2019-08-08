@@ -23,7 +23,7 @@
       <h1>Welcome to Possible Airline!</h1>
       <span class="menu-spacer"></span>
       <span class = "filler"></span>
-      <button mat-button data-toggle="modal" data-target="#modalLRForm">Login/Signup</button>
+      <button *ngIf="!isLoggedIn" mat-button data-toggle="modal" data-target="#modalLRForm">Login/Signup</button>
     <!-- <mat-form-field>
         <button mat-button>Click me!</button>
       <mat-select placeholder = "My Account" 
@@ -41,9 +41,9 @@
       </mat-toolbar-row>
   </mat-toolbar>
   
-  <mat-sidenav-container>
-   <mat-sidenav #sidenav>
-     <mat-nav-list>
+  <mat-sidenav-container >
+   <mat-sidenav #sidenav >
+     <mat-nav-list *ngIf="isLoggedIn">
  
        <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
        <a mat-list-item [routerLink]="'/create-account'"> Create Account </a>
@@ -51,7 +51,7 @@
        <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
        <a mat-list-item [routerLink]="'/activities'"> Activities </a>
        <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
-       <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a> 
+       <a mat-list-item  (click)="sidenav.toggle()" href="" mat-list-item>Close</a> 
  
      </mat-nav-list>
    </mat-sidenav>
@@ -96,19 +96,19 @@
             <!--Body-->
             <div class="modal-body justify-content-md-center">
                 <div class="container">
-                    <form>
+                    <form (ngSubmit)="login(f)" #f="ngForm">
                   <div class="form-group">
-                    <input type="email" class="form-control" id="email1" placeholder="Email" />
+                    <input type="email"  id="email1" placeholder="Email" name="email1" ngModel class="form-control" #email1="ngModel"/>
                   </div>
                   <div class="form-group">
-                    <input type="password" id="loginpassword" name="loginpassword" class="form-control pwd" data-toggle="password"
-                      placeholder="Password" />
+                    <input type="password" id="loginpassword"  class="form-control pwd" data-toggle="password"
+                      placeholder="Password" name="loginpassword" ngModel  #loginpassword="ngModel" />
                   </div>
                   <div class="form-group" style="float: right;">
                   <a href="javascript:;"><u>Forgot your password?</u></a>
                   </div>
                   <div class="form-group">
-                    <button type="button" class="btn btn-success btn-lg btn-block" style="background-color: rgba(0, 145, 0, 0.966)">Login</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-block" style="background-color: rgba(0, 145, 0, 0.966)" >Login</button>
                   </div>
                   
                   <div class="loginSeparator_3X-mB"><hr><div class="or_3koTd" style="font-weight: bold;">OR</div></div>
@@ -134,10 +134,10 @@
               <div class="container">
                 <form>
               <div class="form-group">
-                <input type="email" class="form-control" id="email1" placeholder="Email" />
+                <input type="email" class="form-control" id="email2" placeholder="Email" />
               </div>
               <div class="form-group">
-                <input type="password" id="loginpassword" name="loginpassword" class="form-control pwd" data-toggle="password"
+                <input type="password" id="loginpassword2" name="loginpassword2" class="form-control pwd" data-toggle="password"
                   placeholder="Create password" />
               </div>
               <div class="form-group">

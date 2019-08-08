@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
+import { AirlineService } from './airline.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { HeaderComponent } from './header/header.component';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [AirlineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
