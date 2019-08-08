@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-sm-4"></div>
+
+  <div class="col-sm-4">
+
+  <form (ngSubmit)="signUp(f)" #f="ngForm">
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="name" id="name" name="name" ngModel class="form-control" #name="ngModel" required>
+    <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name</span>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" ngModel #email="ngModel" class="form-control" required>
+    <span class="help-block" *ngIf="!email.valid && email.touched">Please enter email</span>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Passport</label>
+    <input name="passport" id="passport"  maxlength="10"
+    ngModel #passport="ngModel" class="form-control" required>
+    <div>
+   <span class="help-block" *ngIf="!passport.valid && passport.touched">Please enter a valid Passport</span>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" id="address" name="address" ngModel #address="ngModel" class="form-control" required>
+    <span class="help-block" *ngIf="!address.valid && address.touched">Please enter Addess</span>
+  </div>
+
+  <div class="form-group">
+    <label for="dob">DOB</label>
+    <input type="text" id="dob" name="dob" ngModel #dob="ngModel" class="form-control" required>
+    <span class="help-block" *ngIf="!dob.valid && dob.touched">Please enter DOB</span>
+  </div>
+
+  <div class="form-group">
+  <label for="dob">Select Disablity</label><br>
+  <mat-radio-group aria-label="Select Disablity">
+    <mat-radio-button value="1">Yes</mat-radio-button>
+    <mat-radio-button value="2">No</mat-radio-button>
+  </mat-radio-group>
+  </div>
+  <div class="form-group">
+  <mat-form-field>
+      <mat-label>Select Food</mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option>None</mat-option>
+        <mat-option value="option1">Veg</mat-option>
+        <mat-option value="option2">Non Veg</mat-option>
+        <mat-option value="option3">Egg</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+      <label for="setno">Seat No</label>
+      <input type="text" id="dob" name="dob" ngModel #dob="ngModel" class="form-control" required>
+      <span class="help-block" *ngIf="!dob.valid && dob.touched">Please enter SeatNo</span>
+    </div>
+    <div class="form-group">
+        <label for="dob">Checked In?</label><br>
+        <mat-radio-group aria-label="Checked In?">
+          <mat-radio-button value="1">Yes</mat-radio-button>
+          <mat-radio-button value="2">No</mat-radio-button>
+        </mat-radio-group>
+        </div>
+        <div class="form-group">
+            <label for="setno">Infants Count</label>
+            <input type="text" id="dob" name="dob" ngModel #dob="ngModel" class="form-control" required>
+            <span class="help-block" *ngIf="!dob.valid && dob.touched">Please enter Infants Count</span>
+          </div>
+
+          <div class="form-group">
+            
+    <section class="example-section">
+        <label for="setno">Ancilary Service</label><br>
+        <mat-checkbox class="example-margin" [(ngModel)]="Baggage">Baggage</mat-checkbox>
+        <mat-checkbox class="example-margin" [(ngModel)]="Food">Food</mat-checkbox>
+      </section>
+          </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-success" [disabled]="!f.valid">Save</button>
+  </div>
+  
+
+  </form>
+  </div>
+<div class="col-sm-4"></div>
+</div>

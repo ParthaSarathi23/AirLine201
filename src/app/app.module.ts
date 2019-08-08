@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule } from  '@angular/material';
+import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCheckboxModule } from  '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,14 +11,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { AirlineService } from './airline.service';
 import { PassengerListComponent } from './PassengerDetails/passenger-list/passenger-list.component';
-
+import { AddPassengerComponent } from './PassengerDetails/add-passenger/add-passenger.component';
+import { MatRadioModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
-    PassengerListComponent
+    PassengerListComponent,
+    AddPassengerComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,13 @@ import { PassengerListComponent } from './PassengerDetails/passenger-list/passen
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+        MatInputModule,
+        MatRadioModule,
+        MatCheckboxModule
   ],
   providers: [AirlineService],
   bootstrap: [AppComponent]

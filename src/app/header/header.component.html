@@ -46,13 +46,10 @@
    <mat-sidenav #sidenav >
      <mat-nav-list *ngIf="isLoggedIn">
  
-       <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
-       <a mat-list-item [routerLink]="'/create-account'"> Create Account </a>
-       <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
-       <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
-       <a mat-list-item [routerLink]="'/activities'"> Activities </a>
-       <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
-       <a mat-list-item  (click)="sidenav.toggle()" href="" mat-list-item>Close</a> 
+       <a mat-list-item [routerLink]="'/passenger-list'"> Passenger List </a>
+       <a mat-list-item [routerLink]="'/add-passenger'"> Add Passenger </a>
+       <a mat-list-item [routerLink]="'/logout'"> Logout </a>
+     
  
      </mat-nav-list>
    </mat-sidenav>
