@@ -10,13 +10,15 @@ import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { AirlineService } from './airline.service';
+import { PassengerListComponent } from './PassengerDetails/passenger-list/passenger-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    HeaderComponent
+    HeaderComponent,
+    PassengerListComponent
   ],
   imports: [
     BrowserModule,
