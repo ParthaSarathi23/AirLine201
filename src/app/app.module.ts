@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCheckboxModule } from  '@angular/material';
+import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatCardModule, MatDatepickerModule, MatNativeDateModule } from  '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { AirlineService } from './airline.service';
 import { PassengerListComponent } from './PassengerDetails/passenger-list/passenger-list.component';
 import { AddPassengerComponent } from './PassengerDetails/add-passenger/add-passenger.component';
 import { MatRadioModule } from '@angular/material';
+// import * as $ from 'jquery';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,10 @@ import { MatRadioModule } from '@angular/material';
     MatFormFieldModule,
         MatInputModule,
         MatRadioModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatCardModule,
+        MatDatepickerModule,
+         MatNativeDateModule 
   ],
   providers: [AirlineService],
   bootstrap: [AppComponent]

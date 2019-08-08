@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-4"></div>
 
   <div class="col-sm-4">
@@ -90,4 +90,108 @@
   </form>
   </div>
 <div class="col-sm-4"></div>
-</div>
+</div> -->
+
+
+<mat-card >
+  <mat-card-content style="text-align:center">
+  <h3>Passenger Form</h3>
+    <div class="row">
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput placeholder="Your name">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput placeholder="email">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput placeholder="passport">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date of birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <mat-select placeholder="Disablity">
+            <mat-option value="yes">Yes</mat-option>
+            <mat-option value="no">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <mat-select placeholder="Food">
+            <mat-option value="veg">Veg</mat-option>
+            <mat-option value="Non-veg">Non-Veg</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <mat-form-field>
+          <mat-select placeholder="Ancilary Service">
+            <mat-option value="veg">Veg</mat-option>
+            <mat-option value="Non-veg">Non-Veg</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput placeholder="Seat Number">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <mat-select placeholder="isCheckedin">
+            <mat-option value="Yes">yes</mat-option>
+            <mat-option value="No">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput placeholder="City">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <mat-form-field>
+          <input matInput placeholder="State">
+        </mat-form-field>
+      </div>
+      <div class="col-lg-2">
+        <div class="example-container">
+          <label>Infants: </label>
+          <mat-radio-group>
+            <mat-radio-button value="true">Yes</mat-radio-button>
+            <mat-radio-button value="false">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-lg">
+        <mat-form-field style="width: 50%;">
+          <textarea matInput placeholder="Address"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+</mat-card-content>
+</mat-card>

@@ -79,6 +79,14 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header> Ancilarservices </mat-header-cell>
           <mat-cell *matCellDef="let row" [style.color]="row.ancilarservices"> {{row.ancilarservices}} </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="remove">
+            <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent">
+                <mat-icon>pencil</mat-icon>
+               Edit
+            </button>  </mat-cell>
+          </ng-container>
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;">

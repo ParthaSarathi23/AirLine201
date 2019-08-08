@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AirlineService } from '../airline.service';
+// import * as $ from "jquery";
 
 export interface UserType {
   value: string;
