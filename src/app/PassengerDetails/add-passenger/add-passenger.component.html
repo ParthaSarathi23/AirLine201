@@ -111,54 +111,9 @@
 </form>
  -->
 
- <!doctype html>
-<title>Example</title>
-<style>
-  .myForm {
-    display: flex;
-    flex-direction: column;
-    background-color: beige;
-    border-radius: 3px;
-    padding: 1em;
-  }
-  .row {
-    display: flex;
-    justify-content: center;
-  }
-  .column {
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-  }
-  .input-group {
-   	display: flex;
-  }
-  .input-group > label {
-    margin-right: 1em; 
-    padding: .5em 0;
-  }
-  .myForm input,
-  .myForm select {
-    flex: 6; 
-    padding: .5em;
-    margin-bottom: 1em;
-  }
-  .myForm button {
-   padding: 1em; 
-    background: gray;
-    color: white;
-    border: 0;
-  }
-  .myForm fieldset {
-   	border: 0; 
-  }
-  .taxi > label,
-  .extras > label {
-    display: block;
-  }
-</style>
-<form class="myForm" (ngSubmit)="addPassenger(f)" #f="ngForm">
 
+
+<!-- <form class="myForm" (ngSubmit)="addPassenger(f)" #f="ngForm">
   <div class="row">
     <div class="column">
       <div class="input-group">
@@ -175,7 +130,7 @@
       </div>
       <div class="input-group">
         <label for="dob">Date Of Birth</label>
-        <input type="datetime-local" id="dob" name="dob" ngModel class="form-control" #dob="ngModel" required>
+        <input type="date" id="dob" name="dob" ngModel class="form-control" #dob="ngModel" required>
       </div>
       <div class="input-group">
         <label for="food">Food</label>
@@ -221,4 +176,158 @@
   <div class="row">
     <button type="submit" class="btn btn-success">Submit</button>
   </div>
-</form>
+</form> -->
+
+
+<div class="card">
+  <h5 class="card-header" style="text-align: center;">Create a new Passenger</h5>
+  <div class="card-body">
+    <form class="myForm" (ngSubmit)="addPassenger(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Full name" #name="ngModel"
+              required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input type="email" id="email" name="email" ngModel class="form-control" placeholder="Your E-mail" #email="ngModel" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
+            </div>
+            <input type="text" id="passport" name="passport" placeholder="Passport Number" ngModel class="form-control" #passport="ngModel" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-calendar-alt"></i> </span>
+            </div>
+            <input type="date" id="dob" name="dob" placeholder="Date of Birth" ngModel class="form-control" #dob="ngModel" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
+            </div>
+            <select id="food">
+              <option value="" selected="selected">Food Prefrence</option>
+              <option value="veg">Veg</option>
+              <option value="nonveg">NonVeg</option>
+              <option value="egg">Egg</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fas fa-wheelchair"></i> </span>
+            </div>
+            <input type="text" id="disablity" list="disablitys" placeholder="Are you person with disablity?">
+            <datalist id="disablitys">
+              <option value="Yes">
+              <option value="No">
+            </datalist>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-4">
+              <div class="form-group input-group">
+                <fieldset class="checkedin">
+                    <legend>Is CheckedIn?</legend>
+                    <label> <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes </label>
+                    <label> <input type="radio" id="no" value="no" name="radio" [(ngModel)]="radioData"> No </label>
+                  </fieldset>
+              </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group input-group">
+                  <fieldset class="ancilary">
+                      <legend>Ancilary</legend>
+                      <div *ngFor="let cbItem of cbArr">
+                        <label>
+                          <input type="checkbox" name="options" value="{{cbItem}}" [checked]="cbChecked.indexOf(cbItem) >= 0"
+                            (change)="updateCheckedOptions(cbItem, $event)" />
+                          {{cbItem}}
+                        </label>
+                      </div>
+                    </fieldset>
+                </div>
+              </div>
+      </div>
+      <button type="submit" class="btn btn-success" style="text-align: center;">Submit</button>
+    </form>
+      <!-- <div class="row">
+        <div class="col-lg-4">
+          <div class="input-group">
+            <label for="passport">Passport </label>
+            <input type="text" id="passport" name="passport" ngModel class="form-control" #passport="ngModel" required>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="input-group">
+            <label for="dob">Date Of Birth</label>
+            <input type="date" id="dob" name="dob" ngModel class="form-control" #dob="ngModel" required>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="food">Food</label>
+        <select id="food">
+          <option value="" selected="selected">Select One</option>
+          <option value="veg">Veg</option>
+          <option value="nonveg">NonVeg</option>
+          <option value="egg">Egg</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="disablity">Disability</label>
+        <input type="text" id="disablity" list="disablitys">
+        <datalist id="disablitys">
+          <option value="Yes">
+          <option value="No">
+        </datalist>
+      </div>
+
+      <div class="column">
+        <fieldset class="checkedin">
+          <legend>Is CheckedIn?</legend>
+          <label> <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes </label>
+          <label> <input type="radio" id="no" value="no" name="radio" [(ngModel)]="radioData"> No </label>
+        </fieldset>
+
+        <fieldset class="ancilary">
+          <legend>Ancilary</legend>
+          <div *ngFor="let cbItem of cbArr">
+            <label>
+              <input type="checkbox" name="options" value="{{cbItem}}" [checked]="cbChecked.indexOf(cbItem) >= 0"
+                (change)="updateCheckedOptions(cbItem, $event)" />
+              {{cbItem}}
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="row">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div> -->
+
+  </div>
+</div>

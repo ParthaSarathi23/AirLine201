@@ -1,30 +1,46 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-    // height: 100vh;
-//   display: flex;
-  justify-content: center;
-  align-items: center;
-  }
-  
-  .example-container > * {
-    width: 100%;
-  }
-  
-  .example-container form {
-    margin-bottom: 20px;
-  }
-  
-  .example-container form > * {
-    margin: 5px 0;
-  }
-  
-  .example-container .mat-radio-button {
-    margin: 0 12px;
-  }
 
-//   .mat-card,.row{
-//       width: 100%;
-//       text-align: center;
+//   .myForm {
+//     display: flex;
+//     flex-direction: column;
+//     background-color: beige;
+//     border-radius: 3px;
+//     padding: 1em;
 //   }
-  
+  .row {
+    display: flex;
+    justify-content: center;
+  }
+//   .column {
+//     display: flex;
+//     flex-direction: column;
+//     // padding: 1em;
+//   }
+//   .input-group {
+//    	display: flex;
+//   }
+//   .input-group > label {
+//     margin-right: 1em; 
+//     // padding: .5em 0;
+//   }
+  .myForm input,
+  .myForm select {
+    flex: 6; 
+    // padding: .5em;
+    // margin-bottom: 1em;
+  }
+//   .myForm button {
+//    padding: 1em; 
+//     background: gray;
+//     color: white;
+//     border: 0;
+//   }
+//   .myForm fieldset {
+//    	border: 0; 
+//   }
+//   .taxi > label,
+//   .extras > label {
+//     display: block;
+//   }
+// .card{
+//     text-align: center;
+// }
