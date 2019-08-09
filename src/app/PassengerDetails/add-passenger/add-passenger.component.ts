@@ -8,40 +8,60 @@ import { NgForm } from '@angular/forms';
 })
 export class AddPassengerComponent implements OnInit {
 
-  email:string;
-  name:string;
-  passport:string;
-  address:string;
-  dob:string;
-  disablity:string;
-  food:string;
-  seatno:string;
-  checkedin:string;
-  infantcount:string;
-  anicilary:string;
-
-  constructor() { }
+  email: string;
+  name: string;
+  passport: string;
+  address: string;
+  dob: string;
+  disablity: string;
+  food: string;
+  seatno: string;
+  checkedin: string;
+  infantcount: string;
+  anicilary: string;
+  cbArr: string[];
+  cbChecked: string[];
+  type: number;
+  constructor() {
+    this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
+    this.cbChecked = ['Shopping'];
+  }
 
   ngOnInit() {
   }
+  updateCheckedOptions(chBox, event) {
+    var cbIdx = this.cbChecked.indexOf(chBox);
+    if (event.target.checked) {
+      if (cbIdx < 0)
+        this.cbChecked.push(chBox);
+    } else {
+      if (cbIdx >= 0)
+        this.cbChecked.splice(cbIdx, 1);
+    }
+  }
 
-  addPassenger(form:NgForm){
+  updateOptions() {
+    console.log(this.cbChecked);
+  }
+  addPassenger(form: NgForm) {
+    this.updateOptions();
+
     console.log("sigin");
-    this.email=form.value.email;
-    this.name=form.value.name;
-    this.passport=form.value.passport;
-    this.address=form.value.address;
-    this.passport=form.value.passport;
-    this.dob=form.value.dob;
-    //this.disablity=form.value.disablity;
+    this.email = form.value.email;
+    this.name = form.value.name;
+    this.passport = form.value.passport;
+    //this.address=form.value.address;
+    this.dob = form.value.dob;
+    this.disablity = form.value.disablity;
 
-    this.food=form.value.food;
-    this.seatno=form.value.seatno;
-    //this.checkedin=form.value.checkedin;
-    this.infantcount=form.value.infantcount;
-   // this.anicilary=form.value.anicilary;
+    this.food = form.value.food;
+    this.seatno = form.value.seatno;
+    this.checkedin = form.value.checkedin;
+    this.infantcount = form.value.infantcount;
+    this.anicilary = form.value.anicilary;
+    
 
-    console.log(this.disablity +"**"+this.checkedin+"**"+this.anicilary );
+    
 
 
 

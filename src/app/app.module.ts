@@ -15,7 +15,7 @@ import { AirlineService } from './airline.service';
 import { PassengerListComponent } from './PassengerDetails/passenger-list/passenger-list.component';
 import { AddPassengerComponent } from './PassengerDetails/add-passenger/add-passenger.component';
 import { MatRadioModule } from '@angular/material';
-// import * as $ from 'jquery';
+ import * as $ from 'jquery';
 @NgModule({
   declarations: [
     AppComponent,
