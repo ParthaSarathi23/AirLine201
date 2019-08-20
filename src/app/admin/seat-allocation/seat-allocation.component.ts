@@ -14,9 +14,9 @@ export class SeatAllocationComponent implements OnInit {
   private seatmap = [];
   
   private seatChartConfig = {
-    showRowsLabel : false,
-    showRowWisePricing : false,
-    newSeatNoForRow : false
+    showRowsLabel : true,
+    showRowWisePricing : true,
+    newSeatNoForRow : true
   }
   
   private cart = {
@@ -28,7 +28,7 @@ export class SeatAllocationComponent implements OnInit {
   };
   
 
-  title = 'seat-chart-generator';
+  title = 'Airline Booking';
 
 
   ngOnInit(): void {
@@ -39,35 +39,43 @@ export class SeatAllocationComponent implements OnInit {
         "seat_map": [
           {
             "seat_label": "1",
-            "layout": "g_____"
+            "layout": "gggggggggg"
           },
           {
             "seat_label": "2",
-            "layout": "gg__gg"
+            "layout": "gggggggggg"
           },
           {
             "seat_label": "3",
-            "layout": "gg__gg"
+            "layout": "gggggggggg"
           },
           {
             "seat_label": "4",
-            "layout": "gg__gg"
+            "layout": "______"
           },
           {
             "seat_label": "5",
-            "layout": "gg__gg"
+            "layout": "______"
           },
           {
             "seat_label": "6",
-            "layout": "gg__gg"
+            "layout": "______"
           },
           {
             "seat_label": "7",
-            "layout": "gg__gg"
+            "layout": "______"
           },
           {
             "seat_label": "8",
-            "layout": "gggggg"
+            "layout": "gggggggggg"
+          },
+          {
+            "seat_label": "9",
+            "layout": "gggggggggg"
+          },
+          {
+            "seat_label": "10",
+            "layout": "gggggggggg"
           }
         ]
       }
