@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Hi {{data.name}}</h1>
+  <div mat-dialog-content>
+    
+    <p>Name :{{data.name}}</p>
+    <p>Email :{{data.email}}</p>
+    <p>Passport :{{data.passport}}</p>
+    <p>Address :{{data.address}}</p>
+    <p>DOB :{{data.dob}}</p>
+    <p>Disability :{{data.disability}}</p>
+    <p>Food :{{data.food}}</p>
+    <p>Seatnumber :{{data.seatnumber}}</p>
+    <p>ischeckedin :{{data.ischeckedin}}</p>
+    <p>Infants :{{data.infants}}</p>
+    <p>Aancilary Services :{{data.ancilarservices}}</p>
+
+
+    <!-- <mat-form-field>
+      <input matInput [(ngModel)]="data.animal">
+    </mat-form-field> -->
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Ok</button>
+    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+  </div>

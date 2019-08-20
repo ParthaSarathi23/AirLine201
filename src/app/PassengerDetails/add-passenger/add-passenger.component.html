@@ -189,7 +189,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
             </div>
-            <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Full name" #name="ngModel"
+            <input type="text" id="name" name="name" [(ngModel)]="name" class="form-control" placeholder="Full name" 
               required>
           </div>
         </div>
@@ -198,7 +198,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
-            <input type="email" id="email" name="email" ngModel class="form-control" placeholder="Your E-mail" #email="ngModel" required>
+            <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control" placeholder="Your E-mail" required>
           </div>
         </div>
       </div>

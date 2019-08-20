@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { AirlineService } from 'src/app/airline.service';
+import { Passenger } from 'src/app/Entity/Passenger';
 
 @Component({
   selector: 'app-add-passenger',
@@ -7,7 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./add-passenger.component.scss']
 })
 export class AddPassengerComponent implements OnInit {
-
+  id: number
   email: string;
   name: string;
   passport: string;
@@ -22,12 +25,27 @@ export class AddPassengerComponent implements OnInit {
   cbArr: string[];
   cbChecked: string[];
   type: number;
-  constructor() {
+  passengerParticularData: Passenger;
+
+  constructor(private route: ActivatedRoute, private router: Router,
+    private airlineService: AirlineService) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
   }
 
   ngOnInit() {
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = params['id'];
+        console.log(this.id);
+        this.passengerParticularData = this.airlineService.getParticularPassengerData(this.id);
+        this.updateView(this.passengerParticularData)
+      }
+    );
+  }
+  updateView(passenger:Passenger){
+      this.name=passenger.name;
+      this.email=passenger.email;
   }
   updateCheckedOptions(chBox, event) {
     var cbIdx = this.cbChecked.indexOf(chBox);
@@ -59,9 +77,9 @@ export class AddPassengerComponent implements OnInit {
     this.checkedin = form.value.checkedin;
     this.infantcount = form.value.infantcount;
     this.anicilary = form.value.anicilary;
-    
 
-    
+
+
 
 
 

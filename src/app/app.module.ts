@@ -16,6 +16,7 @@ import { PassengerListComponent } from './PassengerDetails/passenger-list/passen
 import { AddPassengerComponent } from './PassengerDetails/add-passenger/add-passenger.component';
 import { MatRadioModule } from '@angular/material';
  import * as $ from 'jquery';
+import { PassengerModalComponent } from './PassengerDetails/passenger-modal/passenger-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { MatRadioModule } from '@angular/material';
     DashboardComponent,
     HeaderComponent,
     PassengerListComponent,
-    AddPassengerComponent
+    AddPassengerComponent,
+    PassengerModalComponent
   ],
   imports: [
   //   AngularFireModule.initializeApp(environment.firebase),
@@ -49,6 +51,7 @@ import { MatRadioModule } from '@angular/material';
         MatDatepickerModule,
          MatNativeDateModule 
   ],
+  entryComponents: [PassengerModalComponent],
   providers: [AirlineService],
   bootstrap: [AppComponent]
 })

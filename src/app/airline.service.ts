@@ -69,6 +69,9 @@ export class AirlineService{
     getPassengerData(){
         return this.passengerData.slice();
     }
+    getParticularPassengerData(id:number){
+        return this.passengerData[id];
+    }
     updatePassenger(id:number,passengerData:Passenger){
         this.passengerData[id]=passengerData;
         console.log(this.passengerData[0].name);
