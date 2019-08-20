@@ -28,9 +28,8 @@
   
       <ng-container matColumnDef="details">
         <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
-        <mat-cell *matCellDef="let element"> 
-          <button mat-raised-button color="accent">
-           
+        <mat-cell *matCellDef="let row"> 
+          <button mat-raised-button color="accent" (click)="onDetailsClicked(row)">
             Details
         </button>  </mat-cell>
       </ng-container>
@@ -38,14 +37,14 @@
 
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-            <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent">
+            <mat-cell *matCellDef="let row"> <button mat-raised-button color="accent" (click)="onDetailsClicked(row)"> 
                
                Edit
             </button>  </mat-cell>
           </ng-container>
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent">
+            <mat-cell *matCellDef="let row"> <button mat-raised-button color="accent">
                Delete
             </button>  </mat-cell>
           </ng-container>

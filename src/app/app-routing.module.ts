@@ -9,6 +9,7 @@ const routes: Routes = [
   {path:'',component:DashboardComponent},
   {path:'login',component:LoginComponent},
   {path:'add-passenger',component:AddPassengerComponent},
+  { path : 'add-passenger/:id', component : AddPassengerComponent},
   {path:'passenger-list',component:PassengerListComponent},
 ];
 
