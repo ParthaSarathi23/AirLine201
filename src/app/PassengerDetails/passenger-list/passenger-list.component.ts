@@ -43,6 +43,11 @@ export class PassengerListComponent implements OnInit {
    // this.router.navigate(['add-passenger/'+ row.id]);
    this.openDialog(row);
 }
+onEditClicked(row) {
+  console.log('Row clicked: ', row);
+ this.router.navigate(['add-passenger/'+ row.id]);
+ 
+}
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

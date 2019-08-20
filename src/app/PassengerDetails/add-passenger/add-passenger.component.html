@@ -180,7 +180,10 @@
 
 
 <div class="card">
-  <h5 class="card-header" style="text-align: center;">Create a new Passenger</h5>
+    <h5 class="card-header" style="text-align: center;" *ngIf="!isFromEdit">Create a new Passenger</h5>
+
+  <h5 class="card-header" style="text-align: center;" *ngIf="isFromEdit">Edit Passenger</h5>
+
   <div class="card-body">
     <form class="myForm" (ngSubmit)="addPassenger(f)" #f="ngForm">
       <div class="row">

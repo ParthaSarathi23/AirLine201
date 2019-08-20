@@ -10,7 +10,8 @@ import { Passenger } from 'src/app/Entity/Passenger';
   styleUrls: ['./add-passenger.component.scss']
 })
 export class AddPassengerComponent implements OnInit {
-  id: number
+  isFromEdit:boolean;
+  id: number=0;
   email: string;
   name: string;
   passport: string;
@@ -34,18 +35,30 @@ export class AddPassengerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isFromEdit=false;
+    this.id=undefined;
+
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
-        console.log(this.id);
-        this.passengerParticularData = this.airlineService.getParticularPassengerData(this.id);
-        this.updateView(this.passengerParticularData)
+        if(this.id!==undefined){
+          this.isFromEdit=true;
+     
+          console.log(this.id);
+          this.passengerParticularData = this.airlineService.getParticularPassengerData(this.id);
+          this.updateView(this.passengerParticularData);
+        }
+    
       }
     );
+  console.log(this.isFromEdit);
   }
   updateView(passenger:Passenger){
       this.name=passenger.name;
       this.email=passenger.email;
+      this.infantcount=passenger.infants+"";
+      this.passport=passenger.passport;
+      this.seatno=passenger.seatnumber+"";
   }
   updateCheckedOptions(chBox, event) {
     var cbIdx = this.cbChecked.indexOf(chBox);
