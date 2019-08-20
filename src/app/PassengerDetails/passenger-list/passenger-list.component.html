@@ -1,11 +1,20 @@
-<div class="example-header">
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for passenger"/>
     </mat-form-field>
   </div>
+  <div class="col-md-2">
+    <button mat-raised-button style="background-color: rgb(0, 105, 16)" routerLink="/add-passenger"> 
+        <i class="fas fa-user-plus" style="color: white"> Add New Passenger</i></button>
+            </div>
+  </div>
+    
+  </div>
   
-  <div class="example-container mat-elevation-z8">
-  
+  <div class="container">
     <mat-table [dataSource]="dataSource" matSort>
   
       <!-- ID Column -->
@@ -29,30 +38,32 @@
       <ng-container matColumnDef="details">
         <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
         <mat-cell *matCellDef="let row"> 
-          <button mat-raised-button color="accent" (click)="onDetailsClicked(row)">
-            Details
+          <button mat-raised-button color="primary" (click)="onDetailsClicked(row)">
+            <!-- Details -->
+            <!-- <i class="fas fa-info-circle"></i> -->
+            <i class="fas fa-portrait"></i>
         </button>  </mat-cell>
       </ng-container>
      
 
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-            <mat-cell *matCellDef="let row"> <button mat-raised-button color="accent" (click)="onEditClicked(row)"> 
-               
-               Edit
+            <mat-cell *matCellDef="let row"> <button mat-raised-button style="background-color: rgb(255, 52, 86);" (click)="onEditClicked(row)"> 
+              <i class="fas fa-user-edit"></i>
+               <!-- Edit -->
             </button>  </mat-cell>
           </ng-container>
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let row"> <button mat-raised-button color="accent">
-               Delete
+            <mat-cell *matCellDef="let row"> <button mat-raised-button color="warn">
+                <i class="fas fa-trash"></i>
+               <!-- Delete -->
             </button>  </mat-cell>
           </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;">
       </mat-row>
     </mat-table>
-  
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
   
