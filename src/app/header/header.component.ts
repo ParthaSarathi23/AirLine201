@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AirlineService } from '../airline.service';
 // import * as $ from "jquery";
 
+declare var $:any;
+
 export interface UserType {
   value: string;
   display: string;
@@ -15,6 +17,7 @@ export interface UserType {
 })
 
 export class HeaderComponent implements OnInit {
+  
   isLoggedIn:boolean;
   email:string;
   password:string;
@@ -38,7 +41,10 @@ export class HeaderComponent implements OnInit {
       }
     );
   }
+  signuporlogin(){
+    $('#modalLRForm').modal('show');
 
+  }
   login(form:NgForm){
     console.log("sigin");
     this.email=form.value.email1;
