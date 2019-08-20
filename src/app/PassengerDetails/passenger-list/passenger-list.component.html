@@ -38,10 +38,10 @@
       <ng-container matColumnDef="details">
         <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
         <mat-cell *matCellDef="let row"> 
-          <button mat-raised-button color="primary" (click)="onDetailsClicked(row)">
+          <button mat-raised-button color="" (click)="onDetailsClicked(row)">
             <!-- Details -->
-            <!-- <i class="fas fa-info-circle"></i> -->
-            <i class="fas fa-portrait"></i>
+            <i class="fas fa-info-circle" style="color: blue;font-size: 1.4rem;"></i>
+            <!-- <i class="fas fa-portrait"></i> -->
         </button>  </mat-cell>
       </ng-container>
      
@@ -49,7 +49,7 @@
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
             <mat-cell *matCellDef="let row"> <button mat-raised-button style="background-color: rgb(255, 52, 86);" (click)="onEditClicked(row)"> 
-              <i class="fas fa-user-edit"></i>
+              <i class="fas fa-user-edit" style="color: white;"></i>
                <!-- Edit -->
             </button>  </mat-cell>
           </ng-container>
