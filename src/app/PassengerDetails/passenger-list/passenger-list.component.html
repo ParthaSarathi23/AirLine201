@@ -26,68 +26,29 @@
         <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
       </ng-container>
   
-      <!-- passport Column -->
-      <ng-container matColumnDef="passport">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Passport </mat-header-cell>
-        <mat-cell *matCellDef="let row" [style.color]="row.passport"> {{row.passport}} </mat-cell>
+      <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+        <mat-cell *matCellDef="let element"> 
+          <button mat-raised-button color="accent">
+           
+            Details
+        </button>  </mat-cell>
       </ng-container>
+     
 
-      <!-- address Column -->
-      <ng-container matColumnDef="address">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.address}} </mat-cell>
-        </ng-container>
-    
-        <!-- dob Column -->
-        <ng-container matColumnDef="dob">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> DOB </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.dob}} </mat-cell>
-        </ng-container>
-    
-        <!-- disability Column -->
-        <ng-container matColumnDef="disability">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Disablity </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.disability}} </mat-cell>
-        </ng-container>
-    
-        <!-- food Column -->
-        <ng-container matColumnDef="food">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Food </mat-header-cell>
-          <mat-cell *matCellDef="let row" [style.color]="row.food"> {{row.food}} </mat-cell>
-        </ng-container>
-
-        <!-- seatnumber Column -->
-      <ng-container matColumnDef="seatnumber">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> SeatNo </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.seatnumber}} </mat-cell>
-        </ng-container>
-    
-        <!-- ischeckedin Column -->
-        <ng-container matColumnDef="ischeckedin">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> IsCheckedIn </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.ischeckedin}} </mat-cell>
-        </ng-container>
-    
-        <!-- infants Column -->
-        <ng-container matColumnDef="infants">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Infants </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.infants}} </mat-cell>
-        </ng-container>
-    
-        <!-- ancilarservices Column -->
-        <ng-container matColumnDef="ancilarservices">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Ancilarservices </mat-header-cell>
-          <mat-cell *matCellDef="let row" [style.color]="row.ancilarservices"> {{row.ancilarservices}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="remove">
+        <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
             <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent">
-                <mat-icon>pencil</mat-icon>
+               
                Edit
             </button>  </mat-cell>
           </ng-container>
-  
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+            <mat-cell *matCellDef="let element"> <button mat-raised-button color="accent">
+               Delete
+            </button>  </mat-cell>
+          </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;">
       </mat-row>

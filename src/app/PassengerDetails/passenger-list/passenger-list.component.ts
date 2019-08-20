@@ -9,7 +9,7 @@ import { CdkColumnDef } from '@angular/cdk/table';
   styleUrls: ['./passenger-list.component.scss']
 })
 export class PassengerListComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'email', 'passport','address','dob','disability','food','seatnumber','ischeckedin','infants','ancilarservices','remove'];
+  displayedColumns = ['id', 'name', 'email','details', 'edit','delete'];
   // passenger: Passenger[]= ;
   dataSource: MatTableDataSource<Passenger>;
 
