@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AirlineService } from 'src/app/airline.service';
 import { Passenger } from 'src/app/Entity/Passenger';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-passenger',
@@ -27,13 +28,22 @@ export class AddPassengerComponent implements OnInit {
   cbChecked: string[];
   type: number;
   passengerParticularData: Passenger;
+  dateofbirth:Date;
+  foods:string[];
+  selectedfood:string;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
+    this.foods=['Veg','Nonveg'];
   }
-
+  parseDate(dateString: string): Date {
+    if (dateString) {
+        return new Date(dateString);
+    }
+    return null;
+}
   ngOnInit() {
     this.isFromEdit=false;
     this.id=undefined;
@@ -82,9 +92,11 @@ export class AddPassengerComponent implements OnInit {
     this.name = form.value.name;
     this.passport = form.value.passport;
     //this.address=form.value.address;
-    this.dob = form.value.dob;
+    
+    this.setDate(form.value.dob);
     this.disablity = form.value.disablity;
 
+    console.log(this.selectedfood);
     this.food = form.value.food;
     this.seatno = form.value.seatno;
     this.checkedin = form.value.checkedin;
@@ -96,5 +108,10 @@ export class AddPassengerComponent implements OnInit {
 
 
 
+  }
+  setDate(date:string){
+    let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
+
+    this.dob = formatedDate;
   }
 }

@@ -211,7 +211,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
-            <input type="text" id="passport" name="passport" placeholder="Passport Number" ngModel class="form-control" #passport="ngModel" required>
+            <input type="text" id="passport" name="passport" placeholder="Passport Number" [(ngModel)]="passport" class="form-control" required>
           </div>
         </div>
         <div class="col-md-4">
@@ -219,7 +219,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"><i class="fas fa-calendar-alt"></i> </span>
             </div>
-            <input type="date" id="dob" name="dob" placeholder="Date of Birth" ngModel class="form-control" #dob="ngModel" required>
+
+            <input type="date" id="dob" name="dob" placeholder="Date of Birth" [ngModel]="dob| date:'yyyy-MM-dd'" class="form-control"  (ngModelChange)="dob = $event" required>
           </div>
         </div>
       </div>
@@ -229,13 +230,14 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
-            <select id="food">
-              <option value="" selected="selected">Food Prefrence</option>
-              <option value="veg">Veg</option>
-              <option value="nonveg">NonVeg</option>
-              <option value="egg">Egg</option>
-            </select>
+                  <select  id="food"  class="form-control" name="food" [(ngModel)]="selectedfood" required>
+                      
+                    <option *ngFor="let food of foods" [ngValue]="food" [selected]="food=='Veg'"> {{food}} </option>
+              </select>
+     
+          
           </div>
+       
         </div>
         <div class="col-md-4">
           <div class="form-group input-group">
