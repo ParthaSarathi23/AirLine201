@@ -231,11 +231,9 @@
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
                   <select  id="food"  class="form-control" name="food" [(ngModel)]="selectedfood" required>
-                      
                     <option *ngFor="let food of foods" [ngValue]="food" [selected]="food=='Veg'"> {{food}} </option>
               </select>
-     
-          
+    
           </div>
        
         </div>

@@ -2,9 +2,9 @@ import { Subject } from 'rxjs';
 import { Passenger } from './Entity/Passenger';
 
 export class AirlineService {
-    showLogoutEvent = new Subject<String>();
+    showLogoutEvent = new Subject<String[]>();
     passengerChangedEvent = new Subject<Passenger[]>();
-
+    string: String[];
     passengerData: Passenger[] = [
         {
             id: 1, name: 'Subha', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'String', dob: '05/07/1991', disability: 'No', food: true, seatnumber: 1, ischeckedin: true, infants: 2, ancilarservices: true,
@@ -62,8 +62,9 @@ export class AirlineService {
         },
     ]
 
-    showLogout(email: String) {
-        this.showLogoutEvent.next(email);
+    showLogout(email: String,type:String) {
+        this.string= [email,type];
+        this.showLogoutEvent.next(this.string);
     }
 
     getPassengerData() {

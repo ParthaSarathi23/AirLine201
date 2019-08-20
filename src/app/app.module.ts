@@ -17,6 +17,7 @@ import { AddPassengerComponent } from './PassengerDetails/add-passenger/add-pass
 import { MatRadioModule } from '@angular/material';
  import * as $ from 'jquery';
 import { PassengerModalComponent } from './PassengerDetails/passenger-modal/passenger-modal.component';
+import { AdminComponent } from './admin/admin.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { PassengerModalComponent } from './PassengerDetails/passenger-modal/pass
     HeaderComponent,
     PassengerListComponent,
     AddPassengerComponent,
-    PassengerModalComponent
+    PassengerModalComponent,
+    AdminComponent
   ],
   imports: [
   //   AngularFireModule.initializeApp(environment.firebase),

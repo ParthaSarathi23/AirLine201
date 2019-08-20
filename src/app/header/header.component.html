@@ -24,7 +24,7 @@
       <span class="menu-spacer"></span>
       <span class = "filler"></span>
       <h1>{{name}}</h1>
-      <button *ngIf="!isLoggedIn" mat-button data-toggle="modal" 
+      <button *ngIf="!isLoggedIn && !isAdminLoggedIn" mat-button data-toggle="modal" 
       (click)="signuporlogin()">Login/Signup</button>
     <!-- <mat-form-field>
         <button mat-button>Click me!</button>
@@ -46,13 +46,15 @@
   <mat-sidenav-container >
    <mat-sidenav #sidenav >
      <mat-nav-list *ngIf="isLoggedIn">
- 
        <a mat-list-item [routerLink]="'/passenger-list'" (click)="sidenav.close()"> Passenger List </a>
        <a mat-list-item [routerLink]="'/add-passenger'" (click)="sidenav.close()"> Add Passenger </a>
        <a mat-list-item [routerLink]="'/logout'" (click)="sidenav.close()"> Logout </a>
-     
- 
      </mat-nav-list>
+     <mat-nav-list *ngIf="isAdminLoggedIn">
+        <a mat-list-item [routerLink]="'/passenger-list'" (click)="sidenav.close()"> Seat Allocation </a>
+        <a mat-list-item [routerLink]="'/add-passenger'" (click)="sidenav.close()"> Add Passenger </a>
+        <a mat-list-item [routerLink]="'/logout'" (click)="sidenav.close()"> Logout </a>
+      </mat-nav-list>
    </mat-sidenav>
    <mat-sidenav-content>
      <div style="height: 88vh;">
