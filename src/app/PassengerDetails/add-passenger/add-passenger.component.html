@@ -192,7 +192,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
             </div>
-            <input type="text" id="name" name="name" [(ngModel)]="name" class="form-control" placeholder="Full name" 
+            <input type="text" id="name" name="name" [(ngModel)]="name" class="form-control" placeholder="Full name"
               required>
           </div>
         </div>
@@ -201,7 +201,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
-            <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control" placeholder="Your E-mail" required>
+            <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control"
+              placeholder="Your E-mail" required>
           </div>
         </div>
       </div>
@@ -211,7 +212,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
-            <input type="text" id="passport" name="passport" placeholder="Passport Number" [(ngModel)]="passport" class="form-control" required>
+            <input type="text" id="passport" name="passport" placeholder="Passport Number" [(ngModel)]="passport"
+              class="form-control" required>
           </div>
         </div>
         <div class="col-md-4">
@@ -220,7 +222,8 @@
               <span class="input-group-text"><i class="fas fa-calendar-alt"></i> </span>
             </div>
 
-            <input type="date" id="dob" name="dob" placeholder="Date of Birth" [ngModel]="dob| date:'yyyy-MM-dd'" class="form-control"  (ngModelChange)="dob = $event" required>
+            <input type="date" id="dob" name="dob" placeholder="Date of Birth" [ngModel]="dob| date:'yyyy-MM-dd'"
+              class="form-control" (ngModelChange)="dob = $event" required>
           </div>
         </div>
       </div>
@@ -230,12 +233,12 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
-                  <select  id="food"  class="form-control" name="food" [(ngModel)]="selectedfood" required>
-                    <option *ngFor="let food of foods" [ngValue]="food" [selected]="food=='Veg'"> {{food}} </option>
-              </select>
-    
+            <select id="food" class="form-control" name="food" [(ngModel)]="selectedfood" required>
+              <option *ngFor="let food of foods" [ngValue]="food" [selected]="food=='Veg'"> {{food}} </option>
+            </select>
+
           </div>
-       
+
         </div>
         <div class="col-md-4">
           <div class="form-group input-group">
@@ -250,6 +253,35 @@
           </div>
         </div>
       </div>
+
+      <div class="row" *ngIf="isAdminLoggedIn">
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
+            </div>
+            <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
+              class="form-control" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <a  [routerLink]="'/seat-allocation'" > Seat Allocation</a>
+
+        </div>
+      </div>
+      <div class="row" *ngIf="isAdminLoggedIn">
+        <div class="col-md-8">
+          <div class="form-group input-group">
+
+            <textarea rows="4" cols="50" id="address" name="address" placeholder="Address" [(ngModel)]="address"
+              class="form-control" required></textarea>
+            </div>
+         
+          </div>
+       
+      </div>
+
+
       <div class="row">
           <div class="col-md-4">
               <div class="form-group input-group">
@@ -277,60 +309,6 @@
       </div>
       <button type="submit" class="btn btn-success" style="text-align: center;">Submit</button>
     </form>
-      <!-- <div class="row">
-        <div class="col-lg-4">
-          <div class="input-group">
-            <label for="passport">Passport </label>
-            <input type="text" id="passport" name="passport" ngModel class="form-control" #passport="ngModel" required>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="input-group">
-            <label for="dob">Date Of Birth</label>
-            <input type="date" id="dob" name="dob" ngModel class="form-control" #dob="ngModel" required>
-          </div>
-        </div>
-      </div>
-      <div class="input-group">
-        <label for="food">Food</label>
-        <select id="food">
-          <option value="" selected="selected">Select One</option>
-          <option value="veg">Veg</option>
-          <option value="nonveg">NonVeg</option>
-          <option value="egg">Egg</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <label for="disablity">Disability</label>
-        <input type="text" id="disablity" list="disablitys">
-        <datalist id="disablitys">
-          <option value="Yes">
-          <option value="No">
-        </datalist>
-      </div>
-
-      <div class="column">
-        <fieldset class="checkedin">
-          <legend>Is CheckedIn?</legend>
-          <label> <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes </label>
-          <label> <input type="radio" id="no" value="no" name="radio" [(ngModel)]="radioData"> No </label>
-        </fieldset>
-
-        <fieldset class="ancilary">
-          <legend>Ancilary</legend>
-          <div *ngFor="let cbItem of cbArr">
-            <label>
-              <input type="checkbox" name="options" value="{{cbItem}}" [checked]="cbChecked.indexOf(cbItem) >= 0"
-                (change)="updateCheckedOptions(cbItem, $event)" />
-              {{cbItem}}
-            </label>
-          </div>
-        </fieldset>
-      </div>
-
-      <div class="row">
-        <button type="submit" class="btn btn-success">Submit</button>
-      </div> -->
-
+   
   </div>
 </div>

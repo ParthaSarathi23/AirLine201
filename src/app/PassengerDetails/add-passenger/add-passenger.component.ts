@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AirlineService } from 'src/app/airline.service';
 import { Passenger } from 'src/app/Entity/Passenger';
 import { DatePipe } from '@angular/common';
+import { LoggedInStaus } from 'src/app/user/LoggedInStatus';
 
 @Component({
   selector: 'app-add-passenger',
@@ -31,6 +32,7 @@ export class AddPassengerComponent implements OnInit {
   dateofbirth:Date;
   foods:string[];
   selectedfood:string;
+  isAdminLoggedIn:boolean;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService) {
@@ -61,6 +63,19 @@ export class AddPassengerComponent implements OnInit {
     
       }
     );
+
+    var loggedInStatus: LoggedInStaus[] = [];
+
+    var retrievedObject = localStorage.getItem('loggedIn');
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    loggedInStatus = JSON.parse(retrievedObject);
+
+    if(loggedInStatus.length>0){
+      if (loggedInStatus[0].user === 'ADMIN' && loggedInStatus[0].isLoggedIn === true) {
+        this.isAdminLoggedIn = true;
+  
+      }
+    }
   console.log(this.isFromEdit);
   }
   updateView(passenger:Passenger){

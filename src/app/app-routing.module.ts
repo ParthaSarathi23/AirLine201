@@ -8,14 +8,13 @@ import { AdminComponent } from './admin/admin.component';
 import { SeatAllocationComponent } from './admin/seat-allocation/seat-allocation.component';
 
 const routes: Routes = [
-  {path:'',component:DashboardComponent},
-  {path:'login',component:LoginComponent},
-  {path:'admin',component:AdminComponent},
-  {path:'seat-allocation',component:SeatAllocationComponent},
-
-  {path:'add-passenger',component:AddPassengerComponent},
-  { path : 'add-passenger/:id', component : AddPassengerComponent},
-  {path:'passenger-list',component:PassengerListComponent},
+  { path: '', component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'seat-allocation', component: SeatAllocationComponent },
+  { path: 'add-passenger', component: AddPassengerComponent },
+  { path: 'add-passenger/:id', component: AddPassengerComponent },
+  { path: 'passenger-list', component: PassengerListComponent },
 ];
 
 @NgModule({
