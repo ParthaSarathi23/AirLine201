@@ -37,7 +37,7 @@
      </mat-nav-list>
      <mat-nav-list *ngIf="isAdminLoggedIn">
         <a mat-list-item [routerLink]="'/passenger-list'" (click)="sidenav.close()"> Passenger List </a>
-        <a mat-list-item [routerLink]="'/seat-allocation'" (click)="sidenav.close()"> Seat Allocation </a>
+        <!-- <a mat-list-item [routerLink]="'/seat-allocation'" (click)="sidenav.close()"> Seat Allocation </a> -->
         <!-- <a mat-list-item [routerLink]="'/add-passenger'" (click)="sidenav.close()"> Add Passenger </a> -->
         <a mat-list-item [routerLink]="'/login'" (click)="loggedOut()"> Logout </a>
       </mat-nav-list>

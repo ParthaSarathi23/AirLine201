@@ -50,6 +50,9 @@ export class PassengerListComponent implements OnInit {
     this.router.navigate(['add-passenger/' + row.id]);
 
   }
+  onDeleteClicked(row){
+    this.airlineService.deletePassenger(row.id);
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

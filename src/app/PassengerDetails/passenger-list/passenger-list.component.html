@@ -55,7 +55,7 @@
           </ng-container>
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let row"> <button mat-raised-button color="warn">
+            <mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="onDeleteClicked(row)">
                 <i class="fas fa-trash"></i>
                <!-- Delete -->
             </button>  </mat-cell>

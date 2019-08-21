@@ -197,12 +197,17 @@ export class SeatAllocationComponent implements OnInit {
   }
 
   public selectSeat(seatObject: any) {
+
     console.log("Seat to block: ", seatObject);
     if (seatObject.status == "available") {
+      if(this.cart.selectedSeats.length==0){
       seatObject.status = "booked";
       this.cart.selectedSeats.push(seatObject.seatLabel);
       this.cart.seatstoStore.push(seatObject.key);
       this.cart.totalamount += seatObject.price;
+      }else{
+        alert("Already One Seat Selected");
+      }
     }
     else if (seatObject.status = "booked") {
       seatObject.status = "available";
