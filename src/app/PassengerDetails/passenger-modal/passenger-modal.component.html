@@ -1,7 +1,6 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-  <div mat-dialog-content>
-    
-    <p>Name :{{data.name}}</p>
+<div mat-dialog-content>
+
+  <!-- <p>Name :{{data.name}}</p>
     <p>Email :{{data.email}}</p>
     <p>Passport :{{data.passport}}</p>
     <p>Address :{{data.address}}</p>
@@ -11,14 +10,34 @@
     <p>Seatnumber :{{data.seatnumber}}</p>
     <p>ischeckedin :{{data.ischeckedin}}</p>
     <p>Infants :{{data.infants}}</p>
-    <p>Aancilary Services :{{data.ancilarservices}}</p>
+    <p>Aancilary Services :{{data.ancilarservices}}</p> -->
 
+  <div class="row">
+    <div class="col-md-3">
+      <img class="img-left" src="assets/icon1.png" style="width: 10rem;height: 12rem;padding-right: 1em;padding-top: 3em;">
+    </div>
 
-    <!-- <mat-form-field>
-      <input matInput [(ngModel)]="data.animal">
-    </mat-form-field> -->
+    <div class="col-md-9">
+      <div class="content-heading">
+        <div class="row">
+          <div class="col-md-10">
+            <h3>{{data.name}}</h3>
+          </div>
+          <button mat-button (click)="onNoClick()"><b>Close</b></button>
+        </div>
+
+      </div>
+
+      <hr style="font-weight: bolder;">
+      <p><i class="fa fa-envelope"></i> {{data.email}} </p>
+      <p> <i class="fas fa-passport"></i> {{data.passport}} </p>
+      <p><i class="fas fa-calendar-alt"></i> {{data.dob}} </p>
+      <p> <i class="fas fa-utensils"></i> {{data.food}}</p>
+      <p><i class="fas fa-map-marked-alt"></i> {{data.address}}</p>
+      <p><i class="fas fa-wheelchair"></i> {{data.disability}}</p>
+      <p><i class="fas fa-baby-carriage"></i> {{data.infants}}</p>
+    </div>
   </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Ok</button>
-    <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
-  </div>
+  <!-- <div style="text-align: center;">
+    <button mat-button (click)="onNoClick()" >Ok</button>
+  </div> -->

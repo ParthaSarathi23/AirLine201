@@ -5,7 +5,7 @@ import { AirlineService } from 'src/app/airline.service';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { Router } from '@angular/router';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-passenger-list',
@@ -51,7 +51,29 @@ export class PassengerListComponent implements OnInit {
 
   }
   onDeleteClicked(row){
-    this.airlineService.deletePassenger(row.id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Want to delete '+row.name,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.airlineService.deletePassenger(row.id);
+        Swal.fire(
+          'Deleted!',
+          'Passenger Deleted Successfully!!',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Your data is safe :)',
+          'error'
+        )
+      }
+    })
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
