@@ -1,6 +1,6 @@
-$seat-available-bg: white;
+$seat-available-bg: rgb(218, 157, 65);
 $seat-available-color: #a0a0a0;
-$seat-booked-bg: #a0a0a0;
+$seat-booked-bg: #117e32;
 $seat-booked-color: white;
 $seat-unavailable-bg: black;
 $seat-unavailable-color: white;
@@ -56,10 +56,10 @@ $seat-unavailable-color: white;
 }
 .seat-unavailable
 {
-    // color: $seat-unavailable-color;
-    // background-color: $seat-unavailable-bg;
-    // font-weight: bolder;
-    // border: 1px solid $seat-unavailable-color;
+    color: $seat-unavailable-color;
+    background-color: $seat-unavailable-bg;
+    font-weight: bolder;
+    border: 1px solid $seat-unavailable-color;
 }
 .seat-booked
 {

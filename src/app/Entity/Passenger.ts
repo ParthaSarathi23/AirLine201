@@ -7,7 +7,7 @@ export interface Passenger{
     dob:string,
     disability:string,
     food:boolean,
-    seatnumber:number,
+    seatnumber:string,
     ischeckedin:boolean,
     infants:number,
     ancilarservices:boolean,
