@@ -4,6 +4,8 @@ import { Passenger } from './Entity/Passenger';
 export class AirlineService {
     showLogoutEvent = new Subject<String[]>();
     passengerChangedEvent = new Subject<Passenger[]>();
+    selectedSeats = new Subject<String[]>();
+
     string: String[];
     
     passengerData: Passenger[] = [
@@ -97,5 +99,8 @@ export class AirlineService {
         this.passengerChangedEvent.next(this.passengerData.slice());
     }
 
+   getSelectedSeats(seat:string[]){
+         this.selectedSeats.next(seat);
+   }
 
 }

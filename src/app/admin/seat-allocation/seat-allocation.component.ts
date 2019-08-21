@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AirlineService } from 'src/app/airline.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-seat-allocation',
@@ -8,12 +10,13 @@ import { AirlineService } from 'src/app/airline.service';
 })
 export class SeatAllocationComponent implements OnInit {
 
-  constructor(private airlineService: AirlineService) { }
+  constructor(private airlineService: AirlineService,private router:Router,private route:ActivatedRoute) { }
 
-
+  seat:string="";
   private seatConfig: any = null;
   private seatmap = [];
   private passengerSeatData = [];
+  private id=0;
   private seatChartConfig = {
     showRowsLabel: true,
     showRowWisePricing: false,
@@ -35,6 +38,13 @@ export class SeatAllocationComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = params['id'];
+        if(this.id!==undefined){
+         
+        }
+        });
     this.passengerSeatData = this.airlineService.getPassengerSeatData();
     //Process a simple bus layout
     this.seatConfig = [
@@ -63,14 +73,7 @@ export class SeatAllocationComponent implements OnInit {
             "seat_label": "",
             "layout": ""
           },
-          {
-            "seat_label": "",
-            "layout": ""
-          },
-          {
-            "seat_label": "",
-            "layout": ""
-          },
+          
           {
             "seat_label": "C",
             "layout": "gggggggggg"
@@ -238,6 +241,17 @@ export class SeatAllocationComponent implements OnInit {
 
       }
     }
+
+  }
+
+  processBooking(){
+    this.seat="";
+   // this.airlineService.getSelectedSeats(this.cart.selectedSeats);
+    var passengerData=this.airlineService.getParticularPassengerData(this.id);
+    this.seat=this.cart.selectedSeats.toString();
+    passengerData.seatnumber=this.seat;
+    this.airlineService.updatePassenger(this.id,passengerData);
+    this.router.navigate(['add-passenger/' + this.id]);
 
   }
 }

@@ -50,6 +50,15 @@ export class AddPassengerComponent implements OnInit {
     this.isFromEdit=false;
     this.id=undefined;
 
+
+    this.airlineService.selectedSeats.subscribe(
+      (string: string[]) => {
+        string.forEach(element => {
+             this.seatno=this.seatno+element;
+        });
+        
+      });
+
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
@@ -75,8 +84,13 @@ export class AddPassengerComponent implements OnInit {
         this.isAdminLoggedIn = true;
   
       }
+
     }
   console.log(this.isFromEdit);
+
+
+
+  
   }
   updateView(passenger:Passenger){
       this.name=passenger.name;
@@ -128,5 +142,9 @@ export class AddPassengerComponent implements OnInit {
     let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
 
     this.dob = formatedDate;
+  }
+  seatAllocation(){
+    this.router.navigate(['seat-allocation/' + this.id]);
+
   }
 }

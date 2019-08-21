@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'add-passenger', component: AddPassengerComponent },
   { path: 'add-passenger/:id', component: AddPassengerComponent },
   { path: 'passenger-list', component: PassengerListComponent },
+  { path: 'seat-allocation/:id', component: SeatAllocationComponent }
+
 ];
 
 @NgModule({
