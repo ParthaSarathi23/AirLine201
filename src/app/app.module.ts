@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatCardModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from  '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatCardModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { AngularFireModule } from '@angular/fire';
 // import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
@@ -15,12 +15,16 @@ import { AirlineService } from './airline.service';
 import { PassengerListComponent } from './PassengerDetails/passenger-list/passenger-list.component';
 import { AddPassengerComponent } from './PassengerDetails/add-passenger/add-passenger.component';
 import { MatRadioModule } from '@angular/material';
- import * as $ from 'jquery';
+import * as $ from 'jquery';
 import { PassengerModalComponent } from './PassengerDetails/passenger-modal/passenger-modal.component';
 import { AdminComponent } from './admin/admin.component';
 import { SeatAllocationComponent } from './admin/seat-allocation/seat-allocation.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { addPassengerDetails } from './reducer/Passenger.reducer';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,12 +36,13 @@ import { TooltipModule } from 'ngx-bootstrap';
     PassengerModalComponent,
     AdminComponent,
     SeatAllocationComponent
+    
   ],
   imports: [
     NgbModule,
     TooltipModule.forRoot(),
-  //   AngularFireModule.initializeApp(environment.firebase),
- 	// AngularFirestoreModule,
+    //   AngularFireModule.initializeApp(environment.firebase),
+    // AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -52,12 +57,14 @@ import { TooltipModule } from 'ngx-bootstrap';
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-        MatInputModule,
-        MatRadioModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatDatepickerModule,
-         MatNativeDateModule 
+    MatInputModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    StoreModule.forRoot({ passenger: addPassengerDetails }),
+
   ],
   entryComponents: [PassengerModalComponent],
   providers: [AirlineService],

@@ -1,13 +1,21 @@
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Passenger } from './Entity/Passenger';
+import { Store } from '@ngrx/store';
+import { AppState } from './app.state';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class AirlineService {
+
+    constructor(private store: Store<AppState>) {
+    }
+
     showLogoutEvent = new Subject<String[]>();
     passengerChangedEvent = new Subject<Passenger[]>();
     selectedSeats = new Subject<String[]>();
 
     string: String[];
-    
+    passengerDatas: Passenger[] = [];
     passengerData: Passenger[] = [
         {
             id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: true, infants: 2, ancilarservices: true,
@@ -65,21 +73,29 @@ export class AirlineService {
         },
     ]
 
-    showLogout(email: String,type:String) {
-        this.string= [email,type];
+    showLogout(email: String, type: String) {
+        this.string = [email, type];
         this.showLogoutEvent.next(this.string);
     }
 
     getPassengerData() {
-        return this.passengerData.slice();
+        this.passengerDatas = [];
+        this.store.select(state => state).subscribe(data => {
+            console.log('data', data.passenger);
+            data.passenger.forEach(element => {
+                this.passengerDatas.push(element);
+            });
+        });
+        console.log(this.passengerDatas.slice);
+        return this.passengerDatas.slice();
     }
     getPassengerSeatData() {
-        var seatArray:string[]=[];
+        var seatArray: string[] = [];
         this.passengerData.slice().forEach(map_element => {
             seatArray.push(map_element.seatnumber);
         });
         return seatArray;
-        }
+    }
     getParticularPassengerData(id: number) {
         return this.passengerData[id - 1];
     }
@@ -89,9 +105,10 @@ export class AirlineService {
         this.passengerChangedEvent.next(this.passengerData.slice());
     }
 
-    newPassenger(passengerData: Passenger) {
-        this.passengerData.push(passengerData);
-        this.passengerChangedEvent.next(this.passengerData.slice());
+    newPassenger(passengerData: Observable<Passenger[]>) {
+        console.log(passengerData);
+        //  this.passengerData.push(passengerData);
+        //  this.passengerChangedEvent.next(this.passengerData.slice());
     }
 
     deletePassenger(index: number) {
@@ -99,8 +116,8 @@ export class AirlineService {
         this.passengerChangedEvent.next(this.passengerData.slice());
     }
 
-   getSelectedSeats(seat:string[]){
-         this.selectedSeats.next(seat);
-   }
+    getSelectedSeats(seat: string[]) {
+        this.selectedSeats.next(seat);
+    }
 
 }

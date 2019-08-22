@@ -17,11 +17,16 @@
   <div class="container">
     <mat-table [dataSource]="dataSource" matSort>
   
-      <!-- ID Column -->
+     <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row; let i = index;"> {{i+1}} </mat-cell>
+      </ng-container>
+      
+      <!-- ID Column
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-      </ng-container>
+      </ng-container> -->
   
       <!-- name Column -->
       <ng-container matColumnDef="name">
@@ -48,7 +53,7 @@
 
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-            <mat-cell *matCellDef="let row"> <button mat-raised-button style="background-color: rgb(255, 52, 86);" (click)="onEditClicked(row)"> 
+            <mat-cell *matCellDef="let row; let i = index;"> <button mat-raised-button style="background-color: rgb(255, 52, 86);" (click)="onEditClicked(i+1)"> 
               <i class="fas fa-user-edit" style="color: white;"></i>
                <!-- Edit -->
             </button>  </mat-cell>

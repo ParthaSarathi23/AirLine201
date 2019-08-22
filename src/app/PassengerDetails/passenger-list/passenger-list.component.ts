@@ -45,9 +45,9 @@ export class PassengerListComponent implements OnInit {
     // this.router.navigate(['add-passenger/'+ row.id]);
     this.openDialog(row);
   }
-  onEditClicked(row) {
-    console.log('Row clicked: ', row);
-    this.router.navigate(['add-passenger/' + row.id]);
+  onEditClicked(id) {
+    console.log('Row clicked: ', id);
+    this.router.navigate(['add-passenger/' + id]);
 
   }
   onDeleteClicked(row){

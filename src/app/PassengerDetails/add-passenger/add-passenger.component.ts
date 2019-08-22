@@ -5,15 +5,19 @@ import { AirlineService } from 'src/app/airline.service';
 import { Passenger } from 'src/app/Entity/Passenger';
 import { DatePipe } from '@angular/common';
 import { LoggedInStaus } from 'src/app/user/LoggedInStatus';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-passenger',
   templateUrl: './add-passenger.component.html',
   styleUrls: ['./add-passenger.component.scss']
 })
+
 export class AddPassengerComponent implements OnInit {
   isFromEdit:boolean;
-  id: number=0;
+  id: number = 0;
   email: string;
   name: string;
   passport: string;
@@ -33,20 +37,30 @@ export class AddPassengerComponent implements OnInit {
   foods:string[];
   selectedfood:string;
   isAdminLoggedIn:boolean;
+  passengers: Passenger;
+
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private airlineService: AirlineService) {
+    private airlineService: AirlineService,private store: Store<AppState>) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
     this.foods=['Veg','Nonveg'];
+   // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
+     
+    //console.log(this.passengers);   
   }
+
   parseDate(dateString: string): Date {
     if (dateString) {
         return new Date(dateString);
     }
     return null;
 }
+
+
   ngOnInit() {
+   
+
     this.isFromEdit=false;
     this.id=undefined;
 
@@ -132,12 +146,18 @@ export class AddPassengerComponent implements OnInit {
     this.infantcount = form.value.infantcount;
     this.anicilary = form.value.anicilary;
 
-
-
-
-
-
-  }
+      
+      this.store.dispatch({
+        type: 'ADD_PASSENGER',
+        payload: <Passenger> {
+        
+          email: this.email,
+          name: this.name,
+        }
+      });
+    
+      this.router.navigate(['passenger-list']);
+    }
   setDate(date:string){
     let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
 
