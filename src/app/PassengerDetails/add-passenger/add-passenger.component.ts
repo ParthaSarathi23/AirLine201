@@ -8,6 +8,8 @@ import { LoggedInStaus } from 'src/app/user/LoggedInStatus';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
 
 @Component({
   selector: 'app-add-passenger',
@@ -35,13 +37,12 @@ export class AddPassengerComponent implements OnInit {
   passengerParticularData: Passenger;
   dateofbirth:Date;
   foods:string[];
-  selectedfood:string;
+  edit=0;
   isAdminLoggedIn:boolean;
   passengers: Passenger;
 
-
   constructor(private route: ActivatedRoute, private router: Router,
-    private airlineService: AirlineService,private store: Store<AppState>) {
+    private airlineService: AirlineService,private store: Store<AppState>,public dialog: MatDialog) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
     this.foods=['Veg','Nonveg'];
@@ -58,9 +59,19 @@ export class AddPassengerComponent implements OnInit {
 }
 
 
+openDialog(): void {
+  const dialogRef = this.dialog.open(PassengerModalComponent, {
+    width: '650px',
+    data: null
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    //this.e = result;
+  });
+}
+
   ngOnInit() {
    
-
     this.isFromEdit=false;
     this.id=undefined;
 
@@ -139,8 +150,8 @@ export class AddPassengerComponent implements OnInit {
     this.setDate(form.value.dob);
     this.disablity = form.value.disablity;
 
-    console.log(this.selectedfood);
-    this.food = form.value.food;
+    console.log(this.edit);
+    //this.food = form.value.food;
     this.seatno = form.value.seatno;
     this.checkedin = form.value.checkedin;
     this.infantcount = form.value.infantcount;
@@ -167,4 +178,5 @@ export class AddPassengerComponent implements OnInit {
     this.router.navigate(['seat-allocation/' + this.id]);
 
   }
+  
 }

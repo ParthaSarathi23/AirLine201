@@ -233,10 +233,19 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
-            <select id="food" class="form-control" name="food" [(ngModel)]="selectedfood" required>
-              <option *ngFor="let food of foods" [ngValue]="food" [selected]="food=='Veg'"> {{food}} </option>
+            <select name="edit" [(ngModel)]="edit">
+                <option value="0" disabled selected>Select your option</option>
+                <option *ngFor="let food of foods" [value]="food"> {{ food }}</option>
             </select>
-
+            <!-- <select  name="food" [(ngModel)]="food">
+                <option [ngValue]="undefined" disabled  selected> Please select one option </option>
+              <option *ngFor="let fooditem of foods" [ngValue]="food"> {{fooditem}} </option>
+            </select> -->
+            
+            <!-- <select name="edit" [(ngModel)]="edit">
+                <option [ngValue]="undefined" disabled  selected> Please select one option </option>
+                <option *ngFor="let select of list" [ngValue]="edit"> {{ select }}</option>
+              </select> -->
           </div>
 
         </div>
@@ -266,12 +275,12 @@
         </div>
         <div class="col-md-2">
 
-          <a  (click)="seatAllocation()"> Seat Allocation</a>
+          <a (click)="seatAllocation()"> Seat Allocation</a>
 
         </div>
         <div class="col-md-2">
-          <input type="text" id="seat" name="seat" placeholder="Seat No" [(ngModel)]="seatno"
-            class="form-control" disabled>
+          <input type="text" id="seat" name="seat" placeholder="Seat No" [(ngModel)]="seatno" class="form-control"
+            disabled>
         </div>
       </div>
       <div class="row" *ngIf="isAdminLoggedIn">
@@ -291,15 +300,17 @@
         <div class="col-md-4">
           <div class="form-group input-group">
             <fieldset class="checkedin">
-              <legend>Is CheckedIn?</legend>
-              <label> <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes </label>
+              <h5>Is CheckedIn?</h5>
+               <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes 
               <label> <input type="radio" id="no" value="no" name="radio" [(ngModel)]="radioData"> No </label>
             </fieldset>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-group input-group">
-            <fieldset class="ancilary">
+            <button type="button" class="btn btn-info" (click)="openDialog()">Ancilary Service</button>
+
+            <!-- <fieldset class="ancilary">
               <legend>Ancilary</legend>
               <div *ngFor="let cbItem of cbArr">
                 <label>
@@ -308,7 +319,7 @@
                   {{cbItem}}
                 </label>
               </div>
-            </fieldset>
+            </fieldset> -->
           </div>
         </div>
       </div>
@@ -316,6 +327,8 @@
         <button type="submit" class="btn btn-success">Submit</button>
       </div>
     </form>
-   
+
   </div>
+
 </div>
+

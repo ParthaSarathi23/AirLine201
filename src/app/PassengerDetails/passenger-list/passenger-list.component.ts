@@ -50,6 +50,7 @@ export class PassengerListComponent implements OnInit {
     this.router.navigate(['add-passenger/' + id]);
 
   }
+  
   onDeleteClicked(row){
     Swal.fire({
       title: 'Are you sure?',

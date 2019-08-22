@@ -6,6 +6,8 @@
 //     border-radius: 3px;
 //     padding: 1em;
 //   }
+.hideoption { display:none; visibility:hidden; height:0; font-size:0; }
+
   .row {
     display: flex;
     justify-content: center;
