@@ -1,5 +1,5 @@
 <br>
-<div class="container">
+<div class="container" *ngIf="dataSource.data.length>0">
   <div class="row">
     <div class="col-md-10">
     <mat-form-field>
@@ -14,7 +14,7 @@
     
   </div>
   
-  <div class="container">
+  <div class="container" *ngIf="noUser">
     <mat-table [dataSource]="dataSource" matSort>
   
      <ng-container matColumnDef="id">

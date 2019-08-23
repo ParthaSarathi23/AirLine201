@@ -12,8 +12,9 @@
     <p>Infants :{{data.infants}}</p>
     <p>Aancilary Services :{{data.ancilarservices}}</p> -->
 
-  <div class="row" *ngIf="data!=null">
+  <div class="row" *ngIf="data.length>0">
     <div class="col-md-3">
+        <h5>No f Found</h5>
       <img class="img-left" src="assets/icon1.png"
         style="width: 10rem;height: 12rem;padding-right: 1em;padding-top: 3em;">
     </div>
@@ -43,22 +44,22 @@
 
   <div class="row" *ngIf="data===null">
     <div class="col-md-4">
+        <h5>No f1 Found</h5>
       <p>Baggage :</p>
     </div>
     <div class="col-md-8">
       <div class="form-group input-group">
         <div class="input-group-prepend">
-          <span class="input-group-text"> <i class="fas fa-luggage-cart"></i>  </span>
+          <span class="input-group-text"> <i class="fas fa-luggage-cart"></i> </span>
         </div>
         <select name="bag" [(ngModel)]="bag">
-            <option value="0" disabled selected>Select your option</option>
-            <option *ngFor="let baggage of baggeges" [value]="baggage"> {{ baggage }}</option>
+          <option value="0" disabled selected>Select your option</option>
+          <option *ngFor="let baggage of baggeges" [value]="baggage"> {{ baggage }}</option>
         </select>
       </div>
     </div>
   </div>
-
-  <div class="row"  *ngIf="data===null">
+  <div class="row" *ngIf="data===null">
     <div class="col-md-4">
       <p>Wheel Chair :</p>
     </div>
@@ -68,31 +69,39 @@
           <span class="input-group-text"> <i class="fas fa-wheelchair"></i> </span>
         </div>
         <select name="chair" [(ngModel)]="chair">
-            <option value="0" disabled selected>Select your option</option>
-            <option *ngFor="let chair of chairs" [value]="chair"> {{ chair }}</option>
+          <option value="0" disabled selected>Select your option</option>
+          <option *ngFor="let chair of chairs" [value]="chair"> {{ chair }}</option>
         </select>
       </div>
     </div>
   </div>
-  <div class="row"  *ngIf="data===null">
-      <div class="col-md-4">
-        <p>Shopping:</p>
-      </div>
-      <div class="col-md-8">
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fas fa-suitcase-rolling"></i> </span>
-          </div>
-          <select name="shopping" [(ngModel)]="shopping">
-              <option value="0" disabled selected>Select your option</option>
-              <option *ngFor="let shopping of shoppings" [value]="shopping"> {{ shopping }}</option>
-          </select>
+  <div class="row" *ngIf="data===null">
+    <div class="col-md-4">
+      <p>Shopping:</p>
+    </div>
+    <div class="col-md-8">
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fas fa-suitcase-rolling"></i> </span>
         </div>
+        <select name="shopping" [(ngModel)]="shopping">
+          <option value="0" disabled selected>Select your option</option>
+          <option *ngFor="let shopping of shoppings" [value]="shopping"> {{ shopping }}</option>
+        </select>
       </div>
     </div>
-    <div style="text-align: center;">
-        <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+
+  <div class="row" *ngIf="data.length===0">
+      <div class="col-md-4">
+        <h5>No Data Found</h5>
       </div>
+      
+    </div>
+
+  <div style="text-align: center;">
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
 </div>
 
 

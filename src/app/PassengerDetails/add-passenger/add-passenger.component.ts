@@ -74,16 +74,14 @@ export class AddPassengerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //this.e = result;
+
     });
   }
 
   ngOnInit() {
 
     this.isFromEdit = false;
-    // var uniqueNo=this.uniqueNumber(1000);
-    // this.id=uniqueNo;
-    // this.mid=uniqueNo+'';
+
 
 
 
@@ -103,8 +101,8 @@ export class AddPassengerComponent implements OnInit {
           this.isFromEdit = true;
 
           console.log(this.id);
-           this.passenger= this.airlineService.getParticularPassengerData(+this.id);
-           this.updateView(this.passenger);
+          this.passenger = this.airlineService.getParticularPassengerData(+this.id);
+          this.updateView(this.passenger);
 
         }
 

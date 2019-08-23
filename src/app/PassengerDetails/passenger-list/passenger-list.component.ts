@@ -22,29 +22,31 @@ export class PassengerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog,private store: Store<AppState>) {
+  constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
     const users: Passenger[] = this.airlineService.getPassengerData();
-    this.dataSource = new MatTableDataSource(users);
+    if (users.length > 0) {
+      this.dataSource = new MatTableDataSource(users);
+    } else {
+      this.onNoData();
+    }
   }
 
   openDialog(row): void {
-    const dialogRef = this.dialog.open(PassengerModalComponent, {
-      width: '650px',
-      data: {
-        name: row.name, email: row.email, passport: row.passport, address: row.address,
-        dob: row.dob, disability: row.disability, food: row.food, seatnumber: row.seatnumber,
-        ischeckedin: row.ischeckedin, infants: row.infants, ancilarservices: row.ancilarservices
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      //this.e = result;
-    });
+    if (row !== null) {
+      const dialogRef = this.dialog.open(PassengerModalComponent, {
+        width: '650px',
+        data: {
+          name: row.name, email: row.email, passport: row.passport, address: row.address,
+          dob: row.dob, disability: row.disability, food: row.food, seatnumber: row.seatnumber,
+          ischeckedin: row.ischeckedin, infants: row.infants, ancilarservices: row.ancilarservices
+        }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    } 
   }
-
   onDetailsClicked(row) {
     console.log('Row clicked: ', row);
-    // this.router.navigate(['add-passenger/'+ row.id]);
     this.openDialog(row);
   }
   onEditClicked(row) {
@@ -52,12 +54,11 @@ export class PassengerListComponent implements OnInit {
     this.router.navigate(['add-passenger/' + row.id]);
 
   }
-  
-  onDeleteClicked(row){
-    //var passenger=this.airlineService.getParticularPassengerData(id);
+
+  onDeleteClicked(row) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Want to delete '+row.name,
+      text: 'Want to delete ' + row.name,
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -66,13 +67,13 @@ export class PassengerListComponent implements OnInit {
       if (result.value) {
         this.store.dispatch({
           type: 'REMOVE_PASSENGER',
-          payload: <Passenger> {
-            id:row.id,
+          payload: <Passenger>{
+            id: row.id,
             email: row.email,
             name: row.name,
           }
         });
-      //  this.airlineService.deletePassenger(row.id);
+        //  this.airlineService.deletePassenger(row.id);
         Swal.fire(
           'Deleted!',
           'Passenger Deleted Successfully!!',
@@ -89,18 +90,33 @@ export class PassengerListComponent implements OnInit {
       }
     })
   }
+
+  onNoData() {
+    Swal.fire({
+      title: 'No Data Found!',
+      text: 'Do you want to add new Passenger',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this.router.navigate(['add-passenger']);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        
+      }
+    })
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-
 
   ngOnInit() {
   }
