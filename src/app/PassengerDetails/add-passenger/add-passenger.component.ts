@@ -32,8 +32,8 @@ export class AddPassengerComponent implements OnInit {
   seatno: string;
   arrivaltime:string;
   depaturetime:string;
-  checkedin: string;
-  infantcount: string;
+  checkedin: number;
+  infantcount: number;
   anicilary: string;
   cbArr: string[];
   cbChecked: string[];
@@ -51,6 +51,9 @@ export class AddPassengerComponent implements OnInit {
   flights=[];
   selectedDeviceObj;
   flight:Flight;
+  wheelchair:number;
+  radioData;
+  infants;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
@@ -77,11 +80,12 @@ export class AddPassengerComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(PassengerModalComponent, {
       width: '650px',
-      data: null
+      data: [],
+     
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      console.log(result);
     });
   }
 
@@ -148,7 +152,7 @@ export class AddPassengerComponent implements OnInit {
   updateView(passenger: Passenger) {
     this.name = passenger.name;
     this.email = passenger.email;
-    this.infantcount = passenger.infants + "";
+    this.infantcount = passenger.infants;
     this.passport = passenger.passport;
     this.seatno = passenger.seatnumber + "";
     this.mid = passenger.id + '';
@@ -169,6 +173,12 @@ export class AddPassengerComponent implements OnInit {
   }
   addPassenger(form: NgForm) {
 
+    console.log(this.radioData);
+    if(this.radioData==='yes'){
+      this.checkedin=1;
+    }else{
+      this.checkedin=0;
+    }
     const uniqueNumber = (maxVal) => {
       const number = Math.floor((Math.random() * maxVal) + 1);
       if (!this.numbers.includes(number)) {
@@ -195,8 +205,8 @@ export class AddPassengerComponent implements OnInit {
     console.log(this.flightNo);
     //this.food = form.value.food;
     this.seatno = form.value.seatno;
-    this.checkedin = form.value.checkedin;
-    this.infantcount = form.value.infantcount;
+  //  this.checkedin = form.value.checkedin;
+    this.infantcount = form.value.infants;
     this.anicilary = form.value.anicilary;
 
     
@@ -207,7 +217,10 @@ export class AddPassengerComponent implements OnInit {
           id: +this.mid,
           email: this.email,
           name: this.name,
-          flight:this.flight.name
+          flight:this.flight.name,
+          ischeckedin:this.checkedin,
+          wheelchair:this.wheelchair,
+          infants:+this.infantcount
         }
       });
 

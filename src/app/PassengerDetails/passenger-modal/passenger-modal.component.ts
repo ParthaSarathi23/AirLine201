@@ -18,7 +18,7 @@ export class PassengerModalComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<PassengerModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Passenger) {
-      console.log(data);
+    console.log(data);
     this.baggeges = ['5 kg', '10 kg', '15 kg', '20 kg'];
     this.shoppings = ['shooping 1', 'shopping 2'];
     this.chairs = ['1', '2'];

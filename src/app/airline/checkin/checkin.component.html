@@ -41,13 +41,13 @@
       </ng-container>
    <!-- email Column -->
    <ng-container matColumnDef="passengerno">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> passengerno </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. Of Passengers </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.passengerNo}} </mat-cell>
     </ng-container>
       <ng-container matColumnDef="details">
         <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
-        <mat-cell *matCellDef="let row"> 
-          <button mat-raised-button color="" (click)="onDetailsClicked(row)">
+        <mat-cell *matCellDef="let row;let i = index;"> 
+          <button mat-raised-button color="" (click)="onDetailsClicked(row,i)">
             <!-- Details -->
             <i class="fas fa-info-circle" style="color: blue;font-size: 1.4rem;"></i>
             <!-- <i class="fas fa-portrait"></i> -->

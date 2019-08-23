@@ -8,8 +8,10 @@ export interface Passenger{
     disability:string,
     food:boolean,
     seatnumber:string,
-    ischeckedin:boolean,
+    ischeckedin:number,
     infants:number,
     ancilarservices:boolean,
     flight:string;
+    wheelchair:number,
+    
 }

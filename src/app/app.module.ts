@@ -25,6 +25,7 @@ import { StoreModule } from '@ngrx/store';
 import { addPassengerDetails } from './reducer/Passenger.reducer';
 import { CheckinComponent } from './airline/checkin/checkin.component';
 import { InflightComponent } from './airline/inflight/inflight.component';
+import { AirlineModalComponent } from './airline/airline-modal/airline-modal.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { InflightComponent } from './airline/inflight/inflight.component';
     AdminComponent,
     SeatAllocationComponent,
     CheckinComponent,
-    InflightComponent
+    InflightComponent,
+    AirlineModalComponent
     
   ],
   imports: [
@@ -70,7 +72,7 @@ import { InflightComponent } from './airline/inflight/inflight.component';
     StoreModule.forRoot({ passenger: addPassengerDetails }),
 
   ],
-  entryComponents: [PassengerModalComponent],
+  entryComponents: [PassengerModalComponent,AirlineModalComponent],
   providers: [AirlineService],
   bootstrap: [AppComponent]
 })

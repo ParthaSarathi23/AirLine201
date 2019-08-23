@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+
+  <!-- <p>Name :{{data.name}}</p>
+    <p>Email :{{data.email}}</p>
+    <p>Passport :{{data.passport}}</p>
+    <p>Address :{{data.address}}</p>
+    <p>DOB :{{data.dob}}</p>
+    <p>Disability :{{data.disability}}</p>
+    <p>Food :{{data.food}}</p>
+    <p>Seatnumber :{{data.seatnumber}}</p>
+    <p>ischeckedin :{{data.ischeckedin}}</p>
+    <p>Infants :{{data.infants}}</p>
+    <p>Aancilary Services :{{data.ancilarservices}}</p> -->
+
+  <div class="row">
+    <div class="col-md-3">
+      <img class="img-left" src="assets/icon1.png"
+        style="width: 10rem;height: 12rem;padding-right: 1em;padding-top: 3em;">
+    </div>
+
+    <div class="col-md-9">
+      <div class="content-heading">
+        <div class="row">
+          <div class="col-md-10">
+            <h3>{{data.name}}</h3>
+          </div>
+          <button mat-button (click)="onNoClick()"><b>Close</b></button>
+        </div>
+
+      </div>
+
+      <hr style="font-weight: bolder;">
+      <!-- <p><i class="fa fa-envelope"></i> {{data.id}} </p> -->
+      <p><i class="fas fa-calendar-alt"></i> DepatureTime: {{data.time}} </p>
+      <p><i class="fas fa-calendar-alt"></i> ArrivalTime: {{data.time}} </p>
+      <p> <i class="fas fa-passport"></i>Total No.Of Passengers: {{data.passengerNo}} </p>
+      <p><i class="fas fa-calendar-alt"></i>Total No.Of Passengers ChcekedIn: {{noOfChckedIn}} </p>
+      <p><i class="fas fa-calendar-alt"></i>Total No.Of Passengers Wheelechair: {{noOfWheeleChair}} </p>
+      <p><i class="fas fa-calendar-alt"></i>Total No.Of Passengers Infants: {{noInfants}} </p>
+
+    </div>
+  </div>
+  <div style="text-align: center;">
+    <button type="submit" class="btn btn-success">Hi</button>
+  </div>
+</div>
+
+
+<!-- <div style="text-align: center;">
+    <button mat-button (click)="onNoClick()" >Ok</button>
+  </div> -->

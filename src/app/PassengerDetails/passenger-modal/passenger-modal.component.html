@@ -12,9 +12,8 @@
     <p>Infants :{{data.infants}}</p>
     <p>Aancilary Services :{{data.ancilarservices}}</p> -->
 
-  <div class="row" *ngIf="data.length>0">
+  <div class="row" *ngIf="data.length!==0">
     <div class="col-md-3">
-        <h5>No f Found</h5>
       <img class="img-left" src="assets/icon1.png"
         style="width: 10rem;height: 12rem;padding-right: 1em;padding-top: 3em;">
     </div>
@@ -42,9 +41,8 @@
   </div>
 
 
-  <div class="row" *ngIf="data===null">
+  <div class="row" *ngIf="data.length===0">
     <div class="col-md-4">
-        <h5>No f1 Found</h5>
       <p>Baggage :</p>
     </div>
     <div class="col-md-8">
@@ -59,7 +57,7 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="data===null">
+  <div class="row" *ngIf="data.length===0">
     <div class="col-md-4">
       <p>Wheel Chair :</p>
     </div>
@@ -75,7 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="data===null">
+  <div class="row" *ngIf="data.length===0">
     <div class="col-md-4">
       <p>Shopping:</p>
     </div>
@@ -92,15 +90,9 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="data.length===0">
-      <div class="col-md-4">
-        <h5>No Data Found</h5>
-      </div>
-      
-    </div>
-
+  
   <div style="text-align: center;">
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="btn btn-success" >Submit</button>
   </div>
 </div>
 

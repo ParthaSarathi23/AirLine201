@@ -99,7 +99,6 @@ export class AirlineService {
         this.showLogoutEvent.next(this.string);
     }
     getFlightData() {
-    
         var seatArray: string[] = [];
         this.flightData.slice().forEach(map_element => {
             seatArray.push(map_element.name);
@@ -175,9 +174,11 @@ export class AirlineService {
         this.passenger=this.getParticularPassengerData(id);
             this.flightData.slice().forEach((flight,index) => {
                 if(this.passenger.flight==flight.name){
+                    this.flightData.slice()[index].passengerNo=this.flightData.slice()[index].passengerNo+1;
                     this.flightData.slice()[index].passengerDetails.push(this.passenger);
                 }
             });
+
         console.log(this.flightData.slice());
     }
 }
