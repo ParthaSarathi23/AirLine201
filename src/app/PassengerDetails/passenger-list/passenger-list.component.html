@@ -19,7 +19,7 @@
   
      <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-        <mat-cell *matCellDef="let row; let i = index;"> {{i+1}} </mat-cell>
+        <mat-cell *matCellDef="let row; let i = index;"> {{row.id}} </mat-cell>
       </ng-container>
       
       <!-- ID Column
@@ -53,14 +53,14 @@
 
         <ng-container matColumnDef="edit">
             <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
-            <mat-cell *matCellDef="let row; let i = index;"> <button mat-raised-button style="background-color: rgb(255, 52, 86);" (click)="onEditClicked(i+1)"> 
+            <mat-cell *matCellDef="let row; let i = index;"> <button mat-raised-button style="background-color: rgb(255, 52, 86);" (click)="onEditClicked(row)"> 
               <i class="fas fa-user-edit" style="color: white;"></i>
                <!-- Edit -->
             </button>  </mat-cell>
           </ng-container>
           <ng-container matColumnDef="delete">
             <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-            <mat-cell *matCellDef="let row"> <button mat-raised-button color="warn" (click)="onDeleteClicked(row)">
+            <mat-cell *matCellDef="let row; let i = index;"> <button mat-raised-button color="warn" (click)="onDeleteClicked(row)">
                 <i class="fas fa-trash"></i>
                <!-- Delete -->
             </button>  </mat-cell>

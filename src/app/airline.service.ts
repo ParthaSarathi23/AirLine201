@@ -13,7 +13,7 @@ export class AirlineService {
     showLogoutEvent = new Subject<String[]>();
     passengerChangedEvent = new Subject<Passenger[]>();
     selectedSeats = new Subject<String[]>();
-
+    passenger;
     string: String[];
     passengerDatas: Passenger[] = [];
     passengerData: Passenger[] = [
@@ -96,8 +96,16 @@ export class AirlineService {
         });
         return seatArray;
     }
-    getParticularPassengerData(id: number) {
-        return this.passengerData[id - 1];
+    getParticularPassengerData(id: number):any {
+        this.getPassengerData().forEach((p,index)=>{
+            console.log(p);
+            console.log(index);
+            if(p.id===id){
+              console.log(p);
+              this.passenger=p;
+            }
+        });
+      return this.passenger;
     }
     updatePassenger(id: number, passengerData: Passenger) {
         this.passengerData[id] = passengerData;
@@ -112,6 +120,7 @@ export class AirlineService {
     }
 
     deletePassenger(index: number) {
+        
         this.passengerData.splice(index, 1);
         this.passengerChangedEvent.next(this.passengerData.slice());
     }

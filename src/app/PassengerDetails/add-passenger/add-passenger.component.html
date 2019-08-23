@@ -186,7 +186,16 @@
 
   <div class="card-body">
     <form class="myForm" (ngSubmit)="addPassenger(f)" #f="ngForm">
+      <!-- <div class="row">
+          <div class="col-md-8">
+              <div class="form-group input-group">
+              <input type="text" id="id" name="id" placeholder="" [(ngModel)]="mid" class="form-control"
+              disabled>
+              </div>
+              </div>
+      </div> -->
       <div class="row">
+         
         <div class="col-md-4">
           <div class="form-group input-group">
             <div class="input-group-prepend">
@@ -301,7 +310,7 @@
           <div class="form-group input-group">
             <fieldset class="checkedin">
               <h5>Is CheckedIn?</h5>
-               <input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes 
+              <label><input type="radio" id="yes" value="yes" name="radio" [(ngModel)]="radioData"> Yes </label>
               <label> <input type="radio" id="no" value="no" name="radio" [(ngModel)]="radioData"> No </label>
             </fieldset>
           </div>

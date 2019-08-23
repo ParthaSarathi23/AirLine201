@@ -17,8 +17,9 @@ import { PassengerModalComponent } from '../passenger-modal/passenger-modal.comp
   styleUrls: ['./add-passenger.component.scss']
 })
 
+
 export class AddPassengerComponent implements OnInit {
-  isFromEdit:boolean;
+  isFromEdit: boolean;
   id: number = 0;
   email: string;
   name: string;
@@ -35,66 +36,78 @@ export class AddPassengerComponent implements OnInit {
   cbChecked: string[];
   type: number;
   passengerParticularData: Passenger;
-  dateofbirth:Date;
-  foods:string[];
-  edit=0;
-  isAdminLoggedIn:boolean;
+  dateofbirth: Date;
+  foods: string[];
+  edit = 0;
+  isAdminLoggedIn: boolean;
   passengers: Passenger;
+  numbers = [];
+  mid: string;
+  passenger;
+
+
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private airlineService: AirlineService,private store: Store<AppState>,public dialog: MatDialog) {
+    private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
-    this.foods=['Veg','Nonveg'];
-   // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
-     
+    this.foods = ['Veg', 'Nonveg'];
+
+    // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
+
     //console.log(this.passengers);   
   }
 
   parseDate(dateString: string): Date {
     if (dateString) {
-        return new Date(dateString);
+      return new Date(dateString);
     }
     return null;
-}
+  }
 
 
-openDialog(): void {
-  const dialogRef = this.dialog.open(PassengerModalComponent, {
-    width: '650px',
-    data: null
-  });
 
-  dialogRef.afterClosed().subscribe(result => {
-    //this.e = result;
-  });
-}
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PassengerModalComponent, {
+      width: '650px',
+      data: null
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //this.e = result;
+    });
+  }
 
   ngOnInit() {
-   
-    this.isFromEdit=false;
-    this.id=undefined;
+
+    this.isFromEdit = false;
+    // var uniqueNo=this.uniqueNumber(1000);
+    // this.id=uniqueNo;
+    // this.mid=uniqueNo+'';
+
 
 
     this.airlineService.selectedSeats.subscribe(
       (string: string[]) => {
         string.forEach(element => {
-             this.seatno=this.seatno+element;
+          this.seatno = this.seatno + element;
         });
-        
+
       });
 
     this.route.params.subscribe(
       (params: Params) => {
+        this.id = undefined;
         this.id = params['id'];
-        if(this.id!==undefined){
-          this.isFromEdit=true;
-     
+        if (this.id !== undefined) {
+          this.isFromEdit = true;
+
           console.log(this.id);
-          this.passengerParticularData = this.airlineService.getParticularPassengerData(this.id);
-          this.updateView(this.passengerParticularData);
+           this.passenger= this.airlineService.getParticularPassengerData(+this.id);
+           this.updateView(this.passenger);
+
         }
-    
+
       }
     );
 
@@ -104,25 +117,26 @@ openDialog(): void {
     console.log('retrievedObject: ', JSON.parse(retrievedObject));
     loggedInStatus = JSON.parse(retrievedObject);
 
-    if(loggedInStatus.length>0){
+    if (loggedInStatus.length > 0) {
       if (loggedInStatus[0].user === 'ADMIN' && loggedInStatus[0].isLoggedIn === true) {
         this.isAdminLoggedIn = true;
-  
+
       }
 
     }
-  console.log(this.isFromEdit);
+    console.log(this.isFromEdit);
 
 
 
-  
+
   }
-  updateView(passenger:Passenger){
-      this.name=passenger.name;
-      this.email=passenger.email;
-      this.infantcount=passenger.infants+"";
-      this.passport=passenger.passport;
-      this.seatno=passenger.seatnumber+"";
+  updateView(passenger: Passenger) {
+    this.name = passenger.name;
+    this.email = passenger.email;
+    this.infantcount = passenger.infants + "";
+    this.passport = passenger.passport;
+    this.seatno = passenger.seatnumber + "";
+    this.mid = passenger.id + '';
   }
   updateCheckedOptions(chBox, event) {
     var cbIdx = this.cbChecked.indexOf(chBox);
@@ -139,14 +153,27 @@ openDialog(): void {
     console.log(this.cbChecked);
   }
   addPassenger(form: NgForm) {
+
+    const uniqueNumber = (maxVal) => {
+      const number = Math.floor((Math.random() * maxVal) + 1);
+      if (!this.numbers.includes(number)) {
+        this.numbers.push(number);
+        return number;
+      } else if (this.numbers.length - 1 !== maxVal) {
+        uniqueNumber(maxVal);
+      }
+    }
+
+    this.mid = uniqueNumber(1000) + '';
     this.updateOptions();
 
     console.log("sigin");
+    // this.id = form.value.id;
     this.email = form.value.email;
     this.name = form.value.name;
     this.passport = form.value.passport;
     //this.address=form.value.address;
-    
+
     this.setDate(form.value.dob);
     this.disablity = form.value.disablity;
 
@@ -157,26 +184,36 @@ openDialog(): void {
     this.infantcount = form.value.infantcount;
     this.anicilary = form.value.anicilary;
 
-      
+    if (!this.isFromEdit) {
       this.store.dispatch({
         type: 'ADD_PASSENGER',
-        payload: <Passenger> {
-        
+        payload: <Passenger>{
+          id: +this.mid,
           email: this.email,
           name: this.name,
         }
       });
-    
+      this.router.navigate(['passenger-list']);
+    } else {
+      this.store.dispatch({
+        type: 'EDIT_PASSENGER',
+        payload: <Passenger>{
+          id: +this.id,
+          email: this.email,
+          name: this.name,
+        }
+      });
       this.router.navigate(['passenger-list']);
     }
-  setDate(date:string){
+  }
+  setDate(date: string) {
     let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
 
     this.dob = formatedDate;
   }
-  seatAllocation(){
+  seatAllocation() {
     this.router.navigate(['seat-allocation/' + this.id]);
 
   }
-  
+
 }

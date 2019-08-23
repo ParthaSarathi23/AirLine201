@@ -41,7 +41,7 @@
   </div>
 
 
-  <div class="row">
+  <div class="row" *ngIf="data===null">
     <div class="col-md-4">
       <p>Baggage :</p>
     </div>
@@ -58,7 +58,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row"  *ngIf="data===null">
     <div class="col-md-4">
       <p>Wheel Chair :</p>
     </div>
@@ -74,7 +74,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row"  *ngIf="data===null">
       <div class="col-md-4">
         <p>Shopping:</p>
       </div>

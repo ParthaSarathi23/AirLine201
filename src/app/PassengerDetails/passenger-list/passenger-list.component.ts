@@ -6,6 +6,8 @@ import { CdkColumnDef } from '@angular/cdk/table';
 import { Router } from '@angular/router';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
 import Swal from 'sweetalert2';
+import { AppState } from 'src/app/app.state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-passenger-list',
@@ -20,7 +22,7 @@ export class PassengerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog) {
+  constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog,private store: Store<AppState>) {
     const users: Passenger[] = this.airlineService.getPassengerData();
     this.dataSource = new MatTableDataSource(users);
   }
@@ -45,13 +47,14 @@ export class PassengerListComponent implements OnInit {
     // this.router.navigate(['add-passenger/'+ row.id]);
     this.openDialog(row);
   }
-  onEditClicked(id) {
-    console.log('Row clicked: ', id);
-    this.router.navigate(['add-passenger/' + id]);
+  onEditClicked(row) {
+    console.log('Row clicked: ', row);
+    this.router.navigate(['add-passenger/' + row.id]);
 
   }
   
   onDeleteClicked(row){
+    //var passenger=this.airlineService.getParticularPassengerData(id);
     Swal.fire({
       title: 'Are you sure?',
       text: 'Want to delete '+row.name,
@@ -61,12 +64,22 @@ export class PassengerListComponent implements OnInit {
       cancelButtonText: 'No, keep it'
     }).then((result) => {
       if (result.value) {
-        this.airlineService.deletePassenger(row.id);
+        this.store.dispatch({
+          type: 'REMOVE_PASSENGER',
+          payload: <Passenger> {
+            id:row.id,
+            email: row.email,
+            name: row.name,
+          }
+        });
+      //  this.airlineService.deletePassenger(row.id);
         Swal.fire(
           'Deleted!',
           'Passenger Deleted Successfully!!',
           'success'
         )
+        const users: Passenger[] = this.airlineService.getPassengerData();
+        this.dataSource = new MatTableDataSource(users);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
