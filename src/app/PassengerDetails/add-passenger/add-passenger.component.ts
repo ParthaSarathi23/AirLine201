@@ -138,7 +138,6 @@ export class AddPassengerComponent implements OnInit {
   }
  
   onItemChange(newObj:any) {
-    console.log(newObj);
     this.flight=this.airlineService.getParticularFlightDetails(newObj);
     var time=this.flight.time;
     this.depaturetime=time;
@@ -200,6 +199,7 @@ export class AddPassengerComponent implements OnInit {
     this.infantcount = form.value.infantcount;
     this.anicilary = form.value.anicilary;
 
+    
     if (!this.isFromEdit) {
       this.store.dispatch({
         type: 'ADD_PASSENGER',
@@ -210,6 +210,8 @@ export class AddPassengerComponent implements OnInit {
           flight:this.flight.name
         }
       });
+
+      this.airlineService.addFlightOnAddPassenger(+this.mid);
       this.router.navigate(['passenger-list']);
     } else {
       this.store.dispatch({

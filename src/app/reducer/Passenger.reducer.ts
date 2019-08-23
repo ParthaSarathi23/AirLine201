@@ -14,7 +14,6 @@ export function addPassengerDetails(state: Passenger[] = [], action) {
         case ADD_PASSENGER:
             return [...state, action.payload];
         case EDIT_PASSENGER:
-
             console.log(state);
             state.forEach((p, index) => {
                 console.log(p);

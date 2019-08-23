@@ -99,6 +99,7 @@ export class AirlineService {
         this.showLogoutEvent.next(this.string);
     }
     getFlightData() {
+    
         var seatArray: string[] = [];
         this.flightData.slice().forEach(map_element => {
             seatArray.push(map_element.name);
@@ -106,14 +107,12 @@ export class AirlineService {
         return seatArray;
     }
     getFlightDetails() {
+        console.log(this.flightData.slice());
        return this.flightData.slice();
     }
     getParticularFlightDetails(name) {
         this.getFlightDetails().forEach((p,index)=>{
-            console.log(p);
-            console.log(index);
             if(p.name===name){
-            
               this.flight=p;
             }
         });
@@ -122,14 +121,15 @@ export class AirlineService {
     getPassengerData() {
         this.passengerDatas = [];
         this.store.select(state => state).subscribe(data => {
-            console.log('data', data.passenger);
+          //  console.log('data', data.passenger);
             data.passenger.forEach(element => {
                 this.passengerDatas.push(element);
             });
         });
-        console.log(this.passengerDatas.slice);
+        //console.log(this.passengerDatas.slice);
         return this.passengerDatas.slice();
     }
+    
     getPassengerSeatData() {
         var seatArray: string[] = [];
         this.passengerData.slice().forEach(map_element => {
@@ -170,4 +170,14 @@ export class AirlineService {
         this.selectedSeats.next(seat);
     }
 
+    addFlightOnAddPassenger(id){
+        this.passenger=[];
+        this.passenger=this.getParticularPassengerData(id);
+            this.flightData.slice().forEach((flight,index) => {
+                if(this.passenger.flight==flight.name){
+                    this.flightData.slice()[index].passengerDetails.push(this.passenger);
+                }
+            });
+        console.log(this.flightData.slice());
+    }
 }
