@@ -23,6 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { addPassengerDetails } from './reducer/Passenger.reducer';
+import { CheckinComponent } from './airline/checkin/checkin.component';
+import { InflightComponent } from './airline/inflight/inflight.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { addPassengerDetails } from './reducer/Passenger.reducer';
     AddPassengerComponent,
     PassengerModalComponent,
     AdminComponent,
-    SeatAllocationComponent
+    SeatAllocationComponent,
+    CheckinComponent,
+    InflightComponent
     
   ],
   imports: [

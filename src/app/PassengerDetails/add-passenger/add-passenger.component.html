@@ -246,15 +246,6 @@
                 <option value="0" disabled selected>Select your option</option>
                 <option *ngFor="let food of foods" [value]="food"> {{ food }}</option>
             </select>
-            <!-- <select  name="food" [(ngModel)]="food">
-                <option [ngValue]="undefined" disabled  selected> Please select one option </option>
-              <option *ngFor="let fooditem of foods" [ngValue]="food"> {{fooditem}} </option>
-            </select> -->
-            
-            <!-- <select name="edit" [(ngModel)]="edit">
-                <option [ngValue]="undefined" disabled  selected> Please select one option </option>
-                <option *ngFor="let select of list" [ngValue]="edit"> {{ select }}</option>
-              </select> -->
           </div>
 
         </div>
@@ -272,26 +263,57 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="isAdminLoggedIn">
+      <div class="row">
         <div class="col-md-4">
           <div class="form-group input-group">
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
-            <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
-              class="form-control" required>
+
+            <!-- <select [ngModel]="flightNo" (ngModelChange)="onChangeObj($event)" name="flightNo">
+                <option value="0" disabled selected>Select your flight</option>
+                <option [ngValue]="i" *ngFor="let flight of flights">{{flight.name}}</option>
+              </select>
+
+              {{selectedDeviceObj | json}} -->
+           <select name="flightNo" [(ngModel)]="flightNo" 
+            (change)="onItemChange($event.target.value)">
+                <option value="0" disabled selected>Select your flight</option>
+                <option *ngFor="let flight of flights" [value]="flight"> {{ flight }}</option>
+            </select> 
           </div>
         </div>
         <div class="col-md-2">
-
-          <a (click)="seatAllocation()"> Seat Allocation</a>
-
-        </div>
+            <input type="text" id="depaturetime" name="depaturetime" placeholder="Depature Time" [(ngModel)]="depaturetime" class="form-control"
+              disabled>
+          </div>
         <div class="col-md-2">
-          <input type="text" id="seat" name="seat" placeholder="Seat No" [(ngModel)]="seatno" class="form-control"
-            disabled>
-        </div>
+            <input type="text" id="arrivaltime" name="arrivaltime" placeholder="ArraivalTime" [(ngModel)]="arrivaltime" class="form-control"
+              disabled>
+          </div>
+
+        
       </div>
+
+      <div class="row" >
+          <div class="col-md-4">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
+              </div>
+              <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
+                class="form-control" required>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <a (click)="seatAllocation()"> Seat Allocation</a>
+          </div>
+          <div class="col-md-2">
+            <input type="text" id="seat" name="seat" placeholder="Seat No" [(ngModel)]="seatno" class="form-control"
+              disabled>
+          </div>
+        </div>
+
       <div class="row" *ngIf="isAdminLoggedIn">
         <div class="col-md-8">
           <div class="form-group input-group">

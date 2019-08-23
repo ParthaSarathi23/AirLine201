@@ -31,8 +31,9 @@
   <mat-sidenav-container >
    <mat-sidenav #sidenav >
      <mat-nav-list *ngIf="isLoggedIn">
+        <a mat-list-item [routerLink]="'/flight-list'" (click)="sidenav.close()"> Flight List </a>
        <a mat-list-item [routerLink]="'/passenger-list'" (click)="sidenav.close()"> Passenger List </a>
-       <a mat-list-item [routerLink]="'/add-passenger'" (click)="sidenav.close()"> Add Passenger </a>
+       <a mat-list-item [routerLink]="'/in-flight'" (click)="sidenav.close()"> In Flight </a>
        <a mat-list-item [routerLink]="'/login'" (click)="loggedOut()"> Logout </a>
      </mat-nav-list>
      <mat-nav-list *ngIf="isAdminLoggedIn">

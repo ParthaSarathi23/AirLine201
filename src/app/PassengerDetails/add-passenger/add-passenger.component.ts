@@ -10,6 +10,7 @@ import { AppState } from 'src/app/app.state';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
+import { Flight } from 'src/app/Entity/Flight';
 
 @Component({
   selector: 'app-add-passenger',
@@ -29,6 +30,8 @@ export class AddPassengerComponent implements OnInit {
   disablity: string;
   food: string;
   seatno: string;
+  arrivaltime:string;
+  depaturetime:string;
   checkedin: string;
   infantcount: string;
   anicilary: string;
@@ -44,15 +47,19 @@ export class AddPassengerComponent implements OnInit {
   numbers = [];
   mid: string;
   passenger;
-
-
+  flightNo=0;
+  flights=[];
+  selectedDeviceObj;
+  flight:Flight;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
     this.foods = ['Veg', 'Nonveg'];
-
+    this.flights=this.airlineService.getFlightData();
+    this.selectedDeviceObj = this.flights[1];
+   
     // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
 
     //console.log(this.passengers);   
@@ -79,6 +86,7 @@ export class AddPassengerComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.flightNo);
 
     this.isFromEdit = false;
 
@@ -128,6 +136,16 @@ export class AddPassengerComponent implements OnInit {
 
 
   }
+ 
+  onItemChange(newObj:any) {
+    console.log(newObj);
+    this.flight=this.airlineService.getParticularFlightDetails(newObj);
+    var time=this.flight.time;
+    this.depaturetime=time;
+    this.arrivaltime=time;
+    // this.selectedDeviceObj = newObj;
+    // ... do other stuff here ...
+  }
   updateView(passenger: Passenger) {
     this.name = passenger.name;
     this.email = passenger.email;
@@ -175,7 +193,7 @@ export class AddPassengerComponent implements OnInit {
     this.setDate(form.value.dob);
     this.disablity = form.value.disablity;
 
-    console.log(this.edit);
+    console.log(this.flightNo);
     //this.food = form.value.food;
     this.seatno = form.value.seatno;
     this.checkedin = form.value.checkedin;
@@ -189,6 +207,7 @@ export class AddPassengerComponent implements OnInit {
           id: +this.mid,
           email: this.email,
           name: this.name,
+          flight:this.flight.name
         }
       });
       this.router.navigate(['passenger-list']);

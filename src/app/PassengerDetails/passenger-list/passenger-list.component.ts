@@ -22,6 +22,7 @@ export class PassengerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  
   constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
     const users: Passenger[] = this.airlineService.getPassengerData();
     if (users.length > 0) {

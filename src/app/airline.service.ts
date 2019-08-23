@@ -3,6 +3,7 @@ import { Passenger } from './Entity/Passenger';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { Injectable } from '@angular/core';
+import { Flight } from './Entity/Flight';
 
 @Injectable()
 export class AirlineService {
@@ -14,6 +15,7 @@ export class AirlineService {
     passengerChangedEvent = new Subject<Passenger[]>();
     selectedSeats = new Subject<String[]>();
     passenger;
+    flight;
     string: String[];
     passengerDatas: Passenger[] = [];
     passengerData: Passenger[] = [
@@ -73,11 +75,50 @@ export class AirlineService {
         },
     ]
 
+    
+    flightData:Flight[]=[
+        {
+            id: 1, name: 'Indigo235', time:'10:90',passengerNo:0,passengerDetails:[]
+        },
+        {
+            id: 2, name: 'Indigo990', time:'25:90',passengerNo:0,passengerDetails:[]
+        },
+        {
+            id: 3, name: 'Indigo789', time:'21:90',passengerNo:0,passengerDetails:[]
+        },
+        {
+            id: 4, name: 'Indigo555', time:'25:90',passengerNo:0,passengerDetails:[]
+        },
+        {
+            id: 5, name: 'Indigo231', time:'22:90',passengerNo:0,passengerDetails:[]
+        }
+
+    ];
     showLogout(email: String, type: String) {
         this.string = [email, type];
         this.showLogoutEvent.next(this.string);
     }
-
+    getFlightData() {
+        var seatArray: string[] = [];
+        this.flightData.slice().forEach(map_element => {
+            seatArray.push(map_element.name);
+        });
+        return seatArray;
+    }
+    getFlightDetails() {
+       return this.flightData.slice();
+    }
+    getParticularFlightDetails(name) {
+        this.getFlightDetails().forEach((p,index)=>{
+            console.log(p);
+            console.log(index);
+            if(p.name===name){
+            
+              this.flight=p;
+            }
+        });
+      return this.flight;
+    }
     getPassengerData() {
         this.passengerDatas = [];
         this.store.select(state => state).subscribe(data => {
