@@ -160,7 +160,6 @@ export class AirlineService {
     }
 
     deletePassenger(index: number) {
-        
         this.passengerData.splice(index, 1);
         this.passengerChangedEvent.next(this.passengerData.slice());
     }
@@ -176,6 +175,18 @@ export class AirlineService {
                 if(this.passenger.flight==flight.name){
                     this.flightData.slice()[index].passengerNo=this.flightData.slice()[index].passengerNo+1;
                     this.flightData.slice()[index].passengerDetails.push(this.passenger);
+                }
+            });
+
+        console.log(this.flightData.slice());
+    }
+    removePassengerFromFlight(id){
+        this.passenger=[];
+        this.passenger=this.getParticularPassengerData(id);
+            this.flightData.slice().forEach((flight,index) => {
+                if(this.passenger.flight==flight.name){
+                    this.flightData.slice()[index].passengerNo=this.flightData.slice()[index].passengerNo-1;
+                    this.flightData.slice()[index].passengerDetails.splice(index,1);
                 }
             });
 

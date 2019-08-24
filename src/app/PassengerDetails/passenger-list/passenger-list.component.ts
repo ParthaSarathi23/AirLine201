@@ -65,7 +65,9 @@ export class PassengerListComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, keep it'
     }).then((result) => {
+
       if (result.value) {
+        this.airlineService.removePassengerFromFlight(row.id);
         this.store.dispatch({
           type: 'REMOVE_PASSENGER',
           payload: <Passenger>{
@@ -75,12 +77,14 @@ export class PassengerListComponent implements OnInit {
           }
         });
         //  this.airlineService.deletePassenger(row.id);
+
         Swal.fire(
           'Deleted!',
           'Passenger Deleted Successfully!!',
           'success'
         )
         const users: Passenger[] = this.airlineService.getPassengerData();
+      
         this.dataSource = new MatTableDataSource(users);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
