@@ -29,6 +29,32 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  LinkedinLoginProvider,
+} from "angular-6-social-login";
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        // {
+        //   id: FacebookLoginProvider.PROVIDER_ID,
+        //   provider: new FacebookLoginProvider("Your-Facebook-Client-Id")
+        // },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("4207341406-v5u4ea4gsfj7fi5mf52faomeu48bs9s0.apps.googleusercontent.com")
+        },
+          {
+            id: LinkedinLoginProvider.PROVIDER_ID,
+            provider: new LinkedinLoginProvider("")
+          },
+      ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -55,6 +81,7 @@ import { HttpClientModule } from '@angular/common/http';
     //   AngularFireModule.initializeApp(environment.firebase),
     // AngularFirestoreModule,
     BrowserModule,
+    SocialLoginModule,
     AppRoutingModule,
     MatToolbarModule,
     MatSelectModule,
@@ -78,7 +105,12 @@ import { HttpClientModule } from '@angular/common/http';
 
   ],
   entryComponents: [PassengerModalComponent, AirlineModalComponent],
-  providers: [AirlineService],
+
+  providers: [AirlineService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

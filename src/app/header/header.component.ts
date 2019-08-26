@@ -4,6 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AirlineService } from '../airline.service';
 import { LoggedInStaus } from '../user/LoggedInStatus';
 // import * as $ from "jquery";
+import {
+  AuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  LinkedinLoginProvider
+} from 'angular-6-social-login';
 
 declare var $: any;
 
@@ -38,7 +44,7 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private airlineService: AirlineService) { }
+    private airlineService: AirlineService,private socialAuthService: AuthService) { }
 
   ngOnInit() {
     this.isLoggedIn = false;
@@ -133,4 +139,38 @@ export class HeaderComponent implements OnInit {
     this.isAdminLoggedIn = false;
     this.name="";
   }
+
+  socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    // if(socialPlatform == "facebook"){
+    //   socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    // }
+    if(socialPlatform == "google"){
+      alert();
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    } else if (socialPlatform == "linkedin") {
+      socialPlatformProvider = LinkedinLoginProvider.PROVIDER_ID;
+    }
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        // this.gotit=true;
+        console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+        // ...
+        // this.User.id=userData.id;
+        // this.User.name=userData.name;
+        // this.User.image=userData.image;
+        // this.User.provider=userData.provider;
+        //     console.log(userData.image);
+          
+        //     // console.log(userData.name);
+
+        // console.log(this.User);
+
+      }
+    );
+  }
+
+
 }
