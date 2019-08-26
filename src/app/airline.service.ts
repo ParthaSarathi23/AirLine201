@@ -61,7 +61,7 @@ export class AirlineService {
         }, {
             id: 20, name: 'Sai', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
         }, {
-            id: 21, name: 'Gungun', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
+            id: 21, name: 'Gungun', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 1 , infants: 2, ancilarservices: true,
         }, {
             id: 22, name: 'Ananya', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
         }, {
