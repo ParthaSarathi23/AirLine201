@@ -4,7 +4,6 @@ import { MatToolbarModule, MatSelectModule, MatSidenavModule, MatListModule, Mat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { AngularFireModule } from '@angular/fire';
 // import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +25,10 @@ import { addPassengerDetails } from './reducer/Passenger.reducer';
 import { CheckinComponent } from './airline/checkin/checkin.component';
 import { InflightComponent } from './airline/inflight/inflight.component';
 import { AirlineModalComponent } from './airline/airline-modal/airline-modal.component';
-
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -42,10 +44,13 @@ import { AirlineModalComponent } from './airline/airline-modal/airline-modal.com
     CheckinComponent,
     InflightComponent,
     AirlineModalComponent
-    
+
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     NgbModule,
+    HttpClientModule,
     TooltipModule.forRoot(),
     //   AngularFireModule.initializeApp(environment.firebase),
     // AngularFirestoreModule,
@@ -72,7 +77,7 @@ import { AirlineModalComponent } from './airline/airline-modal/airline-modal.com
     StoreModule.forRoot({ passenger: addPassengerDetails }),
 
   ],
-  entryComponents: [PassengerModalComponent,AirlineModalComponent],
+  entryComponents: [PassengerModalComponent, AirlineModalComponent],
   providers: [AirlineService],
   bootstrap: [AppComponent]
 })

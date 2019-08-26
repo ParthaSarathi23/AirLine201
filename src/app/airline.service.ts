@@ -4,11 +4,16 @@ import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { Injectable } from '@angular/core';
 import { Flight } from './Entity/Flight';
+import { FirebaseDatabase } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { reject } from 'q';
 
 @Injectable()
 export class AirlineService {
-
-    constructor(private store: Store<AppState>) {
+    
+    constructor(private store: Store<AppState>,private db:AngularFirestore,private http:HttpClient) {
     }
 
     showLogoutEvent = new Subject<String[]>();
@@ -20,61 +25,17 @@ export class AirlineService {
     passengerDatas: Passenger[] = [];
     passengerData: Passenger[] = [
         {
-            id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: true, infants: 2, ancilarservices: true,
+            id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: 0, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
         },
         {
-            id: 2, name: 'partha', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
+            id: 2, name: 'partha', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 0, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
         }, {
-            id: 3, name: 'sonali', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'A_1', ischeckedin: true, infants: 2, ancilarservices: true,
+            id: 3, name: 'sonali', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'A_1', ischeckedin: 1, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
         }, {
-            id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 5, name: 'Adrita', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 6, name: 'Gopi', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 7, name: 'Biswa', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 8, name: 'Abhisek', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'E_1', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 9, name: 'Swapna', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'E_2', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 10, name: 'Neel', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'E_4', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 11, name: 'Sanjib', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 12, name: 'Nidhi', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 13, name: 'Mohit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 14, name: 'Madhu', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 15, name: 'queen', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 16, name: 'Lipa', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 17, name: 'Abakash', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 18, name: 'Rinky', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 19, name: 'Satya', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 20, name: 'Sai', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 21, name: 'Gungun', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 22, name: 'Ananya', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 23, name: 'Ardhendu', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 24, name: 'Rajib', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 25, name: 'Arun', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        }, {
-            id: 26, name: 'Ashok', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: true, infants: 2, ancilarservices: true,
-        },
+            id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
+        }
     ]
-
+    coffees = ["Americano", "Flat White", "Cappuccino", "Latte", "Espresso", "Machiato", "Mocha", "Hot Chocolate", "Tea"];
     
     flightData:Flight[]=[
         {
@@ -94,6 +55,7 @@ export class AirlineService {
         }
 
     ];
+
     showLogout(email: String, type: String) {
         this.string = [email, type];
         this.showLogoutEvent.next(this.string);
@@ -122,13 +84,52 @@ export class AirlineService {
         this.store.select(state => state).subscribe(data => {
           //  console.log('data', data.passenger);
             data.passenger.forEach(element => {
-                this.passengerDatas.push(element);
+            this.passengerDatas.push(element);
             });
         });
+        
+      
+      // this.createUser(this.passengerDatas)
+	// .then(
+	//   res => {
+	  
+	//   }
+	//)
         //console.log(this.passengerDatas.slice);
         return this.passengerDatas.slice();
     }
+
     
+    addUser(){
+        return new Promise<any>((resolve, reject) => {
+            this.db
+              .collection("coffeeOrders")
+              .add(this.passengerData[0])
+              .then(res => {}, err => reject(err));
+          });
+
+        // this.passengerData.forEach(element => {
+        //     this.db
+        // .collection("passengers")
+        // .add(element)
+        // .then(res => {
+        //     console.log("**********"+res);
+        // }, err => reject(err));
+        // });
+          
+    }
+    getUsers() { 
+        return  this.db.collection("passengers").snapshotChanges();
+      }
+    // createUser(value){
+    //     if(value.length>0){
+    //     return this.db.collection('users').add({
+    //       name: value.name,
+    //       email: value.name,
+          
+    //     });
+    //   }
+    // }
     getPassengerSeatData() {
         var seatArray: string[] = [];
         this.passengerData.slice().forEach(map_element => {

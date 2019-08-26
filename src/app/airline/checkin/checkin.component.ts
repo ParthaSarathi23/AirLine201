@@ -16,12 +16,12 @@ export class CheckinComponent implements OnInit {
   displayedColumns = ['id', 'name', 'time', 'passengerno', 'details'];
   // passenger: Passenger[]= ;
   dataSource: MatTableDataSource<Flight>;
-   flight:Flight[];
+  flight: Flight[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
-     this.flight= this.airlineService.getFlightDetails();
+    this.flight = this.airlineService.getFlightDetails();
     if (this.flight.length > 0) {
       this.dataSource = new MatTableDataSource(this.flight);
     } else {
@@ -33,9 +33,9 @@ export class CheckinComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDetailsClicked(row,index) {
+  onDetailsClicked(row, index) {
 
-    if (row !== null && row.passengerNo!==0) {
+    if (row !== null && row.passengerNo !== 0) {
       const dialogRef = this.dialog.open(AirlineModalComponent, {
         width: '650px',
         data: {

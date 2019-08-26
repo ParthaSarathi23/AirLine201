@@ -32,7 +32,6 @@ export function addPassengerDetails(state: Passenger[] = [], action) {
             return state;
         case REMOVE_PASSENGER:
             console.log(state);
-
             state.forEach((p, index) => {
                 console.log(p);
                 console.log(index);

@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBcLH3DshWL0p53mTjHrNJtMYHJxmfZ4nA",
-    authDomain: "airline-2626e.firebaseapp.com",
-    databaseURL: "https://airline-2626e.firebaseio.com",
-    projectId: "airline-2626e",
-    storageBucket: "airline-2626e.appspot.com",
-    messagingSenderId: "499388801744",
-    appId: "1:499388801744:web:e92625f099285ba3"
+    apiKey: "AIzaSyAOY8eAjZUWmH_06Iazisfl-JkfSXrI5Sw",
+    authDomain: "airlineapp-e133e.firebaseapp.com",
+    databaseURL: "https://airlineapp-e133e.firebaseio.com",
+    projectId: "airlineapp-e133e",
+    storageBucket: "airlineapp-e133e.appspot.com",
+    messagingSenderId: "549027293896",
+    appId: "1:549027293896:web:0dc73e4b39941d17"
   }
 };
 
