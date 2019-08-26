@@ -22,7 +22,7 @@ export class PassengerListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  
+
   constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
     const users: Passenger[] = this.airlineService.getPassengerData();
     if (users.length > 0) {
@@ -44,7 +44,7 @@ export class PassengerListComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
       });
-    } 
+    }
   }
   onDetailsClicked(row) {
     console.log('Row clicked: ', row);
@@ -84,8 +84,11 @@ export class PassengerListComponent implements OnInit {
           'success'
         )
         const users: Passenger[] = this.airlineService.getPassengerData();
-      
-        this.dataSource = new MatTableDataSource(users);
+        if (users.length > 0) {
+          this.dataSource = new MatTableDataSource(users);
+        } else {
+          this.onNoData();
+        }
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled',
@@ -108,7 +111,7 @@ export class PassengerListComponent implements OnInit {
       if (result.value) {
         this.router.navigate(['add-passenger']);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        
+
       }
     })
   }
