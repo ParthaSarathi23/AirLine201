@@ -13,13 +13,13 @@ import { AirlineModalComponent } from '../airline-modal/airline-modal.component'
   styleUrls: ['./checkin.component.scss']
 })
 export class CheckinComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'time', 'passengerno', 'details'];
-  // passenger: Passenger[]= ;
+  displayedColumns = ['id', 'name', 'time', 'passengerno', 'details','passengerList'];
   dataSource: MatTableDataSource<Flight>;
   flight: Flight[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
   constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
     this.flight = this.airlineService.getFlightDetails();
     if (this.flight.length > 0) {
@@ -48,7 +48,15 @@ export class CheckinComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
       });
+    } else {
+      alert("No Passengers,So no details found");
     }
   }
-
+  onPassengerListClicked(row, index) {
+    if (row !== null && row.passengerNo !== 0) {
+      this.router.navigate(['passenger-list/' + row.id]);
+    }else{
+      alert("No Passengers,So no details found");
+    }
+  }
 }

@@ -3,7 +3,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MAT_DIALOG_DAT
 import { Passenger } from 'src/app/Entity/Passenger';
 import { AirlineService } from 'src/app/airline.service';
 import { CdkColumnDef } from '@angular/cdk/table';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
 import Swal from 'sweetalert2';
 import { AppState } from 'src/app/app.state';
@@ -16,6 +16,7 @@ import { Store } from '@ngrx/store';
 })
 export class PassengerListComponent implements OnInit {
   displayedColumns = ['id', 'name', 'email', 'details', 'edit', 'delete'];
+  id;
   // passenger: Passenger[]= ;
   dataSource: MatTableDataSource<Passenger>;
 
@@ -23,14 +24,10 @@ export class PassengerListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   passengers;
 
-  constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
+  constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>,
+    private route:ActivatedRoute) {
 
-    const users: Passenger[] = this.airlineService.getPassengerData();
-    if (users.length > 0) {
-      this.dataSource = new MatTableDataSource(users);
-    } else {
-      this.onNoData();
-    }
+   
   }
 
   openDialog(row): void {
@@ -56,10 +53,14 @@ export class PassengerListComponent implements OnInit {
     if(row.id===1 ||row.id===2|| row.id===3||row.id===4){
       alert("Couldnt able to edit,as these are default data");
       }else{
+    localStorage.setItem('passengerInfo', '');
     this.router.navigate(['add-passenger/' + row.id]);
       }
   }
-
+  addPassenger(){
+    localStorage.setItem('passengerInfo', '');
+    this.router.navigate(['add-passenger/']);
+  }
   onDeleteClicked(row) {
     if(row.id===1 ||row.id===2|| row.id===3||row.id===4){
     alert("Couldnt able to delete,as these are default data");
@@ -133,6 +134,34 @@ export class PassengerListComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.id = undefined;
+        this.id = params['id'];
+        if (this.id !== undefined) {
+          const users: Passenger[] = this.airlineService.getPassengerDataOfParticularFlight(+this.id);
+          if (users.length > 0) {
+            console.log(JSON.stringify(users));
+            this.dataSource = new MatTableDataSource(users);
+          } else {
+            this.onNoData();
+          }
+
+        }else{
+          const users: Passenger[] = this.airlineService.getPassengerData();
+          if (users.length > 0) {
+            console.log(JSON.stringify(users));
+            this.dataSource = new MatTableDataSource(users);
+          } else {
+            this.onNoData();
+          }
+        }
+
+      }
+    );
+  
   }
 
 }

@@ -11,7 +11,7 @@ export interface Passenger{
     ischeckedin:number,
     infants:number,
     ancilarservices:boolean,
-    flight:string;
+    flight:string,
     wheelchair:number,
     
 }

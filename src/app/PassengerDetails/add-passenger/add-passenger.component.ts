@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
 import { Flight } from 'src/app/Entity/Flight';
+import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
 
 @Component({
   selector: 'app-add-passenger',
@@ -54,6 +55,7 @@ export class AddPassengerComponent implements OnInit {
   wheelchair:number;
   radioData;
   infants;
+  passengerInfo:PassengerDataClass;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
@@ -91,35 +93,45 @@ export class AddPassengerComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.flightNo);
-
     this.isFromEdit = false;
 
 
 
 
-    this.airlineService.selectedSeats.subscribe(
-      (string: string[]) => {
-        string.forEach(element => {
-          this.seatno = this.seatno + element;
-        });
+    // this.airlineService.selectedSeats.subscribe(
+    //   (string: string[]) => {
+    //     string.forEach(element => {
+    //       this.seatno = this.seatno + element;
+    //     });
+    //   });
+    var retrievedObject = localStorage.getItem('passengerInfo');
+    
+    if(retrievedObject===''){
 
-      });
-
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.id = undefined;
-        this.id = params['id'];
-        if (this.id !== undefined) {
-          this.isFromEdit = true;
-
-          console.log(this.id);
-          this.passenger = this.airlineService.getParticularPassengerData(+this.id);
-          this.updateView(this.passenger);
-
+      this.route.params.subscribe(
+        (params: Params) => {
+          this.id = undefined;
+          this.id = params['id'];
+          if (this.id !== undefined) {
+            this.isFromEdit = true;
+  
+            console.log(this.id);
+            this.passenger = this.airlineService.getParticularPassengerData(+this.id);
+            this.updateView(this.passenger);
+  
+          }else{
+            this.isFromEdit = false;
+          }
+  
         }
+      );
+    }else{
+      this.passengerInfo=null;
+      this.passengerInfo = JSON.parse(retrievedObject);
+      this.updateView(this.passengerInfo);
+    }
 
-      }
-    );
+    
 
     var loggedInStatus: LoggedInStaus[] = [];
 
@@ -136,9 +148,7 @@ export class AddPassengerComponent implements OnInit {
     }
     console.log(this.isFromEdit);
 
-
-
-
+    
   }
  
   onItemChange(newObj:any) {
@@ -245,8 +255,17 @@ export class AddPassengerComponent implements OnInit {
     this.dob = formatedDate;
   }
   seatAllocation() {
+    this.passengerInfo=new PassengerDataClass()
+    this.passengerInfo.name=this.name;
+    this.passengerInfo.email=this.email;
+    this.passengerInfo.infants=this.infantcount;
+    
+    localStorage.setItem('passengerInfo', JSON.stringify(this.passengerInfo));
+    if(this.isFromEdit){
     this.router.navigate(['seat-allocation/' + this.id]);
-
+    }else{
+      this.router.navigate(['seat-allocation/']);
+    }
   }
 
 }

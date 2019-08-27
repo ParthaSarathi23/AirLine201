@@ -91,13 +91,23 @@ export class AirlineService {
         this.passengerDatas = this.passengerFromLocalStorage;
         this.store.select(state => state).subscribe(data => {
 
-            data.passenger.forEach(element => {
-                this.passengerDatas.push(element);
+            data.passenger.forEach((element,index) => {
+                this.passengerDatas.unshift(element);
+                //this.passengerDatas.push(element);
             });
         });
         return this.passengerDatas.slice();
     }
 
+    getPassengerDataOfParticularFlight(id){
+        var passengerData=[];
+        this.flightData.forEach((flight, index) => {
+            if (flight.id == id) {
+                passengerData=flight.passengerDetails;
+            }
+        });
+        return passengerData;
+    }
 
     addUser() {
 

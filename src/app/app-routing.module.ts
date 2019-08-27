@@ -20,6 +20,8 @@ const routes: Routes = [
   { path: 'seat-allocation/:id', component: SeatAllocationComponent },
   { path: 'flight-list', component: CheckinComponent },
   { path: 'in-flight', component: InflightComponent },
+  { path: 'passenger-list/:id', component: PassengerListComponent },
+
 ];
 
 @NgModule({

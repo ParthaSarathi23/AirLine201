@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AirlineService } from 'src/app/airline.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
 
 @Component({
   selector: 'app-seat-allocation',
@@ -10,20 +11,20 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class SeatAllocationComponent implements OnInit {
 
-  constructor(private airlineService: AirlineService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private airlineService: AirlineService, private router: Router, private route: ActivatedRoute) { }
 
-  seat:string="";
+  seat: string = "";
   private seatConfig: any = null;
   private seatmap = [];
   private passengerSeatData = [];
-  private id=0;
+  private id = 0;
   private seatChartConfig = {
     showRowsLabel: true,
     showRowWisePricing: false,
     newSeatNoForRow: true
 
   }
-
+  passengerData: PassengerDataClass;
   private cart = {
     selectedSeats: [],
     seatstoStore: [],
@@ -41,10 +42,12 @@ export class SeatAllocationComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
-        if(this.id!==undefined){
-         
+        if (this.id !== undefined) {
+
+        } else {
+
         }
-        });
+      });
     this.passengerSeatData = this.airlineService.getPassengerSeatData();
     //Process a simple bus layout
     this.seatConfig = [
@@ -73,7 +76,7 @@ export class SeatAllocationComponent implements OnInit {
             "seat_label": "",
             "layout": ""
           },
-          
+
           {
             "seat_label": "C",
             "layout": "gggggggggg"
@@ -200,12 +203,12 @@ export class SeatAllocationComponent implements OnInit {
 
     console.log("Seat to block: ", seatObject);
     if (seatObject.status == "available") {
-      if(this.cart.selectedSeats.length==0){
-      seatObject.status = "booked";
-      this.cart.selectedSeats.push(seatObject.seatLabel);
-      this.cart.seatstoStore.push(seatObject.key);
-      this.cart.totalamount += seatObject.price;
-      }else{
+      if (this.cart.selectedSeats.length == 0) {
+        seatObject.status = "booked";
+        this.cart.selectedSeats.push(seatObject.seatLabel);
+        this.cart.seatstoStore.push(seatObject.key);
+        this.cart.totalamount += seatObject.price;
+      } else {
         alert("Already One Seat Selected");
       }
     }
@@ -222,8 +225,8 @@ export class SeatAllocationComponent implements OnInit {
   }
 
   public blockSeats(seatsToBlockArr: string[]) {
-    if (seatsToBlockArr.length>0) {
-     // var seatsToBlockArr = seatsToBlock.split(',');
+    if (seatsToBlockArr.length > 0) {
+      // var seatsToBlockArr = seatsToBlock.split(',');
       for (let index = 0; index < seatsToBlockArr.length; index++) {
         var seat = seatsToBlockArr[index] + "";
         var seatSplitArr = seat.split("_");
@@ -249,14 +252,23 @@ export class SeatAllocationComponent implements OnInit {
 
   }
 
-  processBooking(){
-    this.seat="";
-   // this.airlineService.getSelectedSeats(this.cart.selectedSeats);
-    var passengerData=this.airlineService.getParticularPassengerData(this.id);
-    this.seat=this.cart.selectedSeats.toString();
-    passengerData.seatnumber=this.seat;
-    this.airlineService.updatePassenger(this.id,passengerData);
-    this.router.navigate(['add-passenger/' + this.id]);
+  processBooking() {
+    this.seat = "";
+    // this.airlineService.getSelectedSeats(this.cart.selectedSeats);
+      var retrievedObject = localStorage.getItem('passengerInfo');
+      this.passengerData = JSON.parse(retrievedObject);
+      this.passengerData.seatnumber = this.cart.selectedSeats.toString();
+      localStorage.setItem('passengerInfo', JSON.stringify(this.passengerData));
 
+    if (this.id !== null && this.id !== undefined) {
+      // var passengerData=this.airlineService.getParticularPassengerData(this.id);
+      // this.seat=this.cart.selectedSeats.toString();
+      // passengerData.seatnumber=this.seat;
+      // this.airlineService.updatePassenger(this.id,passengerData);
+      
+      this.router.navigate(['add-passenger/' + this.id]);
+    } else {
+      this.router.navigate(['add-passenger/']);
+    }
   }
 }
