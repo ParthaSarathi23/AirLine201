@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
 import { Flight } from 'src/app/Entity/Flight';
 import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
+import { Ancilary } from 'src/app/Entity/Ancilary';
 
 @Component({
   selector: 'app-add-passenger',
@@ -30,10 +31,10 @@ export class AddPassengerComponent implements OnInit {
   dob: string;
   disablity: string;
   food: string;
-  seatno: string;
-  arrivaltime:string;
-  depaturetime:string;
-  checkedin: number;
+  seatno: string='';
+  arrivaltime: string;
+  depaturetime: string;
+  checkedin: number=0
   infantcount: number;
   anicilary: string;
   cbArr: string[];
@@ -42,29 +43,36 @@ export class AddPassengerComponent implements OnInit {
   passengerParticularData: Passenger;
   dateofbirth: Date;
   foods: string[];
-  edit = 0;
+  disabilities:string[];
+  fooditem = 0;
   isAdminLoggedIn: boolean;
   passengers: Passenger;
   numbers = [];
   mid: string;
   passenger;
-  flightNo=0;
-  flights=[];
+  flightNo = 0;
+  flights = [];
   selectedDeviceObj;
-  flight:Flight;
-  wheelchair:number;
+  flight: Flight;
+  wheelchair: string;
   radioData;
   infants;
-  passengerInfo:PassengerDataClass;
+  passengerInfo: PassengerDataClass;
+  ancilary: Ancilary;
+  shopping: string;
+  baggage: string;
+  flightname:string;
+
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
     this.foods = ['Veg', 'Nonveg'];
-    this.flights=this.airlineService.getFlightData();
+    this.disabilities=['yes','no'];
+    this.flights = this.airlineService.getFlightData();
     this.selectedDeviceObj = this.flights[1];
-   
+
     // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
 
     //console.log(this.passengers);   
@@ -82,12 +90,14 @@ export class AddPassengerComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(PassengerModalComponent, {
       width: '650px',
-      data: [],
-     
+      data: [true,this.ancilary],
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      var obj=localStorage.getItem('ancilary');
+      this.ancilary = JSON.parse(obj);
     });
   }
 
@@ -95,18 +105,9 @@ export class AddPassengerComponent implements OnInit {
     console.log(this.flightNo);
     this.isFromEdit = false;
 
-
-
-
-    // this.airlineService.selectedSeats.subscribe(
-    //   (string: string[]) => {
-    //     string.forEach(element => {
-    //       this.seatno = this.seatno + element;
-    //     });
-    //   });
     var retrievedObject = localStorage.getItem('passengerInfo');
-    
-    if(retrievedObject===''){
+
+    if (retrievedObject === '') {
 
       this.route.params.subscribe(
         (params: Params) => {
@@ -114,24 +115,24 @@ export class AddPassengerComponent implements OnInit {
           this.id = params['id'];
           if (this.id !== undefined) {
             this.isFromEdit = true;
-  
+
             console.log(this.id);
             this.passenger = this.airlineService.getParticularPassengerData(+this.id);
             this.updateView(this.passenger);
-  
-          }else{
+
+          } else {
             this.isFromEdit = false;
           }
-  
+
         }
       );
-    }else{
-      this.passengerInfo=null;
+    } else {
+      this.passengerInfo = null;
       this.passengerInfo = JSON.parse(retrievedObject);
       this.updateView(this.passengerInfo);
     }
 
-    
+
 
     var loggedInStatus: LoggedInStaus[] = [];
 
@@ -148,24 +149,41 @@ export class AddPassengerComponent implements OnInit {
     }
     console.log(this.isFromEdit);
 
-    
+
   }
- 
-  onItemChange(newObj:any) {
-    this.flight=this.airlineService.getParticularFlightDetails(newObj);
-    var time=this.flight.time;
-    this.depaturetime=time;
-    this.arrivaltime=time;
+
+  onItemChange(newObj: any) {
+    this.flightname=newObj;
+    this.flight = this.airlineService.getParticularFlightDetails(newObj);
+    var time = this.flight.time;
+    this.depaturetime = time;
+    this.arrivaltime = time;
     // this.selectedDeviceObj = newObj;
     // ... do other stuff here ...
   }
+  onFoodItemChange(newObj: any) {
+   this.food=newObj;
+  }
+  onDisabilityItemChange(newObj: any) {
+    this.disablity=newObj;
+   }
   updateView(passenger: Passenger) {
     this.name = passenger.name;
     this.email = passenger.email;
     this.infantcount = passenger.infants;
     this.passport = passenger.passport;
-    this.seatno = passenger.seatnumber + "";
+    this.seatno = passenger.seatnumber ? passenger.seatnumber : '';
     this.mid = passenger.id + '';
+    this.address=passenger.address;
+    this.arrivaltime=passenger.arrivaltime;
+    this.depaturetime=passenger.depaturetime;
+  // this.flight.name=passenger.flight;
+    this.food=passenger.food;
+    this.disablity=passenger.disability;
+    this.ancilary=passenger.ancilarservices;
+    this.flight= this.airlineService.getParticularFlightDetails(this.flightname);
+    this.selectedDeviceObj = this.flight;
+    //updateModal(this.ancilary);
   }
   updateCheckedOptions(chBox, event) {
     var cbIdx = this.cbChecked.indexOf(chBox);
@@ -184,10 +202,11 @@ export class AddPassengerComponent implements OnInit {
   addPassenger(form: NgForm) {
 
     console.log(this.radioData);
-    if(this.radioData==='yes'){
-      this.checkedin=1;
-    }else{
-      this.checkedin=0;
+
+    if (this.radioData === 'yes') {
+      this.checkedin = 1;
+    } else {
+      this.checkedin = 0;
     }
     const uniqueNumber = (maxVal) => {
       const number = Math.floor((Math.random() * maxVal) + 1);
@@ -210,31 +229,43 @@ export class AddPassengerComponent implements OnInit {
     //this.address=form.value.address;
 
     this.setDate(form.value.dob);
-    this.disablity = form.value.disablity;
 
-    console.log(this.flightNo);
-    //this.food = form.value.food;
+    console.log(this.food);
+
     this.seatno = form.value.seatno;
-  //  this.checkedin = form.value.checkedin;
     this.infantcount = form.value.infants;
-    this.anicilary = form.value.anicilary;
-
+  
     
+    if(this.ancilary===null || this.ancilary===undefined){
+      this.ancilary=new Ancilary();
+    }else{
+      this.ancilary.baggage = this.baggage;
+      this.ancilary.shopping = this.shopping;
+      this.ancilary.wheelchair = this.wheelchair;
+  
+    }
+
     if (!this.isFromEdit) {
       this.store.dispatch({
         type: 'ADD_PASSENGER',
         payload: <Passenger>{
           id: +this.mid,
-          email: this.email,
           name: this.name,
-          flight:this.flight.name,
-          ischeckedin:this.checkedin,
-          wheelchair:this.wheelchair,
-          infants:+this.infantcount
+          email: this.email,
+          flight: this.flight.name,
+          infants: this.infantcount,
+          passport: this.passport,
+          address: this.address,
+          seatnumber: this.seatno,
+          disability: this.disablity,
+          ischeckedin: this.checkedin,
+          ancilarservices: this.ancilary,
+          arrivaltime: this.arrivaltime,
+          depaturetime: this.depaturetime,
         }
       });
 
-       
+
       this.airlineService.addFlightOnAddPassenger(+this.mid);
       this.router.navigate(['passenger-list']);
     } else {
@@ -255,15 +286,37 @@ export class AddPassengerComponent implements OnInit {
     this.dob = formatedDate;
   }
   seatAllocation() {
-    this.passengerInfo=new PassengerDataClass()
-    this.passengerInfo.name=this.name;
-    this.passengerInfo.email=this.email;
-    this.passengerInfo.infants=this.infantcount;
-    
-    localStorage.setItem('passengerInfo', JSON.stringify(this.passengerInfo));
-    if(this.isFromEdit){
-    this.router.navigate(['seat-allocation/' + this.id]);
+    if(this.ancilary===null || this.ancilary===undefined){
+      this.ancilary=new Ancilary();
     }else{
+      
+      // this.baggage=this.ancilary.baggage ;
+      // this.ancilary.shopping = this.shopping;
+      // this.ancilary.wheelchair = this.wheelchair;
+  
+    }
+   
+    this.passengerInfo = new PassengerDataClass()
+    this.passengerInfo.name = this.name;
+    this.passengerInfo.email = this.email;
+    this.passengerInfo.flight = this.flightname;
+    this.passengerInfo.infants = this.infants;
+    this.passengerInfo.passport = this.passport;
+    this.passengerInfo.address = this.address;
+    this.passengerInfo.seatnumber = this.seatno;
+    this.passengerInfo.disability = this.disablity;
+    this.passengerInfo.ischeckedin = this.checkedin;
+    this.passengerInfo.ancilarservices = this.ancilary;
+    this.passengerInfo.arrivaltime = this.arrivaltime;
+    this.passengerInfo.depaturetime = this.depaturetime;
+    this.passengerInfo.food=this.food;
+
+
+
+    localStorage.setItem('passengerInfo', JSON.stringify(this.passengerInfo));
+    if (this.isFromEdit) {
+      this.router.navigate(['seat-allocation/' + this.id]);
+    } else {
       this.router.navigate(['seat-allocation/']);
     }
   }

@@ -1,3 +1,5 @@
+import { Ancilary } from './Ancilary';
+
 export interface Passenger{
     id:number,
     name:string,
@@ -6,12 +8,13 @@ export interface Passenger{
     address:string,
     dob:string,
     disability:string,
-    food:boolean,
+    food:string,
     seatnumber:string,
     ischeckedin:number,
     infants:number,
-    ancilarservices:boolean,
+    ancilarservices:Ancilary,
     flight:string,
-    wheelchair:number,
+    arrivaltime:string,
+    depaturetime:string,
     
 }

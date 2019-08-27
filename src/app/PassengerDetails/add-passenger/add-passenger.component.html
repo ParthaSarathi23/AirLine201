@@ -195,7 +195,7 @@
               </div>
       </div> -->
       <div class="row">
-         
+
         <div class="col-md-4">
           <div class="form-group input-group">
             <div class="input-group-prepend">
@@ -242,9 +242,10 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
-            <select name="edit" [(ngModel)]="edit">
-                <option value="0" disabled selected>Select your option</option>
-                <option *ngFor="let food of foods" [value]="food"> {{ food }}</option>
+            
+            <select name="fooditem" [(ngModel)]="fooditem" (change)="onFoodItemChange($event.target.value)">
+              <option value="0" disabled selected>Select your food</option>
+              <option *ngFor="let food of foods" [value]="food"> {{ food }}</option>
             </select>
           </div>
 
@@ -254,11 +255,10 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-wheelchair"></i> </span>
             </div>
-            <input type="text" id="disablity" list="disablitys" placeholder="Are you person with disablity?">
-            <datalist id="disablitys">
-              <option value="Yes">
-              <option value="No">
-            </datalist>
+            <select name="disablity" [(ngModel)]="disablity" (change)="onDisabilityItemChange($event.target.value)">
+              <option value="0" disabled selected>Select your Disability</option>
+              <option *ngFor="let disability of disabilities" [value]="disability"> {{ disability }}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -270,49 +270,42 @@
               <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
 
-            <!-- <select [ngModel]="flightNo" (ngModelChange)="onChangeObj($event)" name="flightNo">
-                <option value="0" disabled selected>Select your flight</option>
-                <option [ngValue]="i" *ngFor="let flight of flights">{{flight.name}}</option>
-              </select>
-
-              {{selectedDeviceObj | json}} -->
-           <select name="flightNo" [(ngModel)]="flightNo" 
-            (change)="onItemChange($event.target.value)">
-                <option value="0" disabled selected>Select your flight</option>
-                <option *ngFor="let flight of flights" [value]="flight"> {{ flight }}</option>
-            </select> 
+            <select name="flightNo" [(ngModel)]="flightNo" (change)="onItemChange($event.target.value)">
+              <option value="0" disabled selected>Select your flight</option>
+              <option *ngFor="let flight of flights" [value]="flight"> {{ flight }}</option>
+            </select>
           </div>
         </div>
         <div class="col-md-2">
-            <input type="text" id="depaturetime" name="depaturetime" placeholder="Depature Time" [(ngModel)]="depaturetime" class="form-control"
-              disabled>
-          </div>
+          <input type="text" id="depaturetime" name="depaturetime" placeholder="Depature Time"
+            [(ngModel)]="depaturetime" class="form-control" disabled>
+        </div>
         <div class="col-md-2">
-            <input type="text" id="arrivaltime" name="arrivaltime" placeholder="ArraivalTime" [(ngModel)]="arrivaltime" class="form-control"
-              disabled>
-          </div>
+          <input type="text" id="arrivaltime" name="arrivaltime" placeholder="ArraivalTime" [(ngModel)]="arrivaltime"
+            class="form-control" disabled>
+        </div>
 
-        
+
       </div>
 
-      <div class="row" >
-          <div class="col-md-4">
-            <div class="form-group input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
-              </div>
-              <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
-                class="form-control" required>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
-          </div>
-          <div class="col-md-2">
-            <a (click)="seatAllocation()"> Seat Allocation</a>
-          </div>
-          <div class="col-md-2">
-            <input type="text" id="seat" name="seat" placeholder="Seat No" [(ngModel)]="seatno" class="form-control"
-              disabled>
+            <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
+              class="form-control" required>
           </div>
         </div>
+        <div class="col-md-2">
+          <a (click)="seatAllocation()"> Seat Allocation</a>
+        </div>
+        <div class="col-md-2">
+          <input type="text" id="seat" name="seat" placeholder="Seat No" [(ngModel)]="seatno" class="form-control"
+            disabled>
+        </div>
+      </div>
 
       <div class="row" *ngIf="isAdminLoggedIn">
         <div class="col-md-8">
@@ -362,4 +355,3 @@
   </div>
 
 </div>
-

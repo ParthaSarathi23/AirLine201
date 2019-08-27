@@ -1,4 +1,5 @@
 import { Passenger } from './Passenger';
+import { Ancilary } from './Ancilary';
 
 export class PassengerDataClass{
     id:number;
@@ -8,12 +9,12 @@ export class PassengerDataClass{
     address:string;
     dob:string;
     disability:string;
-    food:boolean;
+    food:string;
     seatnumber:string;
     ischeckedin:number;
     infants:number;
-    ancilarservices:boolean;
+    ancilarservices:Ancilary;
     flight:string;
-    wheelchair:number;
-   
+    arrivaltime:string;
+    depaturetime:string;
 }

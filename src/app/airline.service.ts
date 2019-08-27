@@ -13,6 +13,7 @@ import { reject } from 'q';
 // Add the Firebase products that you want to use
 import "firebase/auth";
 import "firebase/firestore";
+import { Ancilary } from './Entity/Ancilary';
 
 @Injectable()
 export class AirlineService {
@@ -31,14 +32,14 @@ export class AirlineService {
     passengerFromLocalStorage: Passenger[] = [];
     passengerData: Passenger[] = [
         {
-            id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: 0, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
+            id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: 'veg', seatnumber: 'B_1', ischeckedin: 0, infants: 2, ancilarservices: new Ancilary(), flight: 'Indigo235',arrivaltime:'12.55',depaturetime:'12.78',
         },
         {
-            id: 2, name: 'partha', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 0, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
+            id: 2, name: 'partha', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: 'veg', seatnumber: '', ischeckedin: 0, infants: 2, ancilarservices: new Ancilary(), flight: 'Indigo235',arrivaltime:'12.55',depaturetime:'12.78',
         }, {
-            id: 3, name: 'sonali', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'A_1', ischeckedin: 1, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
+            id: 3, name: 'sonali', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: 'veg', seatnumber: 'A_1', ischeckedin: 1, infants: 2, ancilarservices: new Ancilary(), flight: 'Indigo235',arrivaltime:'12.55',depaturetime:'12.78',
         }, {
-            id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
+            id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: 'veg', seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: new Ancilary(), flight: 'Indigo235',arrivaltime:'12.55',depaturetime:'12.78',
         }
     ]
 

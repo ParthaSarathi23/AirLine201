@@ -34,11 +34,11 @@ export class PassengerListComponent implements OnInit {
     if (row !== null) {
       const dialogRef = this.dialog.open(PassengerModalComponent, {
         width: '650px',
-        data: {
+        data: [false,{
           name: row.name, email: row.email, passport: row.passport, address: row.address,
           dob: row.dob, disability: row.disability, food: row.food, seatnumber: row.seatnumber,
           ischeckedin: row.ischeckedin, infants: row.infants, ancilarservices: row.ancilarservices
-        }
+        }]
       });
       dialogRef.afterClosed().subscribe(result => {
       });
