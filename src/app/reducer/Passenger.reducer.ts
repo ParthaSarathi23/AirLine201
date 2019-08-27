@@ -12,6 +12,7 @@ export function addPassengerDetails(state: Passenger[] = [], action) {
 
     switch (action.type) {
         case ADD_PASSENGER:
+            
             return [...state, action.payload];
         case EDIT_PASSENGER:
             console.log(state);

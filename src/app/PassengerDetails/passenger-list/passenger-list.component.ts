@@ -53,11 +53,17 @@ export class PassengerListComponent implements OnInit {
   }
   onEditClicked(row) {
     console.log('Row clicked: ', row);
+    if(row.id===1 ||row.id===2|| row.id===3||row.id===4){
+      alert("Couldnt able to edit,as these are default data");
+      }else{
     this.router.navigate(['add-passenger/' + row.id]);
-
+      }
   }
 
   onDeleteClicked(row) {
+    if(row.id===1 ||row.id===2|| row.id===3||row.id===4){
+    alert("Couldnt able to delete,as these are default data");
+    }else{
     Swal.fire({
       title: 'Are you sure?',
       text: 'Want to delete ' + row.name,
@@ -77,8 +83,6 @@ export class PassengerListComponent implements OnInit {
             name: row.name,
           }
         });
-        //  this.airlineService.deletePassenger(row.id);
-
         Swal.fire(
           'Deleted!',
           'Passenger Deleted Successfully!!',
@@ -98,6 +102,7 @@ export class PassengerListComponent implements OnInit {
         )
       }
     })
+  }
   }
 
   onNoData() {

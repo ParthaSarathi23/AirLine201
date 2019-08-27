@@ -18,6 +18,7 @@ import "firebase/firestore";
 export class AirlineService {
 
     constructor(private store: Store<AppState>) {
+        
     }
 
     showLogoutEvent = new Subject<String[]>();
@@ -27,6 +28,7 @@ export class AirlineService {
     flight;
     string: String[];
     passengerDatas: Passenger[] = [];
+    passengerFromLocalStorage: Passenger[] = [];
     passengerData: Passenger[] = [
         {
             id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: 0, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
@@ -39,7 +41,6 @@ export class AirlineService {
             id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
         }
     ]
-    coffees = ["Americano", "Flat White", "Cappuccino", "Latte", "Espresso", "Machiato", "Mocha", "Hot Chocolate", "Tea"];
 
     flightData: Flight[] = [
         {
@@ -85,14 +86,15 @@ export class AirlineService {
     }
     getPassengerData() {
         this.passengerDatas = [];
-        this.passengerDatas=this.passengerData;
+        var retrievedObject = localStorage.getItem('passengers');
+        this.passengerFromLocalStorage = JSON.parse(retrievedObject);
+        this.passengerDatas = this.passengerFromLocalStorage;
         this.store.select(state => state).subscribe(data => {
-            //  console.log('data', data.passenger);
+
             data.passenger.forEach(element => {
                 this.passengerDatas.push(element);
             });
         });
-
         return this.passengerDatas.slice();
     }
 
@@ -135,7 +137,7 @@ export class AirlineService {
         // });
 
     }
- 
+
     // createUser(value){
     //     if(value.length>0){
     //     return this.db.collection('users').add({
@@ -175,11 +177,6 @@ export class AirlineService {
         //  this.passengerChangedEvent.next(this.passengerData.slice());
     }
 
-    deletePassenger(index: number) {
-        this.passengerData.splice(index, 1);
-        this.passengerChangedEvent.next(this.passengerData.slice());
-    }
-
     getSelectedSeats(seat: string[]) {
         this.selectedSeats.next(seat);
     }
@@ -193,7 +190,6 @@ export class AirlineService {
                 this.flightData[index].passengerDetails.push(this.passenger);
             }
         });
-
         console.log(this.flightData);
     }
     removePassengerFromFlight(id) {

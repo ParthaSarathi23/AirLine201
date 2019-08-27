@@ -224,6 +224,7 @@ export class AddPassengerComponent implements OnInit {
         }
       });
 
+       
       this.airlineService.addFlightOnAddPassenger(+this.mid);
       this.router.navigate(['passenger-list']);
     } else {
