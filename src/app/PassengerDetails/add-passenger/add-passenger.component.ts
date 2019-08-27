@@ -168,6 +168,7 @@ export class AddPassengerComponent implements OnInit {
     this.disablity=newObj;
    }
   updateView(passenger: Passenger) {
+    alert(passenger.flight)
     this.name = passenger.name;
     this.email = passenger.email;
     this.infantcount = passenger.infants;
@@ -179,6 +180,7 @@ export class AddPassengerComponent implements OnInit {
     this.depaturetime=passenger.depaturetime;
   // this.flight.name=passenger.flight;
     this.food=passenger.food;
+    alert(JSON.stringify(passenger.ancilarservices));
     this.disablity=passenger.disability;
     this.ancilary=passenger.ancilarservices;
     this.flight= this.airlineService.getParticularFlightDetails(this.flightname);

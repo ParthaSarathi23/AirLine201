@@ -243,7 +243,7 @@
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
             
-            <select name="fooditem" [(ngModel)]="fooditem" (change)="onFoodItemChange($event.target.value)">
+            <select name="fooditem" [(ngModel)]="food" (change)="onFoodItemChange($event.target.value)">
               <option value="0" disabled selected>Select your food</option>
               <option *ngFor="let food of foods" [value]="food"> {{ food }}</option>
             </select>
@@ -294,7 +294,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
-            <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
+            <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infantcount"
               class="form-control" required>
           </div>
         </div>

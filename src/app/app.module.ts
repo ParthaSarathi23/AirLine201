@@ -25,9 +25,9 @@ import { addPassengerDetails } from './reducer/Passenger.reducer';
 import { CheckinComponent } from './airline/checkin/checkin.component';
 import { InflightComponent } from './airline/inflight/inflight.component';
 import { AirlineModalComponent } from './airline/airline-modal/airline-modal.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from '../environments/environment';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import {
   SocialLoginModule,
@@ -73,8 +73,8 @@ export function getAuthServiceConfigs() {
 
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    // AngularFireModule.initializeApp(environment.firebase),
+    // AngularFirestoreModule,
     NgbModule,
     HttpClientModule,
     TooltipModule.forRoot(),
