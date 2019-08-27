@@ -6,14 +6,18 @@ import { Injectable } from '@angular/core';
 import { Flight } from './Entity/Flight';
 import { FirebaseDatabase } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { reject } from 'q';
 
+
+// Add the Firebase products that you want to use
+import "firebase/auth";
+import "firebase/firestore";
+
 @Injectable()
 export class AirlineService {
-    
-    constructor(private store: Store<AppState>,private db:AngularFirestore,private http:HttpClient) {
+
+    constructor(private store: Store<AppState>) {
     }
 
     showLogoutEvent = new Subject<String[]>();
@@ -25,33 +29,33 @@ export class AirlineService {
     passengerDatas: Passenger[] = [];
     passengerData: Passenger[] = [
         {
-            id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: 0, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
+            id: 1, name: 'Subhalaxmi Behera', email: 'subha064@gmail.com', passport: 'BL78785634', address: 'PLOT-1064,KIIT SQUARE,BBSR-751021,ODISHA,INDIA', dob: '05/07/1991', disability: 'NO', food: true, seatnumber: 'B_1', ischeckedin: 0, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
         },
         {
-            id: 2, name: 'partha', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 0, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
+            id: 2, name: 'partha', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 0, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
         }, {
-            id: 3, name: 'sonali', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'A_1', ischeckedin: 1, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
+            id: 3, name: 'sonali', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: 'A_1', ischeckedin: 1, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
         }, {
-            id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: true,flight :'Indigo235',wheelchair:1
+            id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: true, seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: true, flight: 'Indigo235', wheelchair: 1
         }
     ]
     coffees = ["Americano", "Flat White", "Cappuccino", "Latte", "Espresso", "Machiato", "Mocha", "Hot Chocolate", "Tea"];
-    
-    flightData:Flight[]=[
+
+    flightData: Flight[] = [
         {
-            id: 1, name: 'Indigo235', time:'10:90',passengerNo:0,passengerDetails:[]
+            id: 1, name: 'Indigo235', time: '10:90', passengerNo: 0, passengerDetails: []
         },
         {
-            id: 2, name: 'Indigo990', time:'25:90',passengerNo:0,passengerDetails:[]
+            id: 2, name: 'Indigo990', time: '25:90', passengerNo: 0, passengerDetails: []
         },
         {
-            id: 3, name: 'Indigo789', time:'21:90',passengerNo:0,passengerDetails:[]
+            id: 3, name: 'Indigo789', time: '21:90', passengerNo: 0, passengerDetails: []
         },
         {
-            id: 4, name: 'Indigo555', time:'25:90',passengerNo:0,passengerDetails:[]
+            id: 4, name: 'Indigo555', time: '25:90', passengerNo: 0, passengerDetails: []
         },
         {
-            id: 5, name: 'Indigo231', time:'22:90',passengerNo:0,passengerDetails:[]
+            id: 5, name: 'Indigo231', time: '22:90', passengerNo: 0, passengerDetails: []
         }
 
     ];
@@ -68,45 +72,58 @@ export class AirlineService {
         return seatArray;
     }
     getFlightDetails() {
-       console.log(this.flightData.slice());
-       return this.flightData.slice();
+        console.log(this.flightData.slice());
+        return this.flightData.slice();
     }
     getParticularFlightDetails(name) {
-        this.getFlightDetails().forEach((p,index)=>{
-            if(p.name===name){
-              this.flight=p;
+        this.getFlightDetails().forEach((p, index) => {
+            if (p.name === name) {
+                this.flight = p;
             }
         });
-      return this.flight;
+        return this.flight;
     }
     getPassengerData() {
         this.passengerDatas = [];
+        this.passengerDatas=this.passengerData;
         this.store.select(state => state).subscribe(data => {
-          //  console.log('data', data.passenger);
+            //  console.log('data', data.passenger);
             data.passenger.forEach(element => {
-            this.passengerDatas.push(element);
+                this.passengerDatas.push(element);
             });
         });
-        
-      
-      // this.createUser(this.passengerDatas)
-	// .then(
-	//   res => {
-	  
-	//   }
-	//)
-        //console.log(this.passengerDatas.slice);
+
         return this.passengerDatas.slice();
     }
 
-    
-    addUser(){
-        return new Promise<any>((resolve, reject) => {
-            this.db
-              .collection("coffeeOrders")
-              .add(this.passengerData[0])
-              .then(res => {}, err => reject(err));
-          });
+
+    addUser() {
+
+        // return this.http.put("https://airlineapp-e133e.firebaseio.com/airlineapp-e133e/recipes.json",
+        // this.passengerData);
+        // firebase.database().ref('users/' + 'sonali').set({
+        //     username: name,
+        //     email: 'sonali',
+        //     profile_picture : 'htto://'
+        //   });
+
+        // this.db.collection("cities").doc("LA").set({
+        //     name: "Los Angeles",
+        //     state: "CA",
+        //     country: "USA"
+        // })
+        // .then(function() {
+        //     console.log("Document successfully written!");
+        // })
+        // .catch(function(error) {
+        //     console.error("Error writing document: ", error);
+        // });
+        // return new Promise<any>((resolve, reject) => {
+        //     this.db
+        //       .collection("coffeeOrders")
+        //       .add(this.passengerData[0])
+        //       .then(res => {}, err => reject(err));
+        //   });
 
         // this.passengerData.forEach(element => {
         //     this.db
@@ -116,17 +133,15 @@ export class AirlineService {
         //     console.log("**********"+res);
         // }, err => reject(err));
         // });
-          
+
     }
-    getUsers() { 
-        return  this.db.collection("passengers").snapshotChanges();
-      }
+ 
     // createUser(value){
     //     if(value.length>0){
     //     return this.db.collection('users').add({
     //       name: value.name,
     //       email: value.name,
-          
+
     //     });
     //   }
     // }
@@ -137,16 +152,16 @@ export class AirlineService {
         });
         return seatArray;
     }
-    getParticularPassengerData(id: number):any {
-        this.getPassengerData().forEach((p,index)=>{
+    getParticularPassengerData(id: number): any {
+        this.getPassengerData().forEach((p, index) => {
             console.log(p);
             console.log(index);
-            if(p.id===id){
-              console.log(p);
-              this.passenger=p;
+            if (p.id === id) {
+                console.log(p);
+                this.passenger = p;
             }
         });
-      return this.passenger;
+        return this.passenger;
     }
     updatePassenger(id: number, passengerData: Passenger) {
         this.passengerData[id] = passengerData;
@@ -169,27 +184,27 @@ export class AirlineService {
         this.selectedSeats.next(seat);
     }
 
-    addFlightOnAddPassenger(id){
-        this.passenger=[];
-        this.passenger=this.getParticularPassengerData(id);
-            this.flightData.forEach((flight,index) => {
-                if(this.passenger.flight==flight.name){
-                    this.flightData[index].passengerNo=this.flightData[index].passengerNo+1;
-                    this.flightData[index].passengerDetails.push(this.passenger);
-                }
-            });
+    addFlightOnAddPassenger(id) {
+        this.passenger = [];
+        this.passenger = this.getParticularPassengerData(id);
+        this.flightData.forEach((flight, index) => {
+            if (this.passenger.flight == flight.name) {
+                this.flightData[index].passengerNo = this.flightData[index].passengerNo + 1;
+                this.flightData[index].passengerDetails.push(this.passenger);
+            }
+        });
 
         console.log(this.flightData);
     }
-    removePassengerFromFlight(id){
-        this.passenger=[];
-        this.passenger=this.getParticularPassengerData(id);
-            this.flightData.forEach((flight,index) => {
-                if(this.passenger.flight==flight.name){
-                    this.flightData[index].passengerNo=this.flightData.slice()[index].passengerNo-1;
-                    this.flightData[index].passengerDetails.splice(index,1);
-                }
-            });
+    removePassengerFromFlight(id) {
+        this.passenger = [];
+        this.passenger = this.getParticularPassengerData(id);
+        this.flightData.forEach((flight, index) => {
+            if (this.passenger.flight == flight.name) {
+                this.flightData[index].passengerNo = this.flightData.slice()[index].passengerNo - 1;
+                this.flightData[index].passengerDetails.splice(index, 1);
+            }
+        });
         console.log(this.flightData);
     }
 }

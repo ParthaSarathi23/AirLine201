@@ -8,17 +8,10 @@ import { Passenger } from './Entity/Passenger';
 })
 
 export class AppComponent implements OnInit {
-  passengers;
+  
   ngOnInit(): void {
    
   }
-  constructor(private airlineService: AirlineService) {
-    this.airlineService.addUser().then(res => {
-      /*do something here....maybe clear the form or give a success message*/
-    });
-      ;
-
-
-  }
+  
 
 }
