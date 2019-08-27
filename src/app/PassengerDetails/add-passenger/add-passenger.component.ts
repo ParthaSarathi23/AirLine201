@@ -168,7 +168,7 @@ export class AddPassengerComponent implements OnInit {
     this.disablity=newObj;
    }
   updateView(passenger: Passenger) {
-    alert(passenger.infants)
+    // alert(passenger.infants)
     this.name = passenger.name;
     this.email = passenger.email;
     this.infants = passenger.infants;
@@ -180,7 +180,8 @@ export class AddPassengerComponent implements OnInit {
     this.depaturetime=passenger.depaturetime;
   // this.flight.name=passenger.flight;
     this.food=passenger.food;
-    alert(JSON.stringify(passenger.ancilarservices));
+    // alert(JSON.stringify(passenger.ancilarservices));
+    this.checkedin=passenger.ischeckedin;
     this.disablity=passenger.disability;
     this.ancilary=passenger.ancilarservices;
     this.flight= this.airlineService.getParticularFlightDetails(this.flightname);
