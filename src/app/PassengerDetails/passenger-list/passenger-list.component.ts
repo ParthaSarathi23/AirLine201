@@ -53,11 +53,15 @@ export class PassengerListComponent implements OnInit {
     if(row.id===1 ||row.id===2|| row.id===3||row.id===4){
       alert("Couldnt able to edit,as these are default data");
       }else{
+    localStorage.setItem('ancilary', '');
     localStorage.setItem('passengerInfo', '');
+
     this.router.navigate(['add-passenger/' + row.id]);
       }
   }
   addPassenger(){
+    localStorage.setItem('ancilary', '');
+
     localStorage.setItem('passengerInfo', '');
     this.router.navigate(['add-passenger/']);
   }

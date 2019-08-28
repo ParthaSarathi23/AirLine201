@@ -35,8 +35,14 @@ export class PassengerModalComponent implements OnInit {
     if(data[0]===true){
       this.ancilaryService=true;
       if(data[1]===null || data[1]===undefined){
+
+      // }else if(data[1].length===undefined){
+      // // this.bag='Select your Baggage';
+      // // this.chairCount='Select your Wheelchair count';
+      // // this.shoppingCount='Select your Shopping type';
+      // } 
       }else{
-        console.log(data[1]);
+      console.log(data[1]);
       this.bag=data[1].baggage;
       this.chairCount=data[1].wheelchair;
       this.shoppingCount=data[1].shopping;

@@ -63,6 +63,7 @@ export class AddPassengerComponent implements OnInit {
   baggage: string;
   flightname: string;
   disablityCount = "0";
+  
 
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -98,7 +99,10 @@ export class AddPassengerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       var obj = localStorage.getItem('ancilary');
-      this.ancilary = JSON.parse(obj);
+      if(obj!==''){
+        this.ancilary = JSON.parse(obj);
+      }
+     
     });
   }
 
@@ -251,17 +255,15 @@ export class AddPassengerComponent implements OnInit {
 
     console.log(this.food);
 
-    this.seatno = form.value.seatno;
+   // this.seatno = form.value.seatno;
+    console.log(this.seatno);
     this.infantcount = form.value.infants;
 
 
     if (this.ancilary === null || this.ancilary === undefined) {
       this.ancilary = new Ancilary();
     } else {
-      this.ancilary.baggage = this.baggage;
-      this.ancilary.shopping = this.shopping;
-      this.ancilary.wheelchair = this.wheelchair;
-
+    
     }
 
     if (!this.isFromEdit) {
@@ -281,6 +283,7 @@ export class AddPassengerComponent implements OnInit {
           ancilarservices: this.ancilary,
           arrivaltime: this.arrivaltime,
           depaturetime: this.depaturetime,
+          food:this.fooditem
         }
       });
 
