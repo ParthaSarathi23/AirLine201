@@ -295,8 +295,19 @@ export class AddPassengerComponent implements OnInit {
         type: 'EDIT_PASSENGER',
         payload: <Passenger>{
           id: +this.id,
-          email: this.email,
           name: this.name,
+          email: this.email,
+          flight: this.flightNo,
+          infants: this.infantcount,
+          passport: this.passport,
+          address: this.address,
+          seatnumber: this.seatno,
+          disability: this.disablityCount,
+          ischeckedin: this.checkedin,
+          ancilarservices: this.ancilary,
+          arrivaltime: this.arrivaltime,
+          depaturetime: this.depaturetime,
+          food:this.fooditem
         }
       });
       this.router.navigate(['passenger-list']);
