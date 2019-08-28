@@ -31,10 +31,10 @@ export class AddPassengerComponent implements OnInit {
   dob: string;
   disablity: string;
   food: string;
-  seatno: string='';
+  seatno: string = '';
   arrivaltime: string;
   depaturetime: string;
-  checkedin: number=0
+  checkedin: number = 0
   infantcount: number;
   anicilary: string;
   cbArr: string[];
@@ -43,14 +43,14 @@ export class AddPassengerComponent implements OnInit {
   passengerParticularData: Passenger;
   dateofbirth: Date;
   foods: string[];
-  disabilities:string[];
-  fooditem = 0;
+  disabilities: string[];
+  fooditem = "0";
   isAdminLoggedIn: boolean;
   passengers: Passenger;
   numbers = [];
   mid: string;
   passenger;
-  flightNo = 0;
+  flightNo = "0";
   flights = [];
   selectedDeviceObj;
   flight: Flight;
@@ -61,7 +61,8 @@ export class AddPassengerComponent implements OnInit {
   ancilary: Ancilary;
   shopping: string;
   baggage: string;
-  flightname:string;
+  flightname: string;
+  disablityCount = "0";
 
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -69,7 +70,7 @@ export class AddPassengerComponent implements OnInit {
     this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
     this.cbChecked = ['Shopping'];
     this.foods = ['Veg', 'Nonveg'];
-    this.disabilities=['yes','no'];
+    this.disabilities = ['yes', 'no'];
     this.flights = this.airlineService.getFlightData();
     this.selectedDeviceObj = this.flights[1];
 
@@ -90,18 +91,19 @@ export class AddPassengerComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(PassengerModalComponent, {
       width: '650px',
-      data: [true,this.ancilary],
+      data: [true, this.ancilary],
 
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      var obj=localStorage.getItem('ancilary');
+      var obj = localStorage.getItem('ancilary');
       this.ancilary = JSON.parse(obj);
     });
   }
 
   ngOnInit() {
+    this.radioData = 'no';
     console.log(this.flightNo);
     this.isFromEdit = false;
 
@@ -153,38 +155,53 @@ export class AddPassengerComponent implements OnInit {
   }
 
   onItemChange(newObj: any) {
-    this.flightname=newObj;
+    this.flightname = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
     var time = this.flight.time;
     this.depaturetime = time;
     this.arrivaltime = time;
-    // this.selectedDeviceObj = newObj;
-    // ... do other stuff here ...
   }
   onFoodItemChange(newObj: any) {
-   this.food=newObj;
+    console.log(this.fooditem);
+    this.food = newObj;
   }
   onDisabilityItemChange(newObj: any) {
-    this.disablity=newObj;
-   }
+    this.disablity = newObj;
+  }
   updateView(passenger: Passenger) {
-    alert(passenger.flight)
     this.name = passenger.name;
     this.email = passenger.email;
     this.infantcount = passenger.infants;
     this.passport = passenger.passport;
     this.seatno = passenger.seatnumber ? passenger.seatnumber : '';
     this.mid = passenger.id + '';
-    this.address=passenger.address;
-    this.arrivaltime=passenger.arrivaltime;
-    this.depaturetime=passenger.depaturetime;
-  // this.flight.name=passenger.flight;
-    this.food=passenger.food;
-    alert(JSON.stringify(passenger.ancilarservices));
-    this.disablity=passenger.disability;
-    this.ancilary=passenger.ancilarservices;
-    this.flight= this.airlineService.getParticularFlightDetails(this.flightname);
-    this.selectedDeviceObj = this.flight;
+    this.address = passenger.address;
+    this.arrivaltime = passenger.arrivaltime;
+    this.depaturetime = passenger.depaturetime;
+    this.fooditem = passenger.food;
+
+    if (this.fooditem === undefined) {
+      this.fooditem = "0";
+    }
+
+    this.disablityCount = passenger.disability;
+    if (this.disablityCount === undefined) {
+      this.disablityCount = "0";
+    }
+
+    this.ancilary = passenger.ancilarservices;
+    this.flightNo = passenger.flight;
+    if (this.flightNo === undefined) {
+      this.flightNo = "0";
+    }
+
+    //this.selectedDeviceObj = this.flight;
+
+    if (passenger.ischeckedin === 1) {
+      this.radioData = 'yes';
+    } else {
+      this.radioData = 'no';
+    }
     //updateModal(this.ancilary);
   }
   updateCheckedOptions(chBox, event) {
@@ -236,15 +253,15 @@ export class AddPassengerComponent implements OnInit {
 
     this.seatno = form.value.seatno;
     this.infantcount = form.value.infants;
-  
-    
-    if(this.ancilary===null || this.ancilary===undefined){
-      this.ancilary=new Ancilary();
-    }else{
+
+
+    if (this.ancilary === null || this.ancilary === undefined) {
+      this.ancilary = new Ancilary();
+    } else {
       this.ancilary.baggage = this.baggage;
       this.ancilary.shopping = this.shopping;
       this.ancilary.wheelchair = this.wheelchair;
-  
+
     }
 
     if (!this.isFromEdit) {
@@ -254,12 +271,12 @@ export class AddPassengerComponent implements OnInit {
           id: +this.mid,
           name: this.name,
           email: this.email,
-          flight: this.flight.name,
+          flight: this.flightNo,
           infants: this.infantcount,
           passport: this.passport,
           address: this.address,
           seatnumber: this.seatno,
-          disability: this.disablity,
+          disability: this.disablityCount,
           ischeckedin: this.checkedin,
           ancilarservices: this.ancilary,
           arrivaltime: this.arrivaltime,
@@ -288,32 +305,34 @@ export class AddPassengerComponent implements OnInit {
     this.dob = formatedDate;
   }
   seatAllocation() {
-    if(this.ancilary===null || this.ancilary===undefined){
-      this.ancilary=new Ancilary();
-    }else{
-      
+    if (this.ancilary === null || this.ancilary === undefined) {
+      this.ancilary = new Ancilary();
+    } else {
+
       // this.baggage=this.ancilary.baggage ;
       // this.ancilary.shopping = this.shopping;
       // this.ancilary.wheelchair = this.wheelchair;
-  
+
     }
-   
+    if (this.radioData === 'yes') {
+      this.checkedin = 1;
+    } else {
+      this.checkedin = 0;
+    }
     this.passengerInfo = new PassengerDataClass()
     this.passengerInfo.name = this.name;
     this.passengerInfo.email = this.email;
     this.passengerInfo.flight = this.flightname;
-    this.passengerInfo.infants = this.infants;
+    this.passengerInfo.infants = this.infantcount;
     this.passengerInfo.passport = this.passport;
     this.passengerInfo.address = this.address;
     this.passengerInfo.seatnumber = this.seatno;
-    this.passengerInfo.disability = this.disablity;
+    this.passengerInfo.disability = this.disablityCount;
     this.passengerInfo.ischeckedin = this.checkedin;
     this.passengerInfo.ancilarservices = this.ancilary;
     this.passengerInfo.arrivaltime = this.arrivaltime;
     this.passengerInfo.depaturetime = this.depaturetime;
-    this.passengerInfo.food=this.food;
-
-
+    this.passengerInfo.food = this.food;
 
     localStorage.setItem('passengerInfo', JSON.stringify(this.passengerInfo));
     if (this.isFromEdit) {
