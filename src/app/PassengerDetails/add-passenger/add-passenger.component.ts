@@ -178,7 +178,7 @@ export class AddPassengerComponent implements OnInit {
   updateView(passenger: Passenger) {
     this.name = passenger.name;
     this.email = passenger.email;
-    this.infantcount = passenger.infants;
+    this.infants = passenger.infants;
     this.passport = passenger.passport;
     this.seatno = passenger.seatnumber ? passenger.seatnumber : '';
     this.mid = passenger.id + '';
