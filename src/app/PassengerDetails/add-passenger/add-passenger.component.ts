@@ -65,6 +65,7 @@ export class AddPassengerComponent implements OnInit {
   flightname: string;
   disablityCount = "0";
   seat;
+  seatselection:boolean=false;
   
 
 
@@ -167,6 +168,7 @@ export class AddPassengerComponent implements OnInit {
     var time = this.flight.time;
     this.depaturetime = time;
     this.arrivaltime = time;
+    this.seatselection=true;
   }
   onFoodItemChange(newObj: any) {
     console.log(this.fooditem);
@@ -178,6 +180,7 @@ export class AddPassengerComponent implements OnInit {
   updateView(passenger: Passenger) {
     this.name = passenger.name;
     this.email = passenger.email;
+    this.dob=passenger.dob;
     this.infants = passenger.infants;
     this.passport = passenger.passport;
     this.seatno = passenger.seatnumber ? passenger.seatnumber : '';
@@ -255,7 +258,6 @@ export class AddPassengerComponent implements OnInit {
     this.name = form.value.name;
     this.passport = form.value.passport;
     //this.address=form.value.address;
-
     this.setDate(form.value.dob);
 
     console.log(this.food);
@@ -277,6 +279,7 @@ export class AddPassengerComponent implements OnInit {
         payload: <Passenger>{
           id: +this.mid,
           name: this.name,
+          dob:this.dob,
           email: this.email,
           flight: this.flightNo,
           infants: this.infantcount,
@@ -301,6 +304,7 @@ export class AddPassengerComponent implements OnInit {
         payload: <Passenger>{
           id: +this.id,
           name: this.name,
+          dob:this.dob,
           email: this.email,
           flight: this.flightNo,
           infants: this.infantcount,
@@ -317,6 +321,7 @@ export class AddPassengerComponent implements OnInit {
       });
       this.router.navigate(['passenger-list']);
     }
+    
   }
   setDate(date: string) {
     let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
@@ -343,9 +348,10 @@ export class AddPassengerComponent implements OnInit {
     }
     this.passengerInfo = new PassengerDataClass()
     this.passengerInfo.name = this.name;
+    this.passengerInfo.dob=this.dob;
     this.passengerInfo.email = this.email;
     this.passengerInfo.flight = this.flightname;
-    this.passengerInfo.infants = this.infantcount;
+    this.passengerInfo.infants = this.infants;
     this.passengerInfo.passport = this.passport;
     this.passengerInfo.address = this.address;
     this.passengerInfo.seatnumber = this.seatno;
