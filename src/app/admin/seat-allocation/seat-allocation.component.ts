@@ -51,7 +51,8 @@ export class SeatAllocationComponent implements OnInit {
 
         }
       });
-    this.passengerSeatData = this.airlineService.getPassengerSeatData();
+    //  this.airlineService.getPassengerDataOfParticularFlight
+  // this.passengerSeatData = this.airlineService.getPassengerSeatData();
     //Process a simple bus layout
     this.seatConfig = [
       {
@@ -285,7 +286,7 @@ export class SeatAllocationComponent implements OnInit {
             if (seatObj) {
               console.log("\n\n\nFount Seat to block: ", seatObj);
               seatObj["status"] = "booked";
-              this.cart.selectedSeats.push(seatObj.seatLabel);
+            //  this.cart.selectedSeats.push(seatObj.seatLabel);
               this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
               console.log("\n\n\nSeat Obj", seatObj);
               console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);

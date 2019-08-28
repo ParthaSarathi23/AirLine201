@@ -170,12 +170,16 @@ export class AirlineService {
     //     });
     //   }
     // }
-    getPassengerSeatData() {
-        var seatArray: string[] = [];
-        this.passengerData.slice().forEach(map_element => {
-            seatArray.push(map_element.seatnumber);
+    getPassengerSeatData(name) {
+        var seatArray: Passenger[] = [];
+        this.getFlightDetails().forEach((p, index) => {
+           
+            if (p.name === name) {
+                seatArray=p.passengerDetails;
+            }
         });
         return seatArray;
+        
     }
     getParticularPassengerData(id: number): any {
         this.getPassengerData().forEach((p, index) => {
