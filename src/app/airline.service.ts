@@ -27,6 +27,7 @@ export class AirlineService {
     selectedSeats = new Subject<String[]>();
     passenger;
     flight;
+    index:number;
     string: String[];
     passengerDatas: Passenger[] = [];
     passengerFromLocalStorage: Passenger[] = [];
@@ -84,6 +85,16 @@ export class AirlineService {
             }
         });
         return this.flight;
+    }
+    getParticularFlightIndex(name) {
+        this.getFlightDetails().forEach((p, index) => {
+           
+            if (p.name === name) {
+                this.index=index;
+                this.flight = p;
+            }
+        });
+        return this.index;
     }
     getPassengerData() {
         this.passengerDatas = [];

@@ -17,9 +17,9 @@ export interface data {
 
 export class PassengerModalComponent implements OnInit {
 
-  bag;
-  chair;
-  shopping;
+  bag="0";
+  chairCount="0";
+  shoppingCount="0";
   baggeges: string[];
   shoppings: string[];
   chairs: string[];
@@ -29,20 +29,29 @@ export class PassengerModalComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PassengerModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
     console.log(data);
+    this.baggeges = ['5 kg', '10 kg', '15 kg', '20 kg'];
+    this.shoppings = ['shoping 1', 'shoping 2'];
+    this.chairs = ['1', '2'];
     if(data[0]===true){
       this.ancilaryService=true;
       if(data[1]===null || data[1]===undefined){
+
+      // }else if(data[1].length===undefined){
+      // // this.bag='Select your Baggage';
+      // // this.chairCount='Select your Wheelchair count';
+      // // this.shoppingCount='Select your Shopping type';
+      // } 
       }else{
+      console.log(data[1]);
       this.bag=data[1].baggage;
-      this.chair=data[1].wheelchair;
-      this.shopping=data[1].baggage;
+      this.chairCount=data[1].wheelchair;
+      this.shoppingCount=data[1].shopping;
+      console.log(this.shoppingCount);
       }
     }else{
       this.ancilaryService=false;
     }
-    this.baggeges = ['5 kg', '10 kg', '15 kg', '20 kg'];
-    this.shoppings = ['shooping 1', 'shopping 2'];
-    this.chairs = ['1', '2'];
+  
     
   }
 
@@ -55,18 +64,19 @@ export class PassengerModalComponent implements OnInit {
     this.bag=newObj;
   }
   onchairChange(newObj: any){
-    this.chair=newObj;
+    this.chairCount=newObj;
   }
   onshoppingChange(newObj: any){
-    this.shopping=newObj;
+    this.shoppingCount=newObj;
   }
   submit(){
      this.ancilary=new Ancilary();
      this.ancilary.baggage=this.bag;
-     this.ancilary.shopping=this.shopping;
-     this.ancilary.wheelchair=this.chair;
+     this.ancilary.shopping=this.shoppingCount;
+     this.ancilary.wheelchair=this.chairCount;
 
 
+     console.log(JSON.stringify(this.ancilary));
     localStorage.setItem('ancilary',JSON.stringify(this.ancilary));
     this.dialogRef.close();
   }

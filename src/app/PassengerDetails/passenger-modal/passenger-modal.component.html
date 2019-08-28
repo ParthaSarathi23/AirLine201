@@ -39,7 +39,7 @@
         </div>
         
         <select name="bag" [(ngModel)]="bag" (change)="onBagChange($event.target.value)">
-          <option value="0" disabled selected>Select your option</option>
+          <option value="0" disabled selected>Select your Baggage</option>
           <option *ngFor="let baggage of baggeges" [value]="baggage"> {{ baggage }}</option>
         </select>
       </div>
@@ -54,8 +54,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text"> <i class="fas fa-wheelchair"></i> </span>
         </div>
-        <select name="chair" [(ngModel)]="chair" (change)="onchairChange($event.target.value)">
-          <option value="0" disabled selected>Select your option</option>
+        <select name="chairCount" [(ngModel)]="chairCount" (change)="onchairChange($event.target.value)">
+          <option value="0" disabled selected>Select your Wheelchair count</option>
           <option *ngFor="let chair of chairs" [value]="chair"> {{ chair }}</option>
         </select>
       </div>
@@ -70,8 +70,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text"> <i class="fas fa-suitcase-rolling"></i> </span>
         </div>
-        <select name="shopping" [(ngModel)]="shopping" (change)="onshoppingChange($event.target.value)">
-          <option value="0" disabled selected>Select your option</option>
+        <select name="shoppingCount" [(ngModel)]="shoppingCount" (change)="onshoppingChange($event.target.value)">
+          <option value="0" disabled selected>Select your Shopping Option</option>
           <option *ngFor="let shopping of shoppings" [value]="shopping"> {{ shopping }}</option>
         </select>
       </div>
