@@ -111,7 +111,13 @@ export class SeatAllocationComponent implements OnInit {
     this.seatObj.status = this.passengerData.seat.status;
     //this.selectSeat(this.seatObj);
 
-    this.OwnSelectedSeats(this.passengerData.seat.seatNo);
+   
+    if(this.passengerData.seat.key!=undefined && this.passengerData.seat.key.length!==0){
+      this.OwnSelectedSeats(this.passengerData.seat.key);
+      this.cart.selectedSeats=this.passengerData.seat.seatLabel;
+      this.cart.seatstoStore.push(this.passengerData.seat.key);
+    }
+   
     this.blockSeats(this.passengerSeatData);
     
   }
@@ -286,7 +292,7 @@ export class SeatAllocationComponent implements OnInit {
             if (seatObj) {
               console.log("\n\n\nFount Seat to block: ", seatObj);
               seatObj["status"] = "booked";
-            //  this.cart.selectedSeats.push(seatObj.seatLabel);
+              this.cart.selectedSeats.push(seatObj.seatLabel);
               this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
               console.log("\n\n\nSeat Obj", seatObj);
               console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
@@ -308,14 +314,11 @@ export class SeatAllocationComponent implements OnInit {
     this.passengerData = JSON.parse(retrievedObject);
     this.passengerData.seatnumber = this.cart.selectedSeats.toString();
 
-    // this.passengerData.seat.key = this.cart.seatstoStore[0];
-    // this.passengerData.seat.price = this.cart.totalamount;
-    // this.passengerData.seat.seatLabel = this.cart.selectedSeats.toString();
-    // this.substring= this.cart.seatstoStore[0].split('_');
-    // this.passengerData.seat.seatNo.push(this.substring[1]);
-    // this.passengerData.seat.status = 'available';
-
-    this.passengerData.seat.seatNo = this.cart.seatstoStore;
+    this.passengerData.seat.key = this.cart.seatstoStore;
+    this.passengerData.seat.price = this.cart.totalamount;
+    this.passengerData.seat.seatLabel = this.cart.selectedSeats;
+    // this.substring= this.cart.seatstoStore[0].toString.split('_');
+    // this.passengerData.seat.seatNo=this.substring[1];
 
     localStorage.setItem('passengerInfo', JSON.stringify(this.passengerData));
 
