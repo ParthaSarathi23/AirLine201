@@ -3,6 +3,7 @@ import { AirlineService } from 'src/app/airline.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
+import { Seat } from 'src/app/Entity/Seat';
 
 @Component({
   selector: 'app-seat-allocation',
@@ -18,6 +19,8 @@ export class SeatAllocationComponent implements OnInit {
   private seatmap = [];
   private passengerSeatData = [];
   private id = 0;
+  seatObj;
+  substring=[];
   private seatChartConfig = {
     showRowsLabel: true,
     showRowWisePricing: false,
@@ -92,8 +95,24 @@ export class SeatAllocationComponent implements OnInit {
         ]
       }
     ]
+
     this.processSeatChart(this.seatConfig);
+
+   
+    var retrievedObject = localStorage.getItem('passengerInfo');
+    this.passengerData = JSON.parse(retrievedObject);
+   
+    this.seatObj = new Seat();
+    this.seatObj.seatNo = this.passengerData.seat.seatNo;
+    this.seatObj.key = this.passengerData.seat.key;
+    this.seatObj.price = this.passengerData.seat.price;
+    this.seatObj.seatLabel = this.passengerData.seat.seatLabel;
+    this.seatObj.status = this.passengerData.seat.status;
+    //this.selectSeat(this.seatObj);
+
+    this.OwnSelectedSeats(this.passengerData.seat.seatNo);
     this.blockSeats(this.passengerSeatData);
+    
   }
 
   public processSeatChart(map_data: any[]) {
@@ -252,20 +271,59 @@ export class SeatAllocationComponent implements OnInit {
 
   }
 
+  public   OwnSelectedSeats(seatsToBlockArr: string[]) {
+    if (seatsToBlockArr!==undefined && seatsToBlockArr.length > 0) {
+      // var seatsToBlockArr = seatsToBlock.split(',');
+      for (let index = 0; index < seatsToBlockArr.length; index++) {
+        var seat = seatsToBlockArr[index] + "";
+        var seatSplitArr = seat.split("_");
+        console.log("Split seat: ", seatSplitArr);
+        for (let index2 = 0; index2 < this.seatmap.length; index2++) {
+          const element = this.seatmap[index2];
+          if (element.seatRowLabel == seatSplitArr[0]) {
+            var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
+            if (seatObj) {
+              console.log("\n\n\nFount Seat to block: ", seatObj);
+              seatObj["status"] = "booked";
+              this.cart.selectedSeats.push(seatObj.seatLabel);
+              this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
+              console.log("\n\n\nSeat Obj", seatObj);
+              console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
+              break;
+            }
+
+          }
+        }
+
+      }
+    }
+
+  }
   processBooking() {
     this.seat = "";
+    
     // this.airlineService.getSelectedSeats(this.cart.selectedSeats);
-      var retrievedObject = localStorage.getItem('passengerInfo');
-      this.passengerData = JSON.parse(retrievedObject);
-      this.passengerData.seatnumber = this.cart.selectedSeats.toString();
-      localStorage.setItem('passengerInfo', JSON.stringify(this.passengerData));
+    var retrievedObject = localStorage.getItem('passengerInfo');
+    this.passengerData = JSON.parse(retrievedObject);
+    this.passengerData.seatnumber = this.cart.selectedSeats.toString();
+
+    // this.passengerData.seat.key = this.cart.seatstoStore[0];
+    // this.passengerData.seat.price = this.cart.totalamount;
+    // this.passengerData.seat.seatLabel = this.cart.selectedSeats.toString();
+    // this.substring= this.cart.seatstoStore[0].split('_');
+    // this.passengerData.seat.seatNo.push(this.substring[1]);
+    // this.passengerData.seat.status = 'available';
+
+    this.passengerData.seat.seatNo = this.cart.seatstoStore;
+
+    localStorage.setItem('passengerInfo', JSON.stringify(this.passengerData));
 
     if (this.id !== null && this.id !== undefined) {
       // var passengerData=this.airlineService.getParticularPassengerData(this.id);
       // this.seat=this.cart.selectedSeats.toString();
       // passengerData.seatnumber=this.seat;
       // this.airlineService.updatePassenger(this.id,passengerData);
-      
+
       this.router.navigate(['add-passenger/' + this.id]);
     } else {
       this.router.navigate(['add-passenger/']);

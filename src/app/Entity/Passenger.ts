@@ -1,4 +1,5 @@
 import { Ancilary } from './Ancilary';
+import { Seat } from './Seat';
 
 export interface Passenger{
     id:number,
@@ -16,5 +17,6 @@ export interface Passenger{
     flight:string,
     arrivaltime:string,
     depaturetime:string,
+    seat:Seat
     
 }

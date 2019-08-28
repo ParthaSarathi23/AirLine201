@@ -5,6 +5,9 @@ $seat-booked-color: white;
 $seat-unavailable-bg: #a0a0a0;
 $seat-unavailable-color: white;
 
+$seat-userbooked-bg: #a520f1;
+$seat-userbooked-color: white;
+
 .badge-primary
 {
     color: #fff;
@@ -60,6 +63,13 @@ $seat-unavailable-color: white;
     background-color: $seat-unavailable-bg;
     font-weight: bolder;
     border: 1px solid $seat-unavailable-color;
+}
+.seat-userbooked
+{
+    color: $seat-userbooked-color;
+    background-color: $seat-userbooked-bg;
+    font-weight: bolder;
+    border: 1px solid $seat-userbooked-color;
 }
 .seat-booked
 {

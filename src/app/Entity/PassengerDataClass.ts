@@ -1,5 +1,6 @@
 import { Passenger } from './Passenger';
 import { Ancilary } from './Ancilary';
+import { Seat } from './Seat';
 
 export class PassengerDataClass{
     id:number;
@@ -17,4 +18,5 @@ export class PassengerDataClass{
     flight:string;
     arrivaltime:string;
     depaturetime:string;
+    seat:Seat;
 }

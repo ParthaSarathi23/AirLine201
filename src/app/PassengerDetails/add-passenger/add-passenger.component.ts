@@ -13,6 +13,7 @@ import { PassengerModalComponent } from '../passenger-modal/passenger-modal.comp
 import { Flight } from 'src/app/Entity/Flight';
 import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
 import { Ancilary } from 'src/app/Entity/Ancilary';
+import { Seat } from 'src/app/Entity/Seat';
 
 @Component({
   selector: 'app-add-passenger',
@@ -63,6 +64,7 @@ export class AddPassengerComponent implements OnInit {
   baggage: string;
   flightname: string;
   disablityCount = "0";
+  seat;
   
 
 
@@ -74,6 +76,7 @@ export class AddPassengerComponent implements OnInit {
     this.disabilities = ['yes', 'no'];
     this.flights = this.airlineService.getFlightData();
     this.selectedDeviceObj = this.flights[1];
+    this.seat=new Seat();
 
     // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
 
@@ -206,6 +209,8 @@ export class AddPassengerComponent implements OnInit {
     } else {
       this.radioData = 'no';
     }
+
+    this.seat=passenger.seat;
     //updateModal(this.ancilary);
   }
   updateCheckedOptions(chBox, event) {
@@ -319,8 +324,10 @@ export class AddPassengerComponent implements OnInit {
     this.dob = formatedDate;
   }
   seatAllocation() {
+    
     if (this.ancilary === null || this.ancilary === undefined) {
       this.ancilary = new Ancilary();
+      
     } else {
 
       // this.baggage=this.ancilary.baggage ;
@@ -328,6 +335,7 @@ export class AddPassengerComponent implements OnInit {
       // this.ancilary.wheelchair = this.wheelchair;
 
     }
+
     if (this.radioData === 'yes') {
       this.checkedin = 1;
     } else {
@@ -347,7 +355,9 @@ export class AddPassengerComponent implements OnInit {
     this.passengerInfo.arrivaltime = this.arrivaltime;
     this.passengerInfo.depaturetime = this.depaturetime;
     this.passengerInfo.food = this.food;
+    this.passengerInfo.seat=this.seat;
 
+    
     localStorage.setItem('passengerInfo', JSON.stringify(this.passengerInfo));
     if (this.isFromEdit) {
       this.router.navigate(['seat-allocation/' + this.id]);
