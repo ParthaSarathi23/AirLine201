@@ -17,14 +17,16 @@ export class InflightComponent implements OnInit {
   depaturetime;
   arrivaltime;
   flightNo = "0";
+  serviceitem = "0";
   id;
-  passengerData:Passenger[];
-  vegfoods=[];
-  nonvegfoods=[];
-  ancilaryservice=[];
+  passengerData: Passenger[];
+  vegfoods = [];
+  nonvegfoods = [];
+  shopping = [];
+  ancilaryservice = [];
   private seatConfig: any = null;
   private seatmap = [];
-
+  services = [];
   private seatChartConfig = {
     showRowsLabel: true,
     showRowWisePricing: false,
@@ -37,6 +39,7 @@ export class InflightComponent implements OnInit {
   ngOnInit() {
     this.flights = this.airlineService.getFlightData();
     this.selectedDeviceObj = this.flights[1];
+    this.services = ['foods', 'shoping'];
 
 
     this.seatConfig = [
@@ -82,7 +85,7 @@ export class InflightComponent implements OnInit {
       }
     ]
     this.processSeatChart(this.seatConfig);
-   
+
   }
   public processSeatChart(map_data: any[]) {
 
@@ -141,7 +144,7 @@ export class InflightComponent implements OnInit {
       }
     }
   }
-  public blockSeats(seatsToBlockArr: string[],string) {
+  public blockSeats(seatsToBlockArr: string[], string) {
     if (seatsToBlockArr.length > 0) {
       // var seatsToBlockArr = seatsToBlock.split(',');
       for (let index = 0; index < seatsToBlockArr.length; index++) {
@@ -154,12 +157,14 @@ export class InflightComponent implements OnInit {
             var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
             if (seatObj) {
               console.log("\n\n\nFount Seat to block: ", seatObj);
-              if(string==='Veg'){
+              if (string === 'Veg') {
                 seatObj["status"] = "veg";
-              }else{
+              } else if (string === 'Nonveg') {
                 seatObj["status"] = "nonveg";
+              } else if (string === 'shopping') {
+                seatObj["status"] = "shopping";
               }
-             // seatObj["status"] = "unavailable";
+              // seatObj["status"] = "unavailable";
               this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
               console.log("\n\n\nSeat Obj", seatObj);
               console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
@@ -175,22 +180,40 @@ export class InflightComponent implements OnInit {
   }
 
   onItemChange(newObj: any) {
+    this.vegfoods = [];
+    this.nonvegfoods = [];
+    this.shopping = [];
+
     this.flightname = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
     var time = this.flight.time;
     this.depaturetime = time;
     this.arrivaltime = time;
-    this.id=this.flight.id;
-    this.passengerData=this.airlineService.getPassengerDataOfParticularFlight(this.id);
+    this.id = this.flight.id;
+    this.passengerData = this.airlineService.getPassengerDataOfParticularFlight(this.id);
     this.passengerData.forEach(element => {
-      if(element.food==='Veg'){
-       this.vegfoods.push(element.seatnumber);
-      }else if(element.food==='Nonveg'){
+      if (element.food === 'Veg') {
+        this.vegfoods.push(element.seatnumber);
+      } else if (element.food === 'Nonveg') {
         this.nonvegfoods.push(element.seatnumber);
       }
-    });
-    this.blockSeats(this.vegfoods,'Veg');
-    this.blockSeats(this.nonvegfoods,'Nonveg');
-  }
 
+      if (element.ancilarservices != undefined) {
+        if (element.ancilarservices.shopping != '') {
+          this.shopping.push(element.seatnumber);
+        }
+      }
+    });
+
+
+
+  }
+  onServiceItemChange(newObj: any) {
+    if (newObj === 'foods') {
+      this.blockSeats(this.vegfoods, 'Veg');
+      this.blockSeats(this.nonvegfoods, 'Nonveg');
+    } else {
+      this.blockSeats(this.shopping, 'shopping');
+    }
+  }
 }

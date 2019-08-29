@@ -7,7 +7,7 @@
   <div class="col-md-8">
     <div class="row">
 
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
@@ -26,11 +26,19 @@
       <div class="col-md-3">
         <input type="text" id="arrivaltime" name="arrivaltime" placeholder="ArraivalTime" [(ngModel)]="arrivaltime"
           class="form-control" disabled>
-
-
-
-
       </div>
+      <div class="col-md-3">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
+            </div>
+  
+            <select name="serviceitem" [(ngModel)]="serviceitem" (change)="onServiceItemChange($event.target.value)">
+              <option value="0" disabled selected>Select your Service</option>
+              <option *ngFor="let service of services" [value]="service"> {{ service }}</option>
+            </select>
+          </div>
+        </div>
     </div>
     <div class="col-md-2"></div>
   </div>
@@ -50,19 +58,23 @@
               
               <div *ngFor="let seatobj of seatrow.seats">
                   <div class="seat-item seat-space" style="color:white ; background-color:white" *ngIf="seatobj.seatLabel == ''">  &nbsp; </div>
-                  <div tooltip="Seat : {{seatobj.seatLabel}} | Price : {{seatobj.price}}Rs" placement="top"
+                  <div tooltip="Seat : {{seatobj.seatLabel}}" placement="top"
                   [ngClass]="{ 'seat-item' : true , 'seat-available' : seatobj.status == 'available' ,'seat-booked' : seatobj.status == 'booked'
                   ,'seat-nonveg' : seatobj.status == 'nonveg','seat-veg' : seatobj.status == 'veg'
                 }" 
                    (click)="selectSeat(seatobj)" *ngIf="(seatobj.status == 'available' || seatobj.status == 'booked' )&& seatobj.seatLabel != ''"></div>
                    
-                  <div tooltip="Veg" placement="top"
+                  <div tooltip="Seat : {{seatobj.seatLabel}} | Veg" placement="top"
                   [ngClass]="{ 'seat-item' : true , 'seat-veg' : true }" 
                   *ngIf="seatobj.status == 'veg' && seatobj.seatLabel != ''"></div>
 
-                  <div tooltip="NonVeg" placement="top"
+                  <div tooltip="Seat : {{seatobj.seatLabel}} | Nonveg" placement="top"
                   [ngClass]="{ 'seat-item' : true , 'seat-nonveg' : true }" 
                   *ngIf="seatobj.status == 'nonveg' && seatobj.seatLabel != ''"></div>
+
+                  <div tooltip="Seat : {{seatobj.seatLabel}} | Shopping"placement="top"
+                  [ngClass]="{ 'seat-item' : true , 'seat-shopping' : true }" 
+                  *ngIf="seatobj.status == 'shopping' && seatobj.seatLabel != ''"></div>
               </div>
           </div>
       </div>
