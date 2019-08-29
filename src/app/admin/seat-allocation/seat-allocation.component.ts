@@ -4,6 +4,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
 import { Seat } from 'src/app/Entity/Seat';
+import { Passenger } from 'src/app/Entity/Passenger';
 
 @Component({
   selector: 'app-seat-allocation',
@@ -21,6 +22,9 @@ export class SeatAllocationComponent implements OnInit {
   private id = 0;
   seatObj;
   substring=[];
+  array=[];
+  isEditmode:boolean;
+  seatArray=[];
   private seatChartConfig = {
     showRowsLabel: true,
     showRowWisePricing: false,
@@ -28,6 +32,7 @@ export class SeatAllocationComponent implements OnInit {
 
   }
   passengerData: PassengerDataClass;
+  passengerDataOfFlight:Passenger[];
   private cart = {
     selectedSeats: [],
     seatstoStore: [],
@@ -41,18 +46,20 @@ export class SeatAllocationComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isEditmode=false;
 
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
         if (this.id !== undefined) {
-
+             this.isEditmode=true;
         } else {
-
+          this.isEditmode=false;
         }
       });
-    //  this.airlineService.getPassengerDataOfParticularFlight
-  // this.passengerSeatData = this.airlineService.getPassengerSeatData();
+
+   
+
     //Process a simple bus layout
     this.seatConfig = [
       {
@@ -102,7 +109,16 @@ export class SeatAllocationComponent implements OnInit {
    
     var retrievedObject = localStorage.getItem('passengerInfo');
     this.passengerData = JSON.parse(retrievedObject);
-   
+    this.passengerDataOfFlight=this.airlineService.getPassengerDataOfParticularFlightName(this.passengerData.flight);
+    
+
+    this.passengerDataOfFlight.forEach(element => {
+      this.seatArray.push(element.seat.key);
+    });
+
+    if(this.seatArray!=undefined && this.seatArray.length!=0){
+      this.blockSeats(this.seatArray);
+    }
     // this.seatObj = new Seat();
     // this.seatObj.seatNo = this.passengerData.seat.seatNo;
     // this.seatObj.key = this.passengerData.seat.key;
@@ -112,14 +128,16 @@ export class SeatAllocationComponent implements OnInit {
     //this.selectSeat(this.seatObj);
 
    
-    if(this.passengerData.seat!=undefined && this.passengerData.seat.key!=undefined && this.passengerData.seat.key.length!==0){
-      this.OwnSelectedSeats(this.passengerData.seat.key);
+    if(this.passengerData.seat!=undefined && 
+      this.passengerData.seat.key!=undefined && 
+      this.passengerData.seat.key.length!==0){
+      this.array.push(this.passengerData.seat.key);
+      this.OwnSelectedSeats(this.array);
       this.cart.selectedSeats=this.passengerData.seat.seatLabel;
       this.cart.seatstoStore.push(this.passengerData.seat.key);
     }
    
     this.blockSeats(this.passengerSeatData);
-    
   }
 
   public processSeatChart(map_data: any[]) {

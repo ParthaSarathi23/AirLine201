@@ -121,7 +121,15 @@ export class AirlineService {
         });
         return passengerData;
     }
-
+    getPassengerDataOfParticularFlightName(name){
+        var passengerData=[];
+        this.flightData.forEach((flight, index) => {
+            if (flight.name == name) {
+                passengerData=flight.passengerDetails;
+            }
+        });
+        return passengerData;
+    }
     addUser() {
 
         // return this.http.put("https://airlineapp-e133e.firebaseio.com/airlineapp-e133e/recipes.json",
