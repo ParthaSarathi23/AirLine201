@@ -268,7 +268,7 @@
         <div class="col-md-4">
           <div class="form-group input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
+              <span class="input-group-text"> <i class="fas fa-plane"></i> </span>
             </div>
 
             <select name="flightNo" [(ngModel)]="flightNo" (change)="onItemChange($event.target.value)">
@@ -278,12 +278,22 @@
           </div>
         </div>
         <div class="col-md-2">
+            <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fas fa-plane-departure"></i> </span>
+              </div>
           <input type="text" id="depaturetime" name="depaturetime" placeholder="Depature Time"
             [(ngModel)]="depaturetime" class="form-control" disabled>
+            </div>
         </div>
         <div class="col-md-2">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fas fa-plane-arrival"></i> </span>
+                  </div>
           <input type="text" id="arrivaltime" name="arrivaltime" placeholder="ArraivalTime" [(ngModel)]="arrivaltime"
             class="form-control" disabled>
+            </div>
         </div>
 
 
@@ -293,21 +303,23 @@
         <div class="col-md-4">
           <div class="form-group input-group">
             <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
+              <span class="input-group-text"> <i class="fas fa-baby-carriage"></i> </span>
             </div>
             <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
               class="form-control" required>
           </div>
         </div>
         <div class="col-md-2">
-          <a (click)="seatAllocation()"> Seat Allocation</a>
+          <button type="button" [disabled]="!seatselection" class="btn btn-info" (click)="seatAllocation()">Click to select seat <i class="fas fa-chevron-right"></i></button>
         </div>
-
-       
           <div class="col-md-2">
+              <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fas fa-chair"></i> </span>
+                  </div>
             <input type="text" id="seatno" name="seatno" placeholder="Seat No" [(ngModel)]="seatno" class="form-control"
               disabled>
-          
+              </div>
         </div>
       </div>
 
