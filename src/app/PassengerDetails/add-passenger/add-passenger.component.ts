@@ -53,6 +53,7 @@ export class AddPassengerComponent implements OnInit {
   passenger;
   flightNo = "0";
   flights = [];
+
   selectedDeviceObj;
   flight: Flight;
   wheelchair: string;

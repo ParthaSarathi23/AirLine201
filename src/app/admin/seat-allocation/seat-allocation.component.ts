@@ -103,16 +103,16 @@ export class SeatAllocationComponent implements OnInit {
     var retrievedObject = localStorage.getItem('passengerInfo');
     this.passengerData = JSON.parse(retrievedObject);
    
-    this.seatObj = new Seat();
-    this.seatObj.seatNo = this.passengerData.seat.seatNo;
-    this.seatObj.key = this.passengerData.seat.key;
-    this.seatObj.price = this.passengerData.seat.price;
-    this.seatObj.seatLabel = this.passengerData.seat.seatLabel;
-    this.seatObj.status = this.passengerData.seat.status;
+    // this.seatObj = new Seat();
+    // this.seatObj.seatNo = this.passengerData.seat.seatNo;
+    // this.seatObj.key = this.passengerData.seat.key;
+    // this.seatObj.price = this.passengerData.seat.price;
+    // this.seatObj.seatLabel = this.passengerData.seat.seatLabel;
+    // this.seatObj.status = this.passengerData.seat.status;
     //this.selectSeat(this.seatObj);
 
    
-    if(this.passengerData.seat.key!=undefined && this.passengerData.seat.key.length!==0){
+    if(this.passengerData.seat!=undefined && this.passengerData.seat.key!=undefined && this.passengerData.seat.key.length!==0){
       this.OwnSelectedSeats(this.passengerData.seat.key);
       this.cart.selectedSeats=this.passengerData.seat.seatLabel;
       this.cart.seatstoStore.push(this.passengerData.seat.key);
@@ -278,7 +278,7 @@ export class SeatAllocationComponent implements OnInit {
 
   }
 
-  public   OwnSelectedSeats(seatsToBlockArr: string[]) {
+  public OwnSelectedSeats(seatsToBlockArr: string[]) {
     if (seatsToBlockArr!==undefined && seatsToBlockArr.length > 0) {
       // var seatsToBlockArr = seatsToBlock.split(',');
       for (let index = 0; index < seatsToBlockArr.length; index++) {
