@@ -29,6 +29,7 @@ export class InflightComponent implements OnInit {
   private seatConfig: any = null;
   private seatmap = [];
   totalseats = [];
+  value;
 
   services = [];
   notBookedSeats = [];
@@ -221,6 +222,9 @@ export class InflightComponent implements OnInit {
     this.nonvegfoods = [];
     this.shopping = [];
     this.totalseats = [];
+    this.availableSeats = [];
+    this.totalseats=[];
+    
     this.flightname = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
     var time = this.flight.time;
@@ -229,6 +233,7 @@ export class InflightComponent implements OnInit {
     this.id = this.flight.id;
     this.passengerData = this.airlineService.getPassengerDataOfParticularFlight(this.id);
     this.passengerData.forEach(element => {
+
       if (element.food === 'Veg') {
         this.vegfoods.push(element.seatnumber);
       } else if (element.food === 'Nonveg') {
@@ -266,9 +271,17 @@ export class InflightComponent implements OnInit {
       finalList.push(element.seatLabel);
     });
     this.blockSeats(finalList, 'unavailable');
+    if (this.value === 'foods') {
+      this.blockSeats(this.vegfoods, 'Veg');
+      this.blockSeats(this.nonvegfoods, 'Nonveg');
+    } else if(this.value==='shopping') {
+      this.blockSeats(this.shopping, 'shopping');
+    
+  }
   }
 
   onServiceItemChange(newObj: any) {
+    this.value=newObj;
     if (newObj === 'foods') {
       this.blockSeats(this.vegfoods, 'Veg');
       this.blockSeats(this.nonvegfoods, 'Nonveg');
