@@ -3,6 +3,7 @@ import { AirlineService } from 'src/app/airline.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Passenger } from 'src/app/Entity/Passenger';
 import { element } from '@angular/core/src/render3';
+import { Seat } from 'src/app/Entity/Seat';
 
 @Component({
   selector: 'app-inflight',
@@ -23,17 +24,27 @@ export class InflightComponent implements OnInit {
   vegfoods = [];
   nonvegfoods = [];
   shopping = [];
+  availableSeats = [];
   ancilaryservice = [];
   private seatConfig: any = null;
   private seatmap = [];
+  totalseats = [];
+
   services = [];
+  notBookedSeats = [];
   private seatChartConfig = {
     showRowsLabel: true,
     showRowWisePricing: false,
     newSeatNoForRow: true
 
   }
-
+  private cart = {
+    selectedSeats: [],
+    seatstoStore: [],
+    totalamount: 0,
+    cartId: "",
+    eventId: 0
+  };
   constructor(private airlineService: AirlineService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -142,6 +153,7 @@ export class InflightComponent implements OnInit {
 
         });
       }
+      console.log(this.seatmap);
     }
   }
   public blockSeats(seatsToBlockArr: string[], string) {
@@ -163,8 +175,10 @@ export class InflightComponent implements OnInit {
                 seatObj["status"] = "nonveg";
               } else if (string === 'shopping') {
                 seatObj["status"] = "shopping";
+              }else if(string === 'unavailable'){
+                seatObj["status"] = "unavailable";
               }
-              // seatObj["status"] = "unavailable";
+              // 
               this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
               console.log("\n\n\nSeat Obj", seatObj);
               console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
@@ -178,12 +192,35 @@ export class InflightComponent implements OnInit {
     }
 
   }
+  public selectSeat(seatObject: Seat) {
 
+    console.log("Seat to block: ", seatObject);
+    if (seatObject.status == "available") {
+      if (this.cart.selectedSeats.length == 0) {
+        seatObject.status = "booked";
+        this.cart.selectedSeats.push(seatObject.seatLabel);
+        this.cart.seatstoStore.push(seatObject.key);
+        //this.cart.totalamount += seatObject.price;
+      } else {
+        alert("Already One Seat Selected");
+      }
+    }
+    else if (seatObject.status = "booked") {
+      seatObject.status = "available";
+      var seatIndex = this.cart.selectedSeats.indexOf(seatObject.seatLabel);
+      if (seatIndex > -1) {
+        this.cart.selectedSeats.splice(seatIndex, 1);
+        this.cart.seatstoStore.splice(seatIndex, 1);
+        //this.cart.totalamount -= seatObject.price;
+      }
+
+    }
+  }
   onItemChange(newObj: any) {
     this.vegfoods = [];
     this.nonvegfoods = [];
     this.shopping = [];
-
+    this.totalseats = [];
     this.flightname = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
     var time = this.flight.time;
@@ -203,11 +240,34 @@ export class InflightComponent implements OnInit {
           this.shopping.push(element.seatnumber);
         }
       }
+
+      if (element.seatnumber != undefined) {
+        this.availableSeats.push(element.seat.key);
+      }
     });
-
-
-
+    this.seatmap.forEach(seatmap =>
+      seatmap.seats.forEach(element => {
+        this.totalseats.push(element);
+      }));
+    this.getNotBookedSeats(this.availableSeats);
   }
+  getNotBookedSeats(seats) {
+    var result = [];
+    var finalList=[];
+    this.totalseats.reduce(function (acc, seat) {
+      if (seats.indexOf(seat.key) === -1) {
+        acc.push(seat);
+      }
+      return result;
+    }, result);
+    console.log(result);
+
+    result.forEach(element => {
+      finalList.push(element.seatLabel);
+    });
+    this.blockSeats(finalList, 'unavailable');
+  }
+
   onServiceItemChange(newObj: any) {
     if (newObj === 'foods') {
       this.blockSeats(this.vegfoods, 'Veg');

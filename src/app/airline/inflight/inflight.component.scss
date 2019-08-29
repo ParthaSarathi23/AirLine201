@@ -1,14 +1,20 @@
 $seat-available-bg: rgb(218, 157, 65);
 $seat-available-color: #a0a0a0;
+
 $seat-veg-bg: #117e32;
 $seat-veg-color: white;
+
 $seat-unavailable-bg: #a0a0a0;
 $seat-unavailable-color: white;
+
 $seat-nonveg-bg: #e92b35;
 $seat-nonveg-color: white;
 
 $seat-shopping-bg: #a520f1;
 $seat-shopping-color: white;
+
+$seat-booked-bg: #2110b9;
+$seat-booked-color: white;
 
 .badge-primary
 {
@@ -79,6 +85,14 @@ $seat-shopping-color: white;
     font-weight: bolder;
     background-color: $seat-veg-bg;
     border: 1px solid $seat-veg-color;
+
+}
+.seat-booked
+{
+    color: $seat-booked-color;
+    font-weight: bolder;
+    background-color: $seat-booked-bg;
+    border: 1px solid $seat-booked-color;
 
 }
 .seat-nonveg

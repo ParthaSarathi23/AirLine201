@@ -292,7 +292,9 @@ export class AddPassengerComponent implements OnInit {
           ancilarservices: this.ancilary,
           arrivaltime: this.arrivaltime,
           depaturetime: this.depaturetime,
-          food:this.fooditem
+          food:this.fooditem,
+          seat:this.seat
+          
         }
       });
 

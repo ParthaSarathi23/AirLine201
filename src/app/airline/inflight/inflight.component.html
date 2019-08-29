@@ -59,8 +59,8 @@
               <div *ngFor="let seatobj of seatrow.seats">
                   <div class="seat-item seat-space" style="color:white ; background-color:white" *ngIf="seatobj.seatLabel == ''">  &nbsp; </div>
                   <div tooltip="Seat : {{seatobj.seatLabel}}" placement="top"
-                  [ngClass]="{ 'seat-item' : true , 'seat-available' : seatobj.status == 'available' ,'seat-booked' : seatobj.status == 'booked'
-                  ,'seat-nonveg' : seatobj.status == 'nonveg','seat-veg' : seatobj.status == 'veg'
+                  [ngClass]="{ 'seat-item' : true , 'seat-available' : seatobj.status == 'available', 'seat-booked' : seatobj.status == 'booked'
+                  ,'seat-unavailable' : seatobj.status == 'unavailable','seat-veg' : seatobj.status == 'veg'
                 }" 
                    (click)="selectSeat(seatobj)" *ngIf="(seatobj.status == 'available' || seatobj.status == 'booked' )&& seatobj.seatLabel != ''"></div>
                    
@@ -75,6 +75,10 @@
                   <div tooltip="Seat : {{seatobj.seatLabel}} | Shopping"placement="top"
                   [ngClass]="{ 'seat-item' : true , 'seat-shopping' : true }" 
                   *ngIf="seatobj.status == 'shopping' && seatobj.seatLabel != ''"></div>
+
+                  <div tooltip="Seat : {{seatobj.seatLabel}} | Unavailable" placement="top"
+                  [ngClass]="{ 'seat-item' : true , 'seat-unavailable' : true }" 
+                  *ngIf="seatobj.status == 'unavailable' && seatobj.seatLabel != ''"></div>
               </div>
           </div>
       </div>

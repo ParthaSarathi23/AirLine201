@@ -1,5 +1,5 @@
 export class Seat{
-    key:string[];
+    key:string;
     price:number;
     seatLabel:string[];
     seatNo:string;
