@@ -24,6 +24,7 @@ export class AirlineService {
     constructor(private store: Store<AppState>) {
         
     }
+    ancilary=new Ancilary();
 
     showLogoutEvent = new Subject<String[]>();
     passengerChangedEvent = new Subject<Passenger[]>();
@@ -46,31 +47,52 @@ export class AirlineService {
             id: 4, name: 'Arijit', email: 'String', passport: 'BL78785634', address: 'String', dob: 'String', disability: 'String', food: 'veg', seatnumber: '', ischeckedin: 1, infants: 2, ancilarservices: new Ancilary(), flight: 'Indigo235',arrivaltime:'12.55',depaturetime:'12.78',seat:new Seat()
         }
     ]
-
+     
+    
     flightData: Flight[] = [
         {
             id: 1, name: 'Indigo235', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
-            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
+            meal:null,ancilaryService:null,shoppingItems:new ShoppingItem()
         },
         {
             id: 2, name: 'Indigo990', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
-            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
+            meal:null,ancilaryService:null,shoppingItems:new ShoppingItem()
         },
         {
             id: 3, name: 'Indigo789', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
-            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
+            meal:null,ancilaryService:null,shoppingItems:new ShoppingItem()
         },
         {
             id: 4, name: 'Indigo555', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
-            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
+            meal:null,ancilaryService:null,shoppingItems:new ShoppingItem()
         },
         {
             id: 5, name: 'Indigo231',arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
-            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
+            meal:null,ancilaryService:null,shoppingItems:new ShoppingItem()
         }
 
     ];
-
+    updateFlightAncilaryData(id,ancilary){
+        this.flightData.forEach(map_element => {
+            if(map_element.id==id){
+                map_element.ancilaryService=ancilary;
+            }
+        });
+    }
+    updateFlightMealData(id,meal){
+        this.flightData.forEach(map_element => {
+            if(map_element.id==id){
+                map_element.meal=meal;
+            }
+        });
+    }
+    updateFlightShoppingData(id,shoppingItems){
+        this.flightData.forEach(map_element => {
+            if(map_element.id==id){
+                map_element.shoppingItems=shoppingItems;
+            }
+        });
+    }
     showLogout(email: String, type: String) {
         this.string = [email, type];
         this.showLogoutEvent.next(this.string);

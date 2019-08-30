@@ -48,49 +48,49 @@
 
 <div class="row" *ngIf="data[0]==1">
   <div class="col-md-4">
-    <mat-checkbox class="example-margin" [(ngModel)]="Baggage">Baggage</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]=ancilary.baggage>Baggage</mat-checkbox>
   </div>
   <div class="col-md-4">
-    <mat-checkbox class="example-margin" [(ngModel)]="Wheelchair">Wheelchair</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]=ancilary.wheelchair>Wheelchair</mat-checkbox>
   </div>
   <div class="col-md-4">
-    <mat-checkbox class="example-margin" [(ngModel)]="Shopping">Shopping</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]=ancilary.shopping>Shopping</mat-checkbox>
   </div>
 </div>
 <div style="text-align: center;" *ngIf="data[0]==1">
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="ancilary.baggage==false && ancilary.wheelchair==false && ancilary.shopping==false" [mat-dialog-close]=ancilary cdkFocusInitial>Submit</button>
 </div>
 
 
 <div class="row" *ngIf="data[0]==2">
-    <div class="col-md-4">
-      <mat-checkbox class="example-margin" [(ngModel)]="Veg">Veg</mat-checkbox>
-    </div>
-    <div class="col-md-4">
-      <mat-checkbox class="example-margin" [(ngModel)]="NonVeg">NonVeg</mat-checkbox>
-    </div>
-    <div class="col-md-4">
-      <mat-checkbox class="example-margin" [(ngModel)]="CustomisedMeal">CustomisedMeal</mat-checkbox>
-    </div>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]=meal.veg>Veg</mat-checkbox>
   </div>
-  <div style="text-align: center;" *ngIf="data[0]==2">
-    <button type="submit" class="btn btn-success">Submit</button>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]=meal.nonveg>NonVeg</mat-checkbox>
   </div>
-  
-  <div class="row" *ngIf="data[0]==3">
-      <div class="col-md-4">
-        <mat-checkbox class="example-margin" [(ngModel)]="Perfume">Perfume</mat-checkbox>
-      </div>
-      <div class="col-md-4">
-        <mat-checkbox class="example-margin" [(ngModel)]="CardHolder">CardHolder</mat-checkbox>
-      </div>
-      <div class="col-md-4">
-        <mat-checkbox class="example-margin" [(ngModel)]="PhoneStand">PhoneStand</mat-checkbox>
-      </div>
-    </div>
-    <div style="text-align: center;" *ngIf="data[0]==3">
-      <button type="submit" class="btn btn-success">Submit</button>
-    </div>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]=meal.customisedmeal>CustomisedMeal</mat-checkbox>
+  </div>
+</div>
+<div style="text-align: center;" *ngIf="data[0]==2">
+  <button type="submit" class="btn btn-success" [disabled]="meal.veg==false && meal.nonveg==false && meal.customisedmeal==false" [mat-dialog-close]=meal cdkFocusInitial>Submit</button>
+</div>
+
+<div class="row" *ngIf="data[0]==3">
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]="shoppingItem.perfume">Perfume</mat-checkbox>
+  </div>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]="shoppingItem.cardholder">CardHolder</mat-checkbox>
+  </div>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]="shoppingItem.phonestand">PhoneStand</mat-checkbox>
+  </div>
+</div>
+<div style="text-align: center;" *ngIf="data[0]==3">
+  <button type="submit" class="btn btn-success" [disabled]="shoppingItem.cardholder==false && shoppingItem.perfume==false && shoppingItem.phonestand==false" [mat-dialog-close]=shoppingItem cdkFocusInitial>Submit</button>
+</div>
 
 <!-- <div style="text-align: center;">
     <button mat-button (click)="onNoClick()" >Ok</button>

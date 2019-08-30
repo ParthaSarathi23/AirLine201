@@ -243,7 +243,7 @@
               <span class="input-group-text"> <i class="fas fa-utensils"></i> </span>
             </div>
 
-            <select name="fooditem" [(ngModel)]="fooditem" (change)="onFoodItemChange($event.target.value)">
+            <select name="fooditem" [(ngModel)]="fooditem" (change)="onFoodItemChange($event.target.value)" [disabled]="!seatselection">
               <option value="0" disabled selected>Select your food</option>
               <option *ngFor="let food of foods" [value]="food"> {{ food }}</option>
             </select>
@@ -348,7 +348,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group input-group">
-              <button type="button" class="btn btn-info" style="background-color: #673AB7;" (click)="openDialog()">Ancilary Service</button>
+              <button type="button" class="btn btn-info" style="background-color: #673AB7;" (click)="openDialog()" [disabled]="!seatselection">Ancilary Service</button>
 
               <!-- <fieldset class="ancilary">
               <legend>Ancilary</legend>

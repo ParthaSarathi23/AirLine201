@@ -44,7 +44,7 @@ export class CheckinComponent implements OnInit {
           time: row.time,
           passengerNo: +row.passengerNo,
           passengerDetails: this.flight[index].passengerDetails
-        }]
+        },null]
       });
       dialogRef.afterClosed().subscribe(result => {
       });

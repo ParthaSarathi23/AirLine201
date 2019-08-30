@@ -14,6 +14,8 @@ import { Flight } from 'src/app/Entity/Flight';
 import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
 import { Ancilary } from 'src/app/Entity/Ancilary';
 import { Seat } from 'src/app/Entity/Seat';
+import { Meal } from 'src/app/Entity/Meal';
+import { ShoppingItem } from 'src/app/Entity/ShoppingItem';
 
 @Component({
   selector: 'app-add-passenger',
@@ -31,7 +33,7 @@ export class AddPassengerComponent implements OnInit {
   address: string;
   dob: string;
   disablity: string;
-  food: string;
+  food: string = "0";
   seatno: string = '';
   arrivaltime: string;
   depaturetime: string;
@@ -43,7 +45,7 @@ export class AddPassengerComponent implements OnInit {
   type: number;
   passengerParticularData: Passenger;
   dateofbirth: Date;
-  foods: string[];
+  foods = [];
   disabilities: string[];
   fooditem = "0";
   isAdminLoggedIn: boolean;
@@ -53,7 +55,7 @@ export class AddPassengerComponent implements OnInit {
   passenger;
   flightNo = "0";
   flights = [];
-
+  shopingItems:ShoppingItem;
   selectedDeviceObj;
   flight: Flight;
   wheelchair: string;
@@ -61,28 +63,28 @@ export class AddPassengerComponent implements OnInit {
   infants;
   passengerInfo: PassengerDataClass;
   ancilary: Ancilary;
+  meal: Meal;
+  ancilaryItem: Ancilary;
   shopping: string;
   baggage: string;
   flightname: string;
   disablityCount = "0";
   seat;
-  seatselection:boolean=false;
-  
+  seatselection: boolean = false;
+  shopingItemsData=[];
+
 
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
-    this.cbArr = ['Bay Seat', 'Wheelchair Access', 'Tip', 'Shopping'];
-    this.cbChecked = ['Shopping'];
-    this.foods = ['Veg', 'Nonveg'];
+
+
     this.disabilities = ['yes', 'no'];
     this.flights = this.airlineService.getFlightData();
     this.selectedDeviceObj = this.flights[1];
-    this.seat=new Seat();
+    this.seat = new Seat();
 
-    // store.select('addPassengerDetails').subscribe((data: Passenger) => this.passengers = data );
 
-    //console.log(this.passengers);   
   }
 
   parseDate(dateString: string): Date {
@@ -95,19 +97,20 @@ export class AddPassengerComponent implements OnInit {
 
 
   openDialog(): void {
+    console.log(this.ancilary);
     const dialogRef = this.dialog.open(PassengerModalComponent, {
       width: '650px',
-      data: [true, this.ancilary],
+      data: [true, this.ancilary, this.ancilaryItem,this.shopingItemsData],
 
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       var obj = localStorage.getItem('ancilary');
-      if(obj!==''){
-        this.ancilary = JSON.parse(obj);
+      if (obj !== '') {
+        this.ancilaryItem = JSON.parse(obj);
       }
-     
+
     });
   }
 
@@ -168,11 +171,49 @@ export class AddPassengerComponent implements OnInit {
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
     this.depaturetime = this.flight.depaturetime;
     this.arrivaltime = this.flight.arrivaltime;
-    this.seatselection=true;
+    this.seatselection = true;
+    this.ancilary = this.flight.ancilaryService;
+    this.setFoods(this.flight);
+    this.setShoppingItems(this.flight);
+
   }
   onFoodItemChange(newObj: any) {
     console.log(this.fooditem);
     this.food = newObj;
+  }
+
+  setFoods(flight) {
+    this.meal = flight.meal;
+    if (this.meal !== null) {
+      if (this.meal.customisedmeal) {
+        this.foods.push("CustomisedMeal");
+      }
+      if (this.meal.veg) {
+        this.foods.push("Veg");
+      }
+      if (this.meal.nonveg) {
+        this.foods.push("NonVeg");
+      }
+    } else {
+      this.foods = ['Veg', 'NonVeg', 'CustomisedMeal'];
+    }
+  }
+
+  setShoppingItems(flight){
+    this.shopingItems = flight.shoppingItems;
+    if (this.shopingItems !== null) {
+      if (this.shopingItems.perfume) {
+        this.shopingItemsData.push("Perfume");
+      }
+      if (this.shopingItems.cardholder) {
+        this.shopingItemsData.push("CardHolder");
+      }
+      if (this.shopingItems.phonestand) {
+        this.shopingItemsData.push("PhoneStand");
+      }
+    } else {
+      this.shopingItemsData = ['Perfume', 'CardHolder', 'PhoneStand'];
+    }
   }
   onDisabilityItemChange(newObj: any) {
     this.disablity = newObj;
@@ -180,7 +221,7 @@ export class AddPassengerComponent implements OnInit {
   updateView(passenger: Passenger) {
     this.name = passenger.name;
     this.email = passenger.email;
-    this.dob=passenger.dob;
+    this.dob = passenger.dob;
     this.infants = passenger.infants;
     this.passport = passenger.passport;
     this.seatno = passenger.seatnumber ? passenger.seatnumber : '';
@@ -188,7 +229,7 @@ export class AddPassengerComponent implements OnInit {
     this.address = passenger.address;
     this.arrivaltime = passenger.arrivaltime;
     this.depaturetime = passenger.depaturetime;
-    this.fooditem = passenger.food;
+
 
     if (this.fooditem === undefined) {
       this.fooditem = "0";
@@ -199,10 +240,17 @@ export class AddPassengerComponent implements OnInit {
       this.disablityCount = "0";
     }
 
-    this.ancilary = passenger.ancilarservices;
+    this.ancilaryItem = passenger.ancilarservices;
     this.flightNo = passenger.flight;
     if (this.flightNo === undefined) {
       this.flightNo = "0";
+    } else {
+      this.flight = this.airlineService.getParticularFlightDetails(this.flightNo);
+      this.seatselection = true;
+      this.ancilary = this.flight.ancilaryService;
+      this.fooditem = passenger.food;
+      this.setFoods(this.flight);
+      this.setShoppingItems(this.flight);
     }
 
     //this.selectedDeviceObj = this.flight;
@@ -213,7 +261,7 @@ export class AddPassengerComponent implements OnInit {
       this.radioData = 'no';
     }
 
-    this.seat=passenger.seat;
+    this.seat = passenger.seat;
     //updateModal(this.ancilary);
   }
   updateCheckedOptions(chBox, event) {
@@ -262,15 +310,15 @@ export class AddPassengerComponent implements OnInit {
 
     console.log(this.food);
 
-   // this.seatno = form.value.seatno;
+    // this.seatno = form.value.seatno;
     console.log(this.seatno);
     this.infantcount = form.value.infants;
 
 
-    if (this.ancilary === null || this.ancilary === undefined) {
-      this.ancilary = new Ancilary();
+    if (this.ancilaryItem === null || this.ancilaryItem === undefined) {
+      this.ancilaryItem = new Ancilary();
     } else {
-    
+
     }
 
     if (!this.isFromEdit) {
@@ -279,7 +327,7 @@ export class AddPassengerComponent implements OnInit {
         payload: <Passenger>{
           id: +this.mid,
           name: this.name,
-          dob:this.dob,
+          dob: this.dob,
           email: this.email,
           flight: this.flightNo,
           infants: this.infantcount,
@@ -288,12 +336,12 @@ export class AddPassengerComponent implements OnInit {
           seatnumber: this.seatno,
           disability: this.disablityCount,
           ischeckedin: this.checkedin,
-          ancilarservices: this.ancilary,
+          ancilarservices: this.ancilaryItem,
           arrivaltime: this.arrivaltime,
           depaturetime: this.depaturetime,
-          food:this.fooditem,
-          seat:this.seat
-          
+          food: this.fooditem,
+          seat: this.seat
+
         }
       });
 
@@ -306,7 +354,7 @@ export class AddPassengerComponent implements OnInit {
         payload: <Passenger>{
           id: +this.id,
           name: this.name,
-          dob:this.dob,
+          dob: this.dob,
           email: this.email,
           flight: this.flightNo,
           infants: this.infantcount,
@@ -315,15 +363,15 @@ export class AddPassengerComponent implements OnInit {
           seatnumber: this.seatno,
           disability: this.disablityCount,
           ischeckedin: this.checkedin,
-          ancilarservices: this.ancilary,
+          ancilarservices: this.ancilaryItem,
           arrivaltime: this.arrivaltime,
           depaturetime: this.depaturetime,
-          food:this.fooditem
+          food: this.fooditem
         }
       });
       this.router.navigate(['passenger-list']);
     }
-    
+
   }
   setDate(date: string) {
     let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
@@ -331,26 +379,20 @@ export class AddPassengerComponent implements OnInit {
     this.dob = formatedDate;
   }
   seatAllocation() {
-    
-    if (this.ancilary === null || this.ancilary === undefined) {
-      this.ancilary = new Ancilary();
-      
-    } else {
 
-      // this.baggage=this.ancilary.baggage ;
-      // this.ancilary.shopping = this.shopping;
-      // this.ancilary.wheelchair = this.wheelchair;
-
-    }
+    if (this.ancilaryItem === null || this.ancilaryItem === undefined) {
+      this.ancilaryItem = new Ancilary();
+    } 
 
     if (this.radioData === 'yes') {
       this.checkedin = 1;
     } else {
       this.checkedin = 0;
     }
+
     this.passengerInfo = new PassengerDataClass()
     this.passengerInfo.name = this.name;
-    this.passengerInfo.dob=this.dob;
+    this.passengerInfo.dob = this.dob;
     this.passengerInfo.email = this.email;
     this.passengerInfo.flight = this.flightname;
     this.passengerInfo.infants = this.infants;
@@ -359,13 +401,13 @@ export class AddPassengerComponent implements OnInit {
     this.passengerInfo.seatnumber = this.seatno;
     this.passengerInfo.disability = this.disablityCount;
     this.passengerInfo.ischeckedin = this.checkedin;
-    this.passengerInfo.ancilarservices = this.ancilary;
+    this.passengerInfo.ancilarservices = this.ancilaryItem;
     this.passengerInfo.arrivaltime = this.arrivaltime;
     this.passengerInfo.depaturetime = this.depaturetime;
     this.passengerInfo.food = this.food;
-    this.passengerInfo.seat=this.seat;
+    this.passengerInfo.seat = this.seat;
 
-    
+
     localStorage.setItem('passengerInfo', JSON.stringify(this.passengerInfo));
     if (this.isFromEdit) {
       this.router.navigate(['seat-allocation/' + this.id]);
