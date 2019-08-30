@@ -67,7 +67,6 @@ export class AddPassengerComponent implements OnInit {
   ancilaryItem: Ancilary;
   shopping: string;
   baggage: string;
-  flightname: string;
   disablityCount = "0";
   seat;
   seatselection: boolean = false;
@@ -167,7 +166,7 @@ export class AddPassengerComponent implements OnInit {
   }
 
   onItemChange(newObj: any) {
-    this.flightname = newObj;
+    this.flightNo = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
     this.depaturetime = this.flight.depaturetime;
     this.arrivaltime = this.flight.arrivaltime;
@@ -394,7 +393,7 @@ export class AddPassengerComponent implements OnInit {
     this.passengerInfo.name = this.name;
     this.passengerInfo.dob = this.dob;
     this.passengerInfo.email = this.email;
-    this.passengerInfo.flight = this.flightname;
+    this.passengerInfo.flight = this.flightNo;
     this.passengerInfo.infants = this.infants;
     this.passengerInfo.passport = this.passport;
     this.passengerInfo.address = this.address;

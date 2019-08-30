@@ -64,7 +64,7 @@ export class PassengerModalComponent implements OnInit {
       console.log(this.shoppingCount);
     }
 
-    if (data[3] === null || data[3] === undefined) {
+    if (data[3].length==0) {
       this.shoppings = ['Perfume', 'CardHolder', "PhoneStand"];
     } else {
       data[3].forEach(element => {
