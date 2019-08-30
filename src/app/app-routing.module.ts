@@ -8,6 +8,7 @@ import { AdminComponent } from './admin/admin.component';
 import { SeatAllocationComponent } from './admin/seat-allocation/seat-allocation.component';
 import { CheckinComponent } from './airline/checkin/checkin.component';
 import { InflightComponent } from './airline/inflight/inflight.component';
+import { FlightEditComponent } from './admin/flight-edit/flight-edit.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'flight-list', component: CheckinComponent },
   { path: 'in-flight', component: InflightComponent },
   { path: 'passenger-list/:id', component: PassengerListComponent },
-
+  { path: 'flight-edit', component: FlightEditComponent },
 ];
 
 @NgModule({

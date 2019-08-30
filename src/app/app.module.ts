@@ -36,6 +36,7 @@ import {
   FacebookLoginProvider,
   LinkedinLoginProvider,
 } from "angular-6-social-login";
+import { FlightEditComponent } from './admin/flight-edit/flight-edit.component';
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
       [
@@ -69,7 +70,8 @@ export function getAuthServiceConfigs() {
     SeatAllocationComponent,
     CheckinComponent,
     InflightComponent,
-    AirlineModalComponent
+    AirlineModalComponent,
+    FlightEditComponent
 
   ],
   imports: [

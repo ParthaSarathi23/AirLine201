@@ -17,7 +17,7 @@
   <div class="container" *ngIf="dataSource">
     <mat-table [dataSource]="dataSource" matSort>
   
-     <ng-container matColumnDef="id">
+     <ng-container matColumnDef="ID">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
         <mat-cell *matCellDef="let row; let i = index;"> {{row.id}} </mat-cell>
       </ng-container>
@@ -29,36 +29,48 @@
       </ng-container> -->
   
       <!-- name Column -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="Name">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
       </ng-container>
   
       <!-- email Column -->
-      <ng-container matColumnDef="time">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Time </mat-header-cell>
+      <ng-container matColumnDef="ArrivalTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ArrivalTime </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
       </ng-container>
+      
+      <!-- email Column -->
+      <ng-container matColumnDef="DepatureTime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> DepatureTime </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
+        </ng-container>
    <!-- email Column -->
-   <ng-container matColumnDef="passengerno">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> No. Of Passengers </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.passengerNo}} </mat-cell>
+   <ng-container matColumnDef="AncilaryServices">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> AncilaryServices </mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index;"> 
+          <button mat-raised-button color="" (click)="onDetailsClicked(row,i)">
+            <!-- Details -->
+            <i class="fas fa-info-circle" style="color:#673AB7;font-size: 1.4rem;"></i>
+            <!-- <i class="fas fa-portrait"></i> -->
+        </button>  </mat-cell>
     </ng-container>
-      <ng-container matColumnDef="details">
-        <mat-header-cell *matHeaderCellDef>Details</mat-header-cell>
+
+      <ng-container matColumnDef="Meal">
+        <mat-header-cell *matHeaderCellDef>Meal</mat-header-cell>
         <mat-cell *matCellDef="let row;let i = index;"> 
           <button mat-raised-button color="" (click)="onDetailsClicked(row,i)">
             <!-- Details -->
-            <i class="fas fa-dot-circle" style="color: #673AB7;font-size: 1.4rem;"></i>
+            <i class="fas fa-utensils" style="color: #673AB7;font-size: 1.4rem;"></i>
             <!-- <i class="fas fa-portrait"></i> -->
         </button>  </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="passengerList">
-        <mat-header-cell *matHeaderCellDef>Passenger List</mat-header-cell>
+      <ng-container matColumnDef="ShoppingItems">
+        <mat-header-cell *matHeaderCellDef>ShoppingItems</mat-header-cell>
         <mat-cell *matCellDef="let row;let i = index;"> 
           <button mat-raised-button color="" (click)="onPassengerListClicked(row,i)">
             <!-- Details -->
-            <i class="fas fa-info-circle" style="color: #673AB7;font-size: 1.4rem;"></i>
+            <i class="fas fa-suitcase-rolling" style="color: #673AB7;font-size: 1.4rem;"></i>
             <!-- <i class="fas fa-portrait"></i> -->
         </button>  </mat-cell>
       </ng-container>
