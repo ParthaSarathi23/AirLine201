@@ -12,7 +12,7 @@
     <p>Infants :{{data.infants}}</p>
     <p>Aancilary Services :{{data.ancilarservices}}</p> -->
 
-  <div class="row">
+  <div class="row" *ngIf="data[0]==0">
     <div class="col-md-3">
       <img class="img-left" src="assets/icon1.png"
         style="width: 10rem;height: 12rem;padding-right: 1em;padding-top: 3em;">
@@ -40,11 +40,57 @@
 
     </div>
   </div>
-  <div style="text-align: center;">
+  <div style="text-align: center;" *ngIf="data[0]==0">
     <button type="submit" class="btn btn-success">Ok</button>
   </div>
 </div>
 
+
+<div class="row" *ngIf="data[0]==1">
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]="Baggage">Baggage</mat-checkbox>
+  </div>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]="Wheelchair">Wheelchair</mat-checkbox>
+  </div>
+  <div class="col-md-4">
+    <mat-checkbox class="example-margin" [(ngModel)]="Shopping">Shopping</mat-checkbox>
+  </div>
+</div>
+<div style="text-align: center;" *ngIf="data[0]==1">
+  <button type="submit" class="btn btn-success">Submit</button>
+</div>
+
+
+<div class="row" *ngIf="data[0]==2">
+    <div class="col-md-4">
+      <mat-checkbox class="example-margin" [(ngModel)]="Veg">Veg</mat-checkbox>
+    </div>
+    <div class="col-md-4">
+      <mat-checkbox class="example-margin" [(ngModel)]="NonVeg">NonVeg</mat-checkbox>
+    </div>
+    <div class="col-md-4">
+      <mat-checkbox class="example-margin" [(ngModel)]="CustomisedMeal">CustomisedMeal</mat-checkbox>
+    </div>
+  </div>
+  <div style="text-align: center;" *ngIf="data[0]==2">
+    <button type="submit" class="btn btn-success">Submit</button>
+  </div>
+  
+  <div class="row" *ngIf="data[0]==3">
+      <div class="col-md-4">
+        <mat-checkbox class="example-margin" [(ngModel)]="Perfume">Perfume</mat-checkbox>
+      </div>
+      <div class="col-md-4">
+        <mat-checkbox class="example-margin" [(ngModel)]="CardHolder">CardHolder</mat-checkbox>
+      </div>
+      <div class="col-md-4">
+        <mat-checkbox class="example-margin" [(ngModel)]="PhoneStand">PhoneStand</mat-checkbox>
+      </div>
+    </div>
+    <div style="text-align: center;" *ngIf="data[0]==3">
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
 
 <!-- <div style="text-align: center;">
     <button mat-button (click)="onNoClick()" >Ok</button>

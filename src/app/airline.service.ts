@@ -15,6 +15,8 @@ import { reject } from 'q';
 // import "firebase/firestore";
 import { Ancilary } from './Entity/Ancilary';
 import { Seat } from './Entity/Seat';
+import { Meal } from './Entity/Meal';
+import { ShoppingItem } from './Entity/ShoppingItem';
 
 @Injectable()
 export class AirlineService {
@@ -47,19 +49,24 @@ export class AirlineService {
 
     flightData: Flight[] = [
         {
-            id: 1, name: 'Indigo235', time: '10:90', passengerNo: 0, passengerDetails: []
+            id: 1, name: 'Indigo235', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
+            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
         },
         {
-            id: 2, name: 'Indigo990', time: '25:90', passengerNo: 0, passengerDetails: []
+            id: 2, name: 'Indigo990', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
+            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
         },
         {
-            id: 3, name: 'Indigo789', time: '21:90', passengerNo: 0, passengerDetails: []
+            id: 3, name: 'Indigo789', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
+            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
         },
         {
-            id: 4, name: 'Indigo555', time: '25:90', passengerNo: 0, passengerDetails: []
+            id: 4, name: 'Indigo555', arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
+            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
         },
         {
-            id: 5, name: 'Indigo231', time: '22:90', passengerNo: 0, passengerDetails: []
+            id: 5, name: 'Indigo231',arrivaltime: '10:90',depaturetime: '10:90', passengerNo: 0, passengerDetails: [],
+            meal:new Meal(),ancilaryService:new Ancilary(),shoppingItems:new ShoppingItem()
         }
 
     ];

@@ -166,9 +166,8 @@ export class AddPassengerComponent implements OnInit {
   onItemChange(newObj: any) {
     this.flightname = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
-    var time = this.flight.time;
-    this.depaturetime = time;
-    this.arrivaltime = time;
+    this.depaturetime = this.flight.depaturetime;
+    this.arrivaltime = this.flight.arrivaltime;
     this.seatselection=true;
   }
   onFoodItemChange(newObj: any) {

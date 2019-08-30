@@ -35,10 +35,15 @@
       </ng-container>
   
       <!-- email Column -->
-      <ng-container matColumnDef="time">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Time </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
+      <ng-container matColumnDef="ArrivalTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ArrivalTime </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.arrivaltime}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="DepatureTime">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> DepatureTime </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.depaturetime}} </mat-cell>
+        </ng-container>
    <!-- email Column -->
    <ng-container matColumnDef="passengerno">
       <mat-header-cell *matHeaderCellDef mat-sort-header> No. Of Passengers </mat-header-cell>

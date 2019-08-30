@@ -13,7 +13,7 @@ import { AirlineModalComponent } from '../airline-modal/airline-modal.component'
   styleUrls: ['./checkin.component.scss']
 })
 export class CheckinComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'time', 'passengerno', 'details','passengerList'];
+  displayedColumns = ['id', 'name', 'ArrivalTime','DepatureTime', 'passengerno', 'details','passengerList'];
   dataSource: MatTableDataSource<Flight>;
   flight: Flight[];
 
@@ -38,13 +38,13 @@ export class CheckinComponent implements OnInit {
     if (row !== null && row.passengerNo !== 0) {
       const dialogRef = this.dialog.open(AirlineModalComponent, {
         width: '650px',
-        data: {
+        data: [0,{
           id: +row.id,
           name: row.name,
           time: row.time,
           passengerNo: +row.passengerNo,
           passengerDetails: this.flight[index].passengerDetails
-        }
+        }]
       });
       dialogRef.afterClosed().subscribe(result => {
       });

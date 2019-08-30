@@ -34,24 +34,38 @@ export class FlightEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDetailsClicked(row, index) {
-
-    if (row !== null && row.passengerNo !== 0) {
+  onAncilaryClicked(row, index) {
+    if (row !== null) {
       const dialogRef = this.dialog.open(AirlineModalComponent, {
         width: '650px',
-        data: {
-          id: +row.id,
-          name: row.name,
-          time: row.time,
-          passengerNo: +row.passengerNo,
-          passengerDetails: this.flight[index].passengerDetails
-        }
+        data: [1,null
+        ]
       });
       dialogRef.afterClosed().subscribe(result => {
       });
-    } else {
-      alert("No Passengers,So no details found");
-    }
+    } 
+  }
+  onMealClicked(row, index) {
+    if (row !== null) {
+      const dialogRef = this.dialog.open(AirlineModalComponent, {
+        width: '650px',
+        data: [2,null
+        ]
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    } 
+  }
+  onShoppingClicked(row, index) {
+    if (row !== null) {
+      const dialogRef = this.dialog.open(AirlineModalComponent, {
+        width: '650px',
+        data: [3,null
+        ]
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    } 
   }
   onPassengerListClicked(row, index) {
     if (row !== null && row.passengerNo !== 0) {

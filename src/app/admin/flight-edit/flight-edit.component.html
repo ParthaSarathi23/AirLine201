@@ -2,90 +2,93 @@
 <div class="container" *ngIf="dataSource">
   <div class="row">
     <div class="col-md-10">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for flight"/>
-    </mat-form-field>
-  </div>
-  <!-- <div class="col-md-2">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for flight" />
+      </mat-form-field>
+    </div>
+    <!-- <div class="col-md-2">
     <button mat-raised-button style="background-color: rgb(0, 105, 16)" routerLink="/add-passenger"> 
         <i class="fas fa-user-plus" style="color: white"> Add New Passenger</i></button>
             </div> -->
   </div>
-    
-  </div>
-  
-  <div class="container" *ngIf="dataSource">
-    <mat-table [dataSource]="dataSource" matSort>
-  
-     <ng-container matColumnDef="ID">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-        <mat-cell *matCellDef="let row; let i = index;"> {{row.id}} </mat-cell>
-      </ng-container>
-      
-      <!-- ID Column
+
+</div>
+
+<div class="container" *ngIf="dataSource">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="ID">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index;"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- ID Column
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
       </ng-container> -->
-  
-      <!-- name Column -->
-      <ng-container matColumnDef="Name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-      </ng-container>
-  
-      <!-- email Column -->
-      <ng-container matColumnDef="ArrivalTime">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ArrivalTime </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
-      </ng-container>
-      
-      <!-- email Column -->
-      <ng-container matColumnDef="DepatureTime">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> DepatureTime </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.time}} </mat-cell>
-        </ng-container>
-   <!-- email Column -->
-   <ng-container matColumnDef="AncilaryServices">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> AncilaryServices </mat-header-cell>
-      <mat-cell *matCellDef="let row;let i = index;"> 
-          <button mat-raised-button color="" (click)="onDetailsClicked(row,i)">
-            <!-- Details -->
-            <i class="fas fa-info-circle" style="color:#673AB7;font-size: 1.4rem;"></i>
-            <!-- <i class="fas fa-portrait"></i> -->
-        </button>  </mat-cell>
+
+    <!-- name Column -->
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
     </ng-container>
 
-      <ng-container matColumnDef="Meal">
-        <mat-header-cell *matHeaderCellDef>Meal</mat-header-cell>
-        <mat-cell *matCellDef="let row;let i = index;"> 
-          <button mat-raised-button color="" (click)="onDetailsClicked(row,i)">
-            <!-- Details -->
-            <i class="fas fa-utensils" style="color: #673AB7;font-size: 1.4rem;"></i>
-            <!-- <i class="fas fa-portrait"></i> -->
-        </button>  </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="ShoppingItems">
-        <mat-header-cell *matHeaderCellDef>ShoppingItems</mat-header-cell>
-        <mat-cell *matCellDef="let row;let i = index;"> 
-          <button mat-raised-button color="" (click)="onPassengerListClicked(row,i)">
-            <!-- Details -->
-            <i class="fas fa-suitcase-rolling" style="color: #673AB7;font-size: 1.4rem;"></i>
-            <!-- <i class="fas fa-portrait"></i> -->
-        </button>  </mat-cell>
-      </ng-container>
+    <!-- email Column -->
+    <ng-container matColumnDef="ArrivalTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ArrivalTime </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.arrivaltime}} </mat-cell>
+    </ng-container>
 
-        
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;">
-      </mat-row>
-    </mat-table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-  </div>
-  
+    <!-- email Column -->
+    <ng-container matColumnDef="DepatureTime">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> DepatureTime </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.depaturetime}} </mat-cell>
+    </ng-container>
 
-  
+    <!-- email Column -->
+    <ng-container matColumnDef="AncilaryServices">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> AncilaryServices </mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index;">
+        <button mat-raised-button color="" (click)="onAncilaryClicked(row,i)">
+          <!-- Details -->
+          <i class="fas fa-info-circle" style="color:#673AB7;font-size: 1.4rem;"></i>
+          <!-- <i class="fas fa-portrait"></i> -->
+        </button> </mat-cell>
+    </ng-container>
 
-  <!-- Copyright 2018 Google Inc. All Rights Reserved.
+    <ng-container matColumnDef="Meal">
+      <mat-header-cell *matHeaderCellDef>Meal</mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index;">
+        <button mat-raised-button color="" (click)="onMealClicked(row,i)">
+          <!-- Details -->
+          <i class="fas fa-utensils" style="color: #673AB7;font-size: 1.4rem;"></i>
+          <!-- <i class="fas fa-portrait"></i> -->
+        </button> </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="ShoppingItems">
+      <mat-header-cell *matHeaderCellDef>ShoppingItems</mat-header-cell>
+      <mat-cell *matCellDef="let row;let i = index;">
+        <button mat-raised-button color="" (click)="onShoppingClicked(row,i)">
+          <!-- Details -->
+          <i class="fas fa-suitcase-rolling" style="color: #673AB7;font-size: 1.4rem;"></i>
+          <!-- <i class="fas fa-portrait"></i> -->
+        </button> </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
       Use of this source code is governed by an MIT-style license that
       can be found in the LICENSE file at http://angular.io/license -->
