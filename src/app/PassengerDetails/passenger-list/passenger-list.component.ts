@@ -93,7 +93,7 @@ export class PassengerListComponent implements OnInit {
           'Passenger Deleted Successfully!!',
           'success'
         )
-        const users: Passenger[] = this.airlineService.getPassengerData();
+        const users: Passenger[] = this.airlineService.getAllPassengerData();
         if (users.length > 0) {
           this.dataSource = new MatTableDataSource(users);
         } else {
@@ -154,7 +154,7 @@ export class PassengerListComponent implements OnInit {
           }
 
         }else{
-          const users: Passenger[] = this.airlineService.getPassengerData();
+          const users: Passenger[] = this.airlineService.getAllPassengerData();
           if (users.length > 0) {
             console.log(JSON.stringify(users));
             this.dataSource = new MatTableDataSource(users);

@@ -8,20 +8,15 @@ import { Passenger } from './Entity/Passenger';
 })
 
 export class AppComponent implements OnInit {
-  
-  constructor(private airlineService:AirlineService){
+
+  constructor(private airlineService: AirlineService) {
 
   }
   ngOnInit(): void {
-    localStorage.setItem('passengers', '');
-    localStorage.setItem('flight', '');
-
-
-    localStorage.setItem('passengers', JSON.stringify(this.airlineService.passengerData));
-    localStorage.setItem('flight', JSON.stringify(this.airlineService.flightData));
-
-    
+    var retrievedObject = localStorage.getItem('flight');
+    if (retrievedObject == '' || retrievedObject==null) {
+      localStorage.setItem('flight', '');
+      localStorage.setItem('flight', JSON.stringify(this.airlineService.flightData));        
+    }
   }
-  
-
 }

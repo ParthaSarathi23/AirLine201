@@ -21,7 +21,7 @@ export class CheckinComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private airlineService: AirlineService, private router: Router, public dialog: MatDialog, private store: Store<AppState>) {
-    this.flight = this.airlineService.getFlightDetails();
+    this.flight = this.airlineService.getFlightsData();
     if (this.flight.length > 0) {
       this.dataSource = new MatTableDataSource(this.flight);
     } else {

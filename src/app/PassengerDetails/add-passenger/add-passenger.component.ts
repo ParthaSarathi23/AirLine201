@@ -344,7 +344,7 @@ export class AddPassengerComponent implements OnInit {
         }
       });
 
-
+      this.airlineService.addPassengerDataToLocalStorage(+this.mid);
       this.airlineService.addFlightOnAddPassenger(+this.mid);
       this.router.navigate(['passenger-list']);
     } else {
@@ -368,6 +368,7 @@ export class AddPassengerComponent implements OnInit {
           food: this.fooditem
         }
       });
+    //  this.airlineService.editPassengerDataToLocalStorage(+this.id);
       this.router.navigate(['passenger-list']);
     }
 

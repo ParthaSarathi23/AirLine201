@@ -43,38 +43,39 @@ export class PassengerModalComponent implements OnInit {
       this.ancilaryService = false;
     }
 
-    if (data[1] === null || data[1] === undefined) {
-      this.showBaggage = true;
-      this.showWheelchair = true;
-      this.showShopping = true;
-    } else {
-      this.showBaggage = data[1].baggage;
-      this.showWheelchair = data[1].wheelchair;
-      this.showShopping = data[1].shopping;
-    }
+    if (this.ancilaryService) {
+      if ((data[1] === null || data[1] === undefined)) {
+        this.showBaggage = true;
+        this.showWheelchair = true;
+        this.showShopping = true;
+      } else {
+        this.showBaggage = data[1].baggage;
+        this.showWheelchair = data[1].wheelchair;
+        this.showShopping = data[1].shopping;
+      }
 
 
-    if (data[2] === null || data[2] === undefined) {
+      if ((data[2] === null || data[2] === undefined)) {
 
-    } else {
-      console.log(data[2]);
-      this.bag = data[2].baggage;
-      this.chairCount = data[2].wheelchair;
-      this.shoppingCount = data[2].shopping;
-      console.log(this.shoppingCount);
-    }
+      } else if (this.ancilaryService) {
+        console.log(data[2]);
+        this.bag = data[2].baggage;
+        this.chairCount = data[2].wheelchair;
+        this.shoppingCount = data[2].shopping;
+        console.log(this.shoppingCount);
+      }
 
-    if (data[3].length==0) {
-      this.shoppings = ['Perfume', 'CardHolder', "PhoneStand"];
-    } else {
-      data[3].forEach(element => {
+      if (data[3].length == 0) {
+        this.shoppings = ['Perfume', 'CardHolder', "PhoneStand"];
+      } else {
+        data[3].forEach(element => {
 
-        this.shoppings.push(element);
-
-
-      });
+          this.shoppings.push(element);
 
 
+        });
+
+      }
     }
   }
 
