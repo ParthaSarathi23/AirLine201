@@ -20,6 +20,7 @@ export class PassengerModalComponent implements OnInit {
   bag = "0";
   chairCount = "0";
   shoppingCount = "0";
+
   baggeges: string[];
   shoppings = [];
   chairs: string[];
@@ -55,15 +56,23 @@ export class PassengerModalComponent implements OnInit {
       }
 
 
-      if ((data[2] === null || data[2] === undefined)) {
-
-      } else if (this.ancilaryService) {
-        console.log(data[2]);
+      if (this.ancilaryService && (data[2] != null && data[2] != undefined)) {
         this.bag = data[2].baggage;
         this.chairCount = data[2].wheelchair;
         this.shoppingCount = data[2].shopping;
-        console.log(this.shoppingCount);
+
+        if(this.bag==undefined){
+          this.bag="0";
+        }
+        if(this.chairCount==undefined){
+          this.chairCount="0";
+        }
+        if(this.shoppingCount==undefined){
+          this.shoppingCount="0";
+        }
+
       }
+      
 
       if (data[3].length == 0) {
         this.shoppings = ['Perfume', 'CardHolder', "PhoneStand"];
