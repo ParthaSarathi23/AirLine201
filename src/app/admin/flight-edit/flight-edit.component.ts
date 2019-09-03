@@ -97,7 +97,7 @@ export class FlightEditComponent implements OnInit, OnDestroy {
         flight.meal.nonveg = result.nonveg;
         flight.meal.customisedmeal = result.customisedmeal;
       }else{
-        flight.meal=new Meal;
+        flight.meal=new Meal();
         flight.meal.veg = result.veg;
         flight.meal.nonveg = result.nonveg;
         flight.meal.customisedmeal = result.customisedmeal;
@@ -125,7 +125,7 @@ export class FlightEditComponent implements OnInit, OnDestroy {
         flight.shoppingItems.cardholder = result.cardholder;
         flight.shoppingItems.phonestand = result.phonestand;
       }else{
-        flight.shoppingItems=new ShoppingItem;
+        flight.shoppingItems=new ShoppingItem();
         flight.shoppingItems.perfume = result.perfume;
         flight.shoppingItems.cardholder = result.cardholder;
         flight.shoppingItems.phonestand = result.phonestand;

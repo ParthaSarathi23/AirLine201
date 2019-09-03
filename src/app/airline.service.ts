@@ -137,9 +137,6 @@ export class AirlineService {
         return this.index;
     }
 
-
-    
-   
     getAllPassengerData(){
         this.passenger = [];
         var passengerData = [];
@@ -165,7 +162,7 @@ export class AirlineService {
     }
     getPassengerDataOfParticularFlightName(name) {
         var passengerData = [];
-        this.flightData.forEach((flight, index) => {
+        this.getFlightsData().forEach((flight, index) => {
             if (flight.name == name) {
                 passengerData = flight.passengerDetails;
             }
@@ -244,7 +241,7 @@ export class AirlineService {
             return this.passengerDatas.slice();
         }
     }
-   private getParticularPassengerDataOnAdd(id: number): any {
+    private getParticularPassengerDataOnAdd(id: number): any {
         if (this.getPassengerDataOnAdd() == null || this.getPassengerDataOnAdd() == undefined || this.getPassengerDataOnAdd().length == 0) {
             return
         } else {
@@ -336,6 +333,26 @@ export class AirlineService {
             localStorage.setItem('PassengerList', JSON.stringify(passengerData));
         }
     }
+    editFlightOneditPassenger(id){
+        this.passenger = [];
+        this.flightData=[];
+        this.passenger = this.getParticularPassengerData(id);
+        this.flightData=this.getFlightsData();
+        this.flightData.forEach((flight, index) => {
+            if (this.passenger.flight == flight.name) {
+
+                flight.passengerDetails.forEach((element,index1) => {
+                if(element.id==this.passenger.id){
+                    flight.passengerDetails[index1]=this.passenger;
+                }
+                });
+                
+
+            }
+        });
+        localStorage.setItem('flight', JSON.stringify(this.flightData));
+        console.log(this.flightData);
+    }
     addFlightOnAddPassenger(id) {
         this.passenger = [];
         this.flightData=[];
@@ -353,13 +370,16 @@ export class AirlineService {
     removePassengerFromFlight(id) {
         this.passenger = [];
         this.passenger = this.getParticularPassengerData(id);
-        this.flightData.forEach((flight, index) => {
+        var flightData=this.getFlightsData();
+        flightData.forEach((flight, index) => {
             if (this.passenger.flight == flight.name) {
-                this.flightData[index].passengerNo = this.flightData.slice()[index].passengerNo - 1;
-                this.flightData[index].passengerDetails.splice(index, 1);
+                flightData[index].passengerNo = flightData.slice()[index].passengerNo - 1;
+                flightData[index].passengerDetails.splice(index, 1);
             }
         });
         console.log(this.flightData);
+        localStorage.setItem('flight', JSON.stringify(flightData));
+
     }
 
      getFlightsData(){

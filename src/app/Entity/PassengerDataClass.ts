@@ -19,4 +19,5 @@ export class PassengerDataClass{
     arrivaltime:string;
     depaturetime:string;
     seat:Seat;
+    
 }

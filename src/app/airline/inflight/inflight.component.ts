@@ -49,7 +49,7 @@ export class InflightComponent implements OnInit {
   constructor(private airlineService: AirlineService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.flights = this.airlineService.getFlightData();
+    this.flights = this.airlineService.getFlightsData();
     this.selectedDeviceObj = this.flights[1];
     this.services = ['foods', 'shoping'];
 

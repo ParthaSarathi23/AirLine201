@@ -92,14 +92,16 @@ export class AirlineModalComponent implements OnInit, OnDestroy {
       this.flight = undefined;
       this.flight = data[2];
 
-      if (this.flight.shoppingItems !== null) {
+      if (this.flight.shoppingItems.cardholder==undefined && this.flight.shoppingItems.perfume==undefined &&
+        this.flight.shoppingItems.phonestand==undefined) {
+          this.CardHolder = true;
+          this.Perfume = true;
+          this.PhoneStand = true;
+      } else {
         this.CardHolder = this.flight.shoppingItems.cardholder;
         this.Perfume = this.flight.shoppingItems.perfume;
         this.PhoneStand = this.flight.shoppingItems.phonestand;
-      } else {
-        this.CardHolder = true;
-        this.Perfume = true;
-        this.PhoneStand = true;
+       
       }
 
     }

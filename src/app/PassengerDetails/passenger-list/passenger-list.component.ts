@@ -120,6 +120,7 @@ export class PassengerListComponent implements OnInit {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.value) {
+        localStorage.setItem('passengerInfo', '');
         this.router.navigate(['add-passenger']);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
 

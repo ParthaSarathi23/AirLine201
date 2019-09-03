@@ -331,11 +331,13 @@ export class SeatAllocationComponent implements OnInit {
     var retrievedObject = localStorage.getItem('passengerInfo');
     this.passengerData = JSON.parse(retrievedObject);
     this.passengerData.seatnumber = this.cart.selectedSeats.toString();
+    this.passengerData.id=this.id;
 
     this.passengerData.seat.key = this.cart.seatstoStore[0];
     this.passengerData.seat.price = this.cart.totalamount;
     this.passengerData.seat.seatLabel = this.cart.selectedSeats;
     this.passengerData.seat.seatNo=this.cart.selectedSeats.toString();
+    
     // this.substring= this.cart.seatstoStore[0].toString.split('_');
     // this.passengerData.seat.seatNo=this.substring[1];
 

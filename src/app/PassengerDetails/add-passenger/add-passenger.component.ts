@@ -55,7 +55,7 @@ export class AddPassengerComponent implements OnInit {
   passenger;
   flightNo = "0";
   flights = [];
-  shopingItems:ShoppingItem;
+  shopingItems: ShoppingItem;
   selectedDeviceObj;
   flight: Flight;
   wheelchair: string;
@@ -70,7 +70,7 @@ export class AddPassengerComponent implements OnInit {
   disablityCount = "0";
   seat;
   seatselection: boolean = false;
-  shopingItemsData=[];
+  shopingItemsData = [];
 
 
 
@@ -99,7 +99,7 @@ export class AddPassengerComponent implements OnInit {
     console.log(this.ancilary);
     const dialogRef = this.dialog.open(PassengerModalComponent, {
       width: '650px',
-      data: [true, this.ancilary, this.ancilaryItem,this.shopingItemsData],
+      data: [true, this.ancilary, this.ancilaryItem, this.shopingItemsData],
 
     });
 
@@ -198,7 +198,7 @@ export class AddPassengerComponent implements OnInit {
     }
   }
 
-  setShoppingItems(flight){
+  setShoppingItems(flight) {
     this.shopingItems = flight.shoppingItems;
     if (this.shopingItems !== null) {
       if (this.shopingItems.perfume) {
@@ -224,7 +224,13 @@ export class AddPassengerComponent implements OnInit {
     this.infants = passenger.infants;
     this.passport = passenger.passport;
     this.seatno = passenger.seatnumber ? passenger.seatnumber : '';
-    this.mid = passenger.id + '';
+    var id = passenger.id;
+    if (id != undefined) {
+      this.id=+id;
+      this.isFromEdit = true;
+    } else {
+      this.isFromEdit = false;
+    }
     this.address = passenger.address;
     this.arrivaltime = passenger.arrivaltime;
     this.depaturetime = passenger.depaturetime;
@@ -296,7 +302,9 @@ export class AddPassengerComponent implements OnInit {
       }
     }
 
+    
     this.mid = uniqueNumber(1000) + '';
+    
     this.updateOptions();
 
     console.log("sigin");
@@ -365,10 +373,12 @@ export class AddPassengerComponent implements OnInit {
           ancilarservices: this.ancilaryItem,
           arrivaltime: this.arrivaltime,
           depaturetime: this.depaturetime,
-          food: this.fooditem
+          food: this.fooditem,
+          seat: this.seat
         }
       });
-    //  this.airlineService.editPassengerDataToLocalStorage(+this.id);
+      //  this.airlineService.editPassengerDataToLocalStorage(+this.id);
+      this.airlineService.editFlightOneditPassenger(+this.id);
       this.router.navigate(['passenger-list']);
     }
 
@@ -382,7 +392,7 @@ export class AddPassengerComponent implements OnInit {
 
     if (this.ancilaryItem === null || this.ancilaryItem === undefined) {
       this.ancilaryItem = new Ancilary();
-    } 
+    }
 
     if (this.radioData === 'yes') {
       this.checkedin = 1;
