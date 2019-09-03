@@ -51,7 +51,7 @@ export class InflightComponent implements OnInit {
   ngOnInit() {
     this.flights = this.airlineService.getFlightsData();
     this.selectedDeviceObj = this.flights[1];
-    this.services = ['foods', 'shoping'];
+    this.services = ['foods', 'shopping'];
 
 
     this.seatConfig = [
@@ -157,9 +157,33 @@ export class InflightComponent implements OnInit {
       console.log(this.seatmap);
     }
   }
-  public blockSeats(seatsToBlockArr: string[], string) {
+  public blockSeats(totalAvailableSeats:string[],seatsToBlockArr: string[], string) {
+
+    if (totalAvailableSeats.length > 0) {
+      for (let index = 0; index < totalAvailableSeats.length; index++) {
+        var seat = totalAvailableSeats[index] + "";
+        var seatSplitArr = seat.split('_');
+        console.log("Split seat: ", seatSplitArr);
+        for (let index2 = 0; index2 < this.seatmap.length; index2++) {
+          const element = this.seatmap[index2];
+          if (element.seatRowLabel == seatSplitArr[0]) {
+            var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
+           
+            if (seatObj) {
+              seatObj["status"] = "available";
+              this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
+              console.log("\n\n\nSeat Obj", seatObj);
+              console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
+              break;
+            }
+
+          }
+      }  
+    }
+
+    }
+
     if (seatsToBlockArr.length > 0) {
-      // var seatsToBlockArr = seatsToBlock.split(',');
       for (let index = 0; index < seatsToBlockArr.length; index++) {
         var seat = seatsToBlockArr[index] + "";
         var seatSplitArr = seat.split(' ');
@@ -168,6 +192,7 @@ export class InflightComponent implements OnInit {
           const element = this.seatmap[index2];
           if (element.seatRowLabel == seatSplitArr[0]) {
             var seatObj = element.seats[parseInt(seatSplitArr[1]) - 1];
+           
             if (seatObj) {
               console.log("\n\n\nFount Seat to block: ", seatObj);
               if (string === 'Veg') {
@@ -178,8 +203,9 @@ export class InflightComponent implements OnInit {
                 seatObj["status"] = "shopping";
               }else if(string === 'unavailable'){
                 seatObj["status"] = "unavailable";
+              }else{
+                seatObj["status"] = "available";
               }
-              // 
               this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1] = seatObj;
               console.log("\n\n\nSeat Obj", seatObj);
               console.log(this.seatmap[index2]["seats"][parseInt(seatSplitArr[1]) - 1]);
@@ -227,9 +253,9 @@ export class InflightComponent implements OnInit {
     
     this.flightname = newObj;
     this.flight = this.airlineService.getParticularFlightDetails(newObj);
-    var time = this.flight.time;
-    this.depaturetime = time;
-    this.arrivaltime = time;
+   
+    this.depaturetime = this.flight.depaturetime;
+    this.arrivaltime = this.flight.arrivaltime;
     this.id = this.flight.id;
     this.passengerData = this.airlineService.getPassengerDataOfParticularFlight(this.id);
     this.passengerData.forEach(element => {
@@ -254,9 +280,11 @@ export class InflightComponent implements OnInit {
       seatmap.seats.forEach(element => {
         this.totalseats.push(element);
       }));
+
     this.getNotBookedSeats(this.availableSeats);
   }
   getNotBookedSeats(seats) {
+   // this.availableSeats=seats;
     var result = [];
     var finalList=[];
     this.totalseats.reduce(function (acc, seat) {
@@ -270,23 +298,43 @@ export class InflightComponent implements OnInit {
     result.forEach(element => {
       finalList.push(element.seatLabel);
     });
-    this.blockSeats(finalList, 'unavailable');
-    if (this.value === 'foods') {
-      this.blockSeats(this.vegfoods, 'Veg');
-      this.blockSeats(this.nonvegfoods, 'Nonveg');
-    } else if(this.value==='shopping') {
-      this.blockSeats(this.shopping, 'shopping');
+  
+    this.blockSeats(seats,finalList, 'unavailable');
     
+    if (this.value === 'foods') {
+      if(this.vegfoods.length>0){
+        this.blockSeats(seats,this.vegfoods, 'Veg');
+      }
+      if(this.nonvegfoods.length>0){
+        this.blockSeats(seats,this.nonvegfoods, 'Nonveg');
+
+      }
+    } else if(this.value==='shopping') {
+      if(this.shopping.length>0){
+        this.blockSeats(seats,this.shopping, 'shopping');
+
+      }
+     
   }
   }
 
   onServiceItemChange(newObj: any) {
     this.value=newObj;
-    if (newObj === 'foods') {
-      this.blockSeats(this.vegfoods, 'Veg');
-      this.blockSeats(this.nonvegfoods, 'Nonveg');
-    } else {
-      this.blockSeats(this.shopping, 'shopping');
-    }
+  //  this.blockSeats(this.availableSeats,'available');
+    if (this.value === 'foods') {
+      if(this.vegfoods.length>0){
+        this.blockSeats(this.availableSeats,this.vegfoods, 'Veg');
+      }
+      if(this.nonvegfoods.length>0){
+        this.blockSeats(this.availableSeats,this.nonvegfoods, 'Nonveg');
+
+      }
+    } else if(this.value==='shopping') {
+      if(this.shopping.length>0){
+        this.blockSeats(this.availableSeats,this.shopping, 'shopping');
+
+      }
+     
+  }
   }
 }

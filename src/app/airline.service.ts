@@ -153,7 +153,7 @@ export class AirlineService {
 
     getPassengerDataOfParticularFlight(id) {
         var passengerData = [];
-        this.flightData.forEach((flight, index) => {
+        this.getFlightsData().forEach((flight, index) => {
             if (flight.id == id) {
                 passengerData = flight.passengerDetails;
             }

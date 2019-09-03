@@ -133,5 +133,10 @@ export class FlightEditComponent implements OnInit, OnDestroy {
       this.airlineService.updateFlightShoppingData(flight.id,flight.shoppingItems);
     });
   }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 
 }

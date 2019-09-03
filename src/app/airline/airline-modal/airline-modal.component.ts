@@ -33,12 +33,13 @@ export class AirlineModalComponent implements OnInit, OnDestroy {
   PhoneStand;
 
   flight: Flight;
-
+  arrivalTime;
+  depatureTime;
   ancilaryServiceCliked = new Subject<Ancilary>();
   ancilary=new Ancilary;
   meal=new Meal;
   shoppingItem=new ShoppingItem;
-
+  passengerNo;
   constructor(public dialogRef: MatDialogRef<AirlineModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
     console.log(data);
@@ -46,17 +47,19 @@ export class AirlineModalComponent implements OnInit, OnDestroy {
     if (data[0] == 0) {
 
       this.passenger = data[1].passengerDetails;
-
+      this.passengerNo=this.passenger.length;
       this.passenger.forEach((element, index) => {
         if (element.ischeckedin) {
           this.noOfChckedIn = this.noOfChckedIn + 1;
         }
         if (element.infants) {
-          this.noInfants = this.noInfants + element.infants;
+          this.noInfants = (+this.noInfants) + (+element.infants);
         }
         if (element.disability) {
           this.noOfWheeleChair = this.noOfWheeleChair + 1;
         }
+        this.arrivalTime=element.arrivaltime;
+        this.depatureTime=element.depaturetime;
       });
 
     } else if (data[0] == 1) {

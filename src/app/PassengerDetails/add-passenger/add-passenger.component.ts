@@ -313,7 +313,7 @@ export class AddPassengerComponent implements OnInit {
     this.name = form.value.name;
     this.passport = form.value.passport;
     //this.address=form.value.address;
-    this.setDate(form.value.dob);
+   // this.setDate(form.value.dob);
 
     console.log(this.food);
 
@@ -383,11 +383,11 @@ export class AddPassengerComponent implements OnInit {
     }
 
   }
-  setDate(date: string) {
-    let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
+  // setDate(date: string) {
+  //   let formatedDate = new DatePipe('mm/dd/yyyy').transform(date);
 
-    this.dob = formatedDate;
-  }
+  //   this.dob = formatedDate;
+  // }
   seatAllocation() {
 
     if (this.ancilaryItem === null || this.ancilaryItem === undefined) {
