@@ -59,69 +59,18 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private airlineService: AirlineService, private socialAuthService: AuthService, private authenticationService: AuthenticationService) { 
-      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    private airlineService: AirlineService, private socialAuthService: AuthService, private authenticationService: AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
 
-    }
+  }
 
   ngOnInit() {
     this.radioData = 'Airline';
     this.isLoggedIn = false;
     this.isAdminLoggedIn = false;
 
-
-    // this.airlineService.showLogoutEvent.subscribe(
-    //   (string: string[]) => {
-    //     this.name = string[0];
-    //     this.loggedinType = string[1];
-    //     console.log(name);
-    //     var loggedInStatus: LoggedInStaus[] = [];
-
-    //     if (this.loggedinType === 'airline') {
-    //       this.isLoggedIn = true;
-    //       this.isAdminLoggedIn = false;
-    //       this.name = this.name;
-    //       loggedInStatus.push(new LoggedInStaus('airline', true, this.name));
-    //       localStorage.setItem('loggedIn', '');
-    //       localStorage.setItem('loggedIn', JSON.stringify(loggedInStatus));
-
-    //     } else if (this.loggedinType === 'admin') {
-    //       this.isLoggedIn = false;
-    //       this.isAdminLoggedIn = true;
-    //       this.name = this.name;
-    //       loggedInStatus.push(new LoggedInStaus('admin', true, this.name));
-    //       localStorage.setItem('loggedIn', '');
-    //       localStorage.setItem('loggedIn', JSON.stringify(loggedInStatus));
-    //     }
-    //   }
-    // );
-
-
     var loggedInStatus: LoggedInStaus[] = [];
 
-    // var retrievedObject = localStorage.getItem('loggedIn');
-    // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-    // loggedInStatus = JSON.parse(retrievedObject);
-    // if (loggedInStatus != null && loggedInStatus.length > 0) {
-    //   if (loggedInStatus[0].user === 'airline' && loggedInStatus[0].isLoggedIn === true) {
-
-    //     this.isLoggedIn = true;
-    //     this.isAdminLoggedIn = false;
-    //     this.name = loggedInStatus[0].name;
-
-    //   } else if (loggedInStatus[0].user === 'admin' && loggedInStatus[0].isLoggedIn === true) {
-    //     this.isLoggedIn = false;
-    //     this.isAdminLoggedIn = true;
-    //     this.name = loggedInStatus[0].name;
-
-    //   } else {
-    //     this.isLoggedIn = false;
-    //     this.isAdminLoggedIn = false;
-    //   }
-    // } else {
-    //   this.isLoggedIn = false;
-    //   this.isAdminLoggedIn = false;
-    // }
   }
   signuporlogin() {
     $('#modalLRForm').modal('show');
@@ -136,12 +85,12 @@ export class HeaderComponent implements OnInit {
   loggedOut() {
     this.authenticationService.logout();
     this.signuporlogin();
-    this.currentUser=null;
+    this.currentUser = null;
   }
-  login(form:NgForm) {
+  login(form: NgForm) {
     this.loading = true;
-    this.email1=form.value.email1;
-    this.loginpassword=form.value.loginpassword;
+    this.email1 = form.value.email1;
+    this.loginpassword = form.value.loginpassword;
     this.authenticationService.login(this.email1, this.loginpassword)
       .pipe(first())
       .subscribe(
@@ -155,24 +104,16 @@ export class HeaderComponent implements OnInit {
           // this.loading = false;
           this.loading = false;
 
-          alert(error);
+          alert("Please register first");
         });
   }
 
 
-  // loggedOut() {
-  //   localStorage.setItem('loggedIn', '');
-  //   this.isLoggedIn = false;
-  //   this.isAdminLoggedIn = false;
-  //   this.name = "";
-  //   this.signuporlogin();
-  // }
+
 
   socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
-    // if(socialPlatform == "facebook"){
-    //   socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
-    // }
+
     if (socialPlatform == "google") {
 
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
@@ -186,34 +127,15 @@ export class HeaderComponent implements OnInit {
         console.log(socialPlatform + " sign in data : ", userData);
         this.email2 = userData.email;
         this.isSocialLogin = true;
-        // if(this.email2.length==0){
-        //   this.isDisabled=false;
-        //  }else if(this.isSocialLogin && this.email2.length>0){
-        //   this.isDisabled=true;
-        //  }else{
-        //   this.isDisabled=false;
-        //  }
-
-        // Now sign-in with userData
-        // ...
-        // this.User.id=userData.id;
-        // this.User.name=userData.name;
-        // this.User.image=userData.image;
-        // this.User.provider=userData.provider;
-        //     console.log(userData.image);
-
-        //     // console.log(userData.name);
-
-        // console.log(this.User);
 
       }
     );
   }
 
-  signup(form:NgForm) {
+  signup(form: NgForm) {
 
-    this.email2=form.value.email2;
-    this.loginpassword2=form.value.loginpassword2;
+    this.email2 = form.value.email2;
+    this.loginpassword2 = form.value.loginpassword2;
 
     var retrievedObject = localStorage.getItem('LoginInfo');
     this.loginInfo = JSON.parse(retrievedObject);
