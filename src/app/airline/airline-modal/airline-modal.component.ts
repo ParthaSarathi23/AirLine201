@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Flight } from 'src/app/Entity/Flight';
-import { Passenger } from 'src/app/Entity/Passenger';
+import { Flight } from '@/Entity/Flight';
+import { Passenger } from '@/Entity/Passenger';
 import { Subject } from 'rxjs';
-import { Ancilary } from 'src/app/Entity/Ancilary';
-import { Meal } from 'src/app/Entity/Meal';
-import { ShoppingItem } from 'src/app/Entity/ShoppingItem';
+import { Ancilary } from '@/Entity/Ancilary';
+import { Meal } from '@/Entity/Meal';
+import { ShoppingItem } from '@/Entity/ShoppingItem';
 
 @Component({
   selector: 'app-airline-modal',

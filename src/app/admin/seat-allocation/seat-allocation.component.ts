@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AirlineService } from 'src/app/airline.service';
+import { AirlineService } from '@/services/airline.service';
 import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
-import { Seat } from 'src/app/Entity/Seat';
-import { Passenger } from 'src/app/Entity/Passenger';
+import { PassengerDataClass } from '@/Entity/PassengerDataClass';
+import { Seat } from '@/Entity/Seat';
+import { Passenger } from '@/Entity/Passenger';
 
 @Component({
   selector: 'app-seat-allocation',

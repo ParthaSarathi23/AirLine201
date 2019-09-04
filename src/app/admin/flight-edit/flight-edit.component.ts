@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild, AfterViewChecked, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatDialogConfig } from '@angular/material';
-import { Flight } from 'src/app/Entity/Flight';
-import { AirlineService } from 'src/app/airline.service';
+import { Flight } from '@/Entity/Flight';
+import { AirlineService } from '@/services/airline.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
-import { AirlineModalComponent } from 'src/app/airline/airline-modal/airline-modal.component';
-import { Ancilary } from 'src/app/Entity/Ancilary';
-import { Meal } from 'src/app/Entity/Meal';
-import { ShoppingItem } from 'src/app/Entity/ShoppingItem';
+import { AppState } from '@/app.state';
+import { AirlineModalComponent } from '@/airline/airline-modal/airline-modal.component';
+import { Ancilary } from '@/Entity/Ancilary';
+import { Meal } from '@/Entity/Meal';
+import { ShoppingItem } from '@/Entity/ShoppingItem';
 
 @Component({
   selector: 'app-flight-edit',

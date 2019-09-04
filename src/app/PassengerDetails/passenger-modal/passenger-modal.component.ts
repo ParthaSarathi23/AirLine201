@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Passenger } from 'src/app/Entity/Passenger';
-import { Ancilary } from 'src/app/Entity/Ancilary';
+import { Passenger } from '@/Entity/Passenger';
+import { Ancilary } from '@/Entity/Ancilary';
 
 export interface data {
   shopping: string;

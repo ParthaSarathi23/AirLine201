@@ -1,9 +1,9 @@
 import { Subject, Observable } from 'rxjs';
-import { Passenger } from './Entity/Passenger';
+import { Passenger } from '../Entity/Passenger';
 import { Store } from '@ngrx/store';
-import { AppState } from './app.state';
+import { AppState } from '../app.state';
 import { Injectable } from '@angular/core';
-import { Flight } from './Entity/Flight';
+import { Flight } from '../Entity/Flight';
 // import { FirebaseDatabase } from '@angular/fire';
 // import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
@@ -13,10 +13,10 @@ import { reject } from 'q';
 // Add the Firebase products that you want to use
 // import "firebase/auth";
 // import "firebase/firestore";
-import { Ancilary } from './Entity/Ancilary';
-import { Seat } from './Entity/Seat';
-import { Meal } from './Entity/Meal';
-import { ShoppingItem } from './Entity/ShoppingItem';
+import { Ancilary } from '../Entity/Ancilary';
+import { Seat } from '../Entity/Seat';
+import { Meal } from '../Entity/Meal';
+import { ShoppingItem } from '../Entity/ShoppingItem';
 
 @Injectable()
 export class AirlineService {

@@ -1,6 +1,5 @@
 import { Passenger } from '../Entity/Passenger';
 import { Action } from '@ngrx/store';
-import { stat } from 'fs';
 
 export const ADD_PASSENGER = 'ADD_PASSENGER';
 export const EDIT_PASSENGER = 'EDIT_PASSENGER';

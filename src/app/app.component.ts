@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AirlineService } from './airline.service';
+import { AirlineService } from './services/airline.service';
 import { Passenger } from './Entity/Passenger';
+import { AuthenticationService } from './services';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,9 +9,9 @@ import { Passenger } from './Entity/Passenger';
 })
 
 export class AppComponent implements OnInit {
-
-  constructor(private airlineService: AirlineService) {
-
+  currentUser;
+  constructor(private airlineService: AirlineService,private authenticationService:AuthenticationService) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
   ngOnInit(): void {
     var retrievedObject = localStorage.getItem('flight');

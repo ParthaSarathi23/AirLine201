@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { AirlineService } from 'src/app/airline.service';
-import { Passenger } from 'src/app/Entity/Passenger';
+import { AirlineService } from '../../services/airline.service';
+import { Passenger } from '../../Entity/Passenger';
 import { DatePipe } from '@angular/common';
-import { LoggedInStaus } from 'src/app/user/LoggedInStatus';
+import { LoggedInStaus } from '../../user/LoggedInStatus';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
+import { AppState } from '../../app.state';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
-import { Flight } from 'src/app/Entity/Flight';
-import { PassengerDataClass } from 'src/app/Entity/PassengerDataClass';
-import { Ancilary } from 'src/app/Entity/Ancilary';
-import { Seat } from 'src/app/Entity/Seat';
-import { Meal } from 'src/app/Entity/Meal';
-import { ShoppingItem } from 'src/app/Entity/ShoppingItem';
+import { Flight } from '@/Entity/Flight';
+import { PassengerDataClass } from '@/Entity/PassengerDataClass';
+import { Ancilary } from '@/Entity/Ancilary';
+import { Seat } from '../../Entity/Seat';
+import { Meal } from '@/Entity/Meal';
+import { ShoppingItem } from '@/Entity/ShoppingItem';
 
 @Component({
   selector: 'app-add-passenger',
@@ -50,7 +50,7 @@ export class AddPassengerComponent implements OnInit {
   fooditem = "0";
   isAdminLoggedIn: boolean;
   passengers: Passenger;
-  numbers = [];
+  numbers:Number[] = [];
   mid: string;
   passenger;
   flightNo = "0";
@@ -294,12 +294,16 @@ export class AddPassengerComponent implements OnInit {
     }
     const uniqueNumber = (maxVal) => {
       const number = Math.floor((Math.random() * maxVal) + 1);
-      if (!this.numbers.includes(number)) {
-        this.numbers.push(number);
-        return number;
-      } else if (this.numbers.length - 1 !== maxVal) {
-        uniqueNumber(maxVal);
-      }
+
+      this.numbers.forEach(element => {
+        if (element!=number) {
+          this.numbers.push(number);
+          return number;
+        } else if (this.numbers.length - 1 !== maxVal) {
+          uniqueNumber(maxVal);
+        }
+      });
+      
     }
 
     

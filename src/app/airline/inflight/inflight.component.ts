@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AirlineService } from 'src/app/airline.service';
+import { AirlineService } from '@/services/airline.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Passenger } from 'src/app/Entity/Passenger';
+import { Passenger } from '@/Entity/Passenger';
 import { element } from '@angular/core/src/render3';
-import { Seat } from 'src/app/Entity/Seat';
+import { Seat } from '@/Entity/Seat';
 
 @Component({
   selector: 'app-inflight',

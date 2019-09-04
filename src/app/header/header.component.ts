@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, Form } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AirlineService } from '../airline.service';
-import { LoggedInStaus } from '../user/LoggedInStatus';
+import { AirlineService } from '@/services/airline.service';
+import { LoggedInStaus } from '@/user/LoggedInStatus';
 // import * as $ from "jquery";
 import {
   AuthService,
@@ -12,6 +12,9 @@ import {
 } from 'angular-6-social-login';
 import { Login } from '../Entity/Login';
 import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from '../services';
+import { first } from 'rxjs/operators';
+import { User, Role } from '@/Entity';
 
 declare var $: any;
 
@@ -30,15 +33,15 @@ export interface UserType {
 export class HeaderComponent implements OnInit {
 
   radioData;
-
+  currentUser: User;
   loggedinObject: object;
   isLoggedIn: boolean;
   isAdminLoggedIn: boolean;
-  email1: string='';
-  email2='';
-  loginpassword='';
-  loginpassword2='';
-  loginpassword3='';
+  email1: string = '';
+  email2 = '';
+  loginpassword = '';
+  loginpassword2 = '';
+  loginpassword3 = '';
   isAvailable = false;
   isSocialLogin = false;
   isDisabled = false;
@@ -55,115 +58,110 @@ export class HeaderComponent implements OnInit {
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private airlineService: AirlineService, private socialAuthService: AuthService) { }
+    private airlineService: AirlineService, private socialAuthService: AuthService, private authenticationService: AuthenticationService) { 
+      this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+
+    }
 
   ngOnInit() {
-    this.radioData = 'airline';
+    this.radioData = 'Airline';
     this.isLoggedIn = false;
     this.isAdminLoggedIn = false;
 
 
-    this.airlineService.showLogoutEvent.subscribe(
-      (string: string[]) => {
-        this.name = string[0];
-        this.loggedinType = string[1];
-        console.log(name);
-        var loggedInStatus: LoggedInStaus[] = [];
+    // this.airlineService.showLogoutEvent.subscribe(
+    //   (string: string[]) => {
+    //     this.name = string[0];
+    //     this.loggedinType = string[1];
+    //     console.log(name);
+    //     var loggedInStatus: LoggedInStaus[] = [];
 
-        if (this.loggedinType === 'airline') {
-          this.isLoggedIn = true;
-          this.isAdminLoggedIn = false;
-          this.name = this.name;
-          loggedInStatus.push(new LoggedInStaus('airline', true, this.name));
-          localStorage.setItem('loggedIn', '');
-          localStorage.setItem('loggedIn', JSON.stringify(loggedInStatus));
+    //     if (this.loggedinType === 'airline') {
+    //       this.isLoggedIn = true;
+    //       this.isAdminLoggedIn = false;
+    //       this.name = this.name;
+    //       loggedInStatus.push(new LoggedInStaus('airline', true, this.name));
+    //       localStorage.setItem('loggedIn', '');
+    //       localStorage.setItem('loggedIn', JSON.stringify(loggedInStatus));
 
-        } else if (this.loggedinType === 'admin') {
-          this.isLoggedIn = false;
-          this.isAdminLoggedIn = true;
-          this.name = this.name;
-          loggedInStatus.push(new LoggedInStaus('admin', true, this.name));
-          localStorage.setItem('loggedIn', '');
-          localStorage.setItem('loggedIn', JSON.stringify(loggedInStatus));
-        }
-      }
-    );
+    //     } else if (this.loggedinType === 'admin') {
+    //       this.isLoggedIn = false;
+    //       this.isAdminLoggedIn = true;
+    //       this.name = this.name;
+    //       loggedInStatus.push(new LoggedInStaus('admin', true, this.name));
+    //       localStorage.setItem('loggedIn', '');
+    //       localStorage.setItem('loggedIn', JSON.stringify(loggedInStatus));
+    //     }
+    //   }
+    // );
 
 
     var loggedInStatus: LoggedInStaus[] = [];
 
-    var retrievedObject = localStorage.getItem('loggedIn');
-    console.log('retrievedObject: ', JSON.parse(retrievedObject));
-    loggedInStatus = JSON.parse(retrievedObject);
-    if (loggedInStatus != null && loggedInStatus.length > 0) {
-      if (loggedInStatus[0].user === 'airline' && loggedInStatus[0].isLoggedIn === true) {
+    // var retrievedObject = localStorage.getItem('loggedIn');
+    // console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    // loggedInStatus = JSON.parse(retrievedObject);
+    // if (loggedInStatus != null && loggedInStatus.length > 0) {
+    //   if (loggedInStatus[0].user === 'airline' && loggedInStatus[0].isLoggedIn === true) {
 
-        this.isLoggedIn = true;
-        this.isAdminLoggedIn = false;
-        this.name = loggedInStatus[0].name;
+    //     this.isLoggedIn = true;
+    //     this.isAdminLoggedIn = false;
+    //     this.name = loggedInStatus[0].name;
 
-      } else if (loggedInStatus[0].user === 'admin' && loggedInStatus[0].isLoggedIn === true) {
-        this.isLoggedIn = false;
-        this.isAdminLoggedIn = true;
-        this.name = loggedInStatus[0].name;
+    //   } else if (loggedInStatus[0].user === 'admin' && loggedInStatus[0].isLoggedIn === true) {
+    //     this.isLoggedIn = false;
+    //     this.isAdminLoggedIn = true;
+    //     this.name = loggedInStatus[0].name;
 
-      } else {
-        this.isLoggedIn = false;
-        this.isAdminLoggedIn = false;
-      }
-    } else {
-      this.isLoggedIn = false;
-      this.isAdminLoggedIn = false;
-    }
+    //   } else {
+    //     this.isLoggedIn = false;
+    //     this.isAdminLoggedIn = false;
+    //   }
+    // } else {
+    //   this.isLoggedIn = false;
+    //   this.isAdminLoggedIn = false;
+    // }
   }
   signuporlogin() {
     $('#modalLRForm').modal('show');
 
   }
-
-  login() {
-
-    console.log(this.email1);
-    console.log(this.loginpassword);
-
-    var retrievedObject = localStorage.getItem('LoginInfo');
-    this.loginInfo = JSON.parse(retrievedObject);
-    this.loginInfo.forEach(element => {
-      if (this.email1 == element.username && this.loginpassword == element.password) {
-        $("#modalLRForm").modal('hide');
-        this.router.navigate(['admin'], { relativeTo: this.activatedRoute });
-        this.airlineService.showLogout(this.email1, element.userType);
-        this.email2 = '';
-        this.loginpassword = '';
-      }
-    });
-
-
-
-    // if (this.email == 'subha064@gmail.com' && this.password == 'sonali064') {
-    //   console.log("success");
-    //   $("#modalLRForm").modal('hide');
-    //   this.router.navigate(['flight-list'], { relativeTo: this.activatedRoute });
-    //   this.airlineService.showLogout(this.email, 'USER');
-
-    // } else if (this.email == 'partha064@gmail.com' && this.password == 'sonali064') {
-    //   console.log("success");
-    //   $("#modalLRForm").modal('hide');
-    //   this.router.navigate(['flight-edit'], { relativeTo: this.activatedRoute });
-    //   this.airlineService.showLogout(this.email, 'ADMIN');
-
-    // } else {
-    //   console.log("failed");
-    // }
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
-
+  get isAirline() {
+    return this.currentUser && this.currentUser.role === Role.Airline;
+  }
   loggedOut() {
-    localStorage.setItem('loggedIn', '');
-    this.isLoggedIn = false;
-    this.isAdminLoggedIn = false;
-    this.name = "";
+    this.authenticationService.logout();
     this.signuporlogin();
+    this.currentUser=null;
   }
+  login(form:NgForm) {
+    this.email1=form.value.email1;
+    this.loginpassword=form.value.loginpassword;
+    this.authenticationService.login(this.email1, this.loginpassword)
+      .pipe(first())
+      .subscribe(
+        data => {
+          $("#modalLRForm").modal('hide');
+          this.router.navigate(['admin'], { relativeTo: this.activatedRoute });
+        },
+        error => {
+          // this.error = error;
+          // this.loading = false;
+          alert(error);
+        });
+  }
+
+
+  // loggedOut() {
+  //   localStorage.setItem('loggedIn', '');
+  //   this.isLoggedIn = false;
+  //   this.isAdminLoggedIn = false;
+  //   this.name = "";
+  //   this.signuporlogin();
+  // }
 
   socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
@@ -207,9 +205,10 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  signup() {
+  signup(form:NgForm) {
 
-
+    this.email2=form.value.email2;
+    this.loginpassword2=form.value.loginpassword2;
 
     var retrievedObject = localStorage.getItem('LoginInfo');
     this.loginInfo = JSON.parse(retrievedObject);
@@ -232,7 +231,7 @@ export class HeaderComponent implements OnInit {
       var login = new Login();
       login.password = this.loginpassword2;
       login.username = this.email2;
-      login.userType = this.radioData;
+      login.role = this.radioData;
       this.loginInfo.push(login);
       localStorage.setItem('LoginInfo', JSON.stringify(this.loginInfo));
       $('.nav-tabs a:first').tab('show');
@@ -243,22 +242,6 @@ export class HeaderComponent implements OnInit {
       this.loginpassword = '';
     }
 
-
-    // if (this.email == 'subha064@gmail.com' && this.password == 'sonali064') {
-    //   console.log("success");
-    //   $("#modalLRForm").modal('hide');
-    //   this.router.navigate(['flight-list'], { relativeTo: this.activatedRoute });
-    //   this.airlineService.showLogout(this.email, 'USER');
-
-    // } else if (this.email == 'partha064@gmail.com' && this.password == 'sonali064') {
-    //   console.log("success");
-    //   $("#modalLRForm").modal('hide');
-    //   this.router.navigate(['flight-edit'], { relativeTo: this.activatedRoute });
-    //   this.airlineService.showLogout(this.email, 'ADMIN');
-
-    // } else {
-    //   console.log("failed");
-    // }
   }
 
 }

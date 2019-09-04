@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Flight } from 'src/app/Entity/Flight';
+import { Flight } from '@/Entity/Flight';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
-import { AirlineService } from 'src/app/airline.service';
+import { AirlineService } from '@/services/airline.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.state';
+import { AppState } from '@/app.state';
 import { AirlineModalComponent } from '../airline-modal/airline-modal.component';
 
 @Component({

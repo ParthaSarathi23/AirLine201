@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { Passenger } from 'src/app/Entity/Passenger';
-import { AirlineService } from 'src/app/airline.service';
+import { Passenger } from '../../Entity/Passenger';
+import { AirlineService } from '../../services/airline.service';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { PassengerModalComponent } from '../passenger-modal/passenger-modal.component';
 import Swal from 'sweetalert2';
-import { AppState } from 'src/app/app.state';
+import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 
 @Component({
