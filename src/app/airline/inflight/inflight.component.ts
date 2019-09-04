@@ -51,7 +51,7 @@ export class InflightComponent implements OnInit {
   ngOnInit() {
     this.flights = this.airlineService.getFlightsData();
     this.selectedDeviceObj = this.flights[1];
-    this.services = ['foods', 'shopping'];
+    this.services = ['Veg','NonVeg', 'shopping'];
 
 
     this.seatConfig = [
@@ -197,7 +197,7 @@ export class InflightComponent implements OnInit {
               console.log("\n\n\nFount Seat to block: ", seatObj);
               if (string === 'Veg') {
                 seatObj["status"] = "veg";
-              } else if (string === 'Nonveg') {
+              } else if (string === 'NonVeg') {
                 seatObj["status"] = "nonveg";
               } else if (string === 'shopping') {
                 seatObj["status"] = "shopping";
@@ -262,7 +262,7 @@ export class InflightComponent implements OnInit {
 
       if (element.food === 'Veg') {
         this.vegfoods.push(element.seatnumber);
-      } else if (element.food === 'Nonveg') {
+      } else if (element.food === 'NonVeg') {
         this.nonvegfoods.push(element.seatnumber);
       }
 
@@ -301,12 +301,13 @@ export class InflightComponent implements OnInit {
   
     this.blockSeats(seats,finalList, 'unavailable');
     
-    if (this.value === 'foods') {
+    if (this.value === 'Veg') {
       if(this.vegfoods.length>0){
         this.blockSeats(seats,this.vegfoods, 'Veg');
       }
+    }else  if (this.value === 'NonVeg') {
       if(this.nonvegfoods.length>0){
-        this.blockSeats(seats,this.nonvegfoods, 'Nonveg');
+        this.blockSeats(seats,this.nonvegfoods, 'NonVeg');
 
       }
     } else if(this.value==='shopping') {
@@ -321,12 +322,14 @@ export class InflightComponent implements OnInit {
   onServiceItemChange(newObj: any) {
     this.value=newObj;
   //  this.blockSeats(this.availableSeats,'available');
-    if (this.value === 'foods') {
+    if (this.value === 'Veg') {
       if(this.vegfoods.length>0){
         this.blockSeats(this.availableSeats,this.vegfoods, 'Veg');
       }
-      if(this.nonvegfoods.length>0){
-        this.blockSeats(this.availableSeats,this.nonvegfoods, 'Nonveg');
+    
+    }else if (this.value === 'NonVeg') {
+    if(this.nonvegfoods.length>0){
+        this.blockSeats(this.availableSeats,this.nonvegfoods, 'NonVeg');
 
       }
     } else if(this.value==='shopping') {

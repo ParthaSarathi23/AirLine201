@@ -69,10 +69,10 @@
               <div class="container">
                 <form (ngSubmit)="login(f)" #f="ngForm">
                   <div class="form-group">
-                    <input type="email" id="email1" placeholder="Email" name="email1" ngModel #email1="ngModel"
+                    <input type="email" id="email" placeholder="Email" name="email" ngModel #email="ngModel"
                       class="form-control" required/>
 
-                      <span class="help-block" *ngIf="!email1.valid && email1.touched">Please enter a email</span>
+                      <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a email</span>
 
                   </div>
                   <div class="form-group">
@@ -104,10 +104,10 @@
                 <form (ngSubmit)="signup(g)" #g="ngForm">
                   <div class="form-group">
 
-                    <input type="email" id="email2" placeholder="Email" name="email2" [(ngModel)]="email2"
-                      class="form-control" required/>
-                      <div *ngIf=" email2.invalid && (g.submitted || email2.touched)" class="alert alert-danger">
-                        <div *ngIf="email2.errors.required">Email is required. </div>
+                    <input type="email" id="signupemail" placeholder="Email" name="signupemail" [(ngModel)]="email2"
+                      class="form-control" required #signupemail="ngModel"/>
+                      <div *ngIf=" signupemail.invalid && (g.submitted || signupemail.touched)" class="alert alert-danger">
+                        <div *ngIf="signupemail.errors.required">Email is required. </div>
                       </div>
                   </div>
                   <div class="form-group">

@@ -284,10 +284,6 @@ export class AddPassengerComponent implements OnInit {
     
     const uniqueNumber = Math.floor(Math.random() * 1000) + 1  
    
-      
-    
-
-    
     this.mid = uniqueNumber+'';
     
     this.updateOptions();

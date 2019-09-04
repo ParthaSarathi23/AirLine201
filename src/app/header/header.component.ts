@@ -104,7 +104,11 @@ export class HeaderComponent implements OnInit {
           // this.loading = false;
           this.loading = false;
 
+          if(error!=="Username or password is incorrect"){
           alert("Please register first");
+          }else{
+            alert(error);
+          }
         });
   }
 
