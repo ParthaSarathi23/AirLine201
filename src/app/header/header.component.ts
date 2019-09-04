@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
   selectedValue: string;
   loggedinType: string;
   loginInfo: Login[] = [];
+  loading = false;
   userTypes: UserType[] = [
     { value: 'login', display: 'Login/SignUp' }
 
@@ -138,18 +139,22 @@ export class HeaderComponent implements OnInit {
     this.currentUser=null;
   }
   login(form:NgForm) {
+    this.loading = true;
     this.email1=form.value.email1;
     this.loginpassword=form.value.loginpassword;
     this.authenticationService.login(this.email1, this.loginpassword)
       .pipe(first())
       .subscribe(
         data => {
+          this.loading = false;
           $("#modalLRForm").modal('hide');
           this.router.navigate(['admin'], { relativeTo: this.activatedRoute });
         },
         error => {
           // this.error = error;
           // this.loading = false;
+          this.loading = false;
+
           alert(error);
         });
   }
