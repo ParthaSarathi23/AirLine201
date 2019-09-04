@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from '@/dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { AirlineService } from './services/airline.service';
@@ -50,7 +49,6 @@ export function getAuthServiceConfigs() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     DashboardComponent,
     HeaderComponent,
     PassengerListComponent,
