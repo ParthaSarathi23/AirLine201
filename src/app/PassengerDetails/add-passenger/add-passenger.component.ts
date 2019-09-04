@@ -72,7 +72,7 @@ export class AddPassengerComponent implements OnInit {
   seatselection: boolean = false;
   shopingItemsData = [];
 
-
+  model: any = {};
 
   constructor(private route: ActivatedRoute, private router: Router,
     private airlineService: AirlineService, private store: Store<AppState>, public dialog: MatDialog) {
