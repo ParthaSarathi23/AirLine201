@@ -35,8 +35,8 @@ export class AddPassengerComponent implements OnInit {
   disablity: string;
   food: string = "0";
   seatno: string = '';
-  arrivaltime: string;
-  depaturetime: string;
+  arrivaltime: string='';
+  depaturetime: string='';
   checkedin: number = 0
   infantcount: number;
   anicilary: string;

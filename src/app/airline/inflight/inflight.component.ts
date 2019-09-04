@@ -325,12 +325,15 @@ export class InflightComponent implements OnInit {
     if (this.value === 'Veg') {
       if(this.vegfoods.length>0){
         this.blockSeats(this.availableSeats,this.vegfoods, 'Veg');
+      }else{
+        this.blockSeats(this.availableSeats,this.availableSeats,'available');
       }
     
     }else if (this.value === 'NonVeg') {
     if(this.nonvegfoods.length>0){
         this.blockSeats(this.availableSeats,this.nonvegfoods, 'NonVeg');
-
+      }else{
+        this.blockSeats(this.availableSeats,this.availableSeats,'available');
       }
     } else if(this.value==='shopping') {
       if(this.shopping.length>0){
