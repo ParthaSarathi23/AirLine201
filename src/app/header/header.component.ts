@@ -119,13 +119,13 @@ export class HeaderComponent implements OnInit {
     if (this.email == 'subha064@gmail.com' && this.password == 'sonali064') {
       console.log("success");
       $("#modalLRForm").modal('hide');
-      this.router.navigate(['login'], { relativeTo: this.activatedRoute });
+      this.router.navigate(['flight-list'], { relativeTo: this.activatedRoute });
       this.airlineService.showLogout(this.email, 'USER');
 
     } else if (this.email == 'partha064@gmail.com' && this.password == 'sonali064') {
       console.log("success");
       $("#modalLRForm").modal('hide');
-      this.router.navigate(['admin'], { relativeTo: this.activatedRoute });
+      this.router.navigate(['flight-edit'], { relativeTo: this.activatedRoute });
       this.airlineService.showLogout(this.email, 'ADMIN');
 
     } else {
@@ -138,6 +138,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = false;
     this.isAdminLoggedIn = false;
     this.name="";
+    this.signuporlogin();
   }
 
   socialSignIn(socialPlatform : string) {

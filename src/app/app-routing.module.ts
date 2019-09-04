@@ -12,8 +12,8 @@ import { FlightEditComponent } from './admin/flight-edit/flight-edit.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'login', component: DashboardComponent },
+  { path: 'admin', component: DashboardComponent },
   { path: 'seat-allocation', component: SeatAllocationComponent },
   { path: 'add-passenger', component: AddPassengerComponent },
   { path: 'add-passenger/:id', component: AddPassengerComponent },

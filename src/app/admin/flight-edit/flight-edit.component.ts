@@ -17,7 +17,6 @@ import { ShoppingItem } from 'src/app/Entity/ShoppingItem';
 })
 export class FlightEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
-    console.log("destroy");
   }
 
   displayedColumns = ['ID', 'Name', 'ArrivalTime', 'DepatureTime', 'AncilaryServices', 'Meal', 'ShoppingItems'];
@@ -61,7 +60,7 @@ export class FlightEditComponent implements OnInit, OnDestroy {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    
       var flight = row;
       if(flight.ancilaryService!==null){
         flight.ancilaryService.baggage = result.baggage;
@@ -90,7 +89,7 @@ export class FlightEditComponent implements OnInit, OnDestroy {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    
       var flight = row;
       if(flight.meal!==null){
         flight.meal.veg = result.veg;
@@ -118,7 +117,7 @@ export class FlightEditComponent implements OnInit, OnDestroy {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+     
       var flight = row;
       if(flight.shoppingItems!==null){
         flight.shoppingItems.perfume = result.perfume;

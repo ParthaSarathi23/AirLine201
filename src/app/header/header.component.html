@@ -8,7 +8,7 @@
       <h1>Welcome to Possible Airline!</h1>
       <span class="menu-spacer"></span>
       <span class = "filler"></span>
-      <h1>{{name}}</h1>
+      <button mat-raised-button [disabled]>{{name}}</button>
       <button *ngIf="!isLoggedIn && !isAdminLoggedIn" mat-button data-toggle="modal" 
       (click)="signuporlogin()">Login/Signup</button>
     <!-- <mat-form-field>
@@ -23,9 +23,6 @@
    </mat-form-field> -->
     </mat-toolbar-row>
   
-    <mat-toolbar-row>
-        <span style="font-size: 12px;">SimpleCRM helps you easily manage your contacts</span>
-      </mat-toolbar-row>
   </mat-toolbar>
   
   <mat-sidenav-container >
