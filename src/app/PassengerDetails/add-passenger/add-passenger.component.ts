@@ -48,7 +48,6 @@ export class AddPassengerComponent implements OnInit {
   foods = [];
   disabilities: string[];
   fooditem = "0";
-  isAdminLoggedIn: boolean;
   passengers: Passenger;
   numbers:Number[] = [];
   mid: string;
@@ -149,17 +148,7 @@ export class AddPassengerComponent implements OnInit {
 
     var loggedInStatus: LoggedInStaus[] = [];
 
-    var retrievedObject = localStorage.getItem('loggedIn');
-    console.log('retrievedObject: ', JSON.parse(retrievedObject));
-    loggedInStatus = JSON.parse(retrievedObject);
-
-    if (loggedInStatus.length > 0) {
-      if (loggedInStatus[0].user === 'ADMIN' && loggedInStatus[0].isLoggedIn === true) {
-        this.isAdminLoggedIn = true;
-
-      }
-
-    }
+   
     console.log(this.isFromEdit);
 
 
@@ -292,22 +281,14 @@ export class AddPassengerComponent implements OnInit {
     } else {
       this.checkedin = 0;
     }
-    const uniqueNumber = (maxVal) => {
-      const number = Math.floor((Math.random() * maxVal) + 1);
-
-      this.numbers.forEach(element => {
-        if (element!=number) {
-          this.numbers.push(number);
-          return number;
-        } else if (this.numbers.length - 1 !== maxVal) {
-          uniqueNumber(maxVal);
-        }
-      });
+    
+    const uniqueNumber = Math.floor(Math.random() * 1000) + 1  
+   
       
-    }
+    
 
     
-    this.mid = uniqueNumber(1000) + '';
+    this.mid = uniqueNumber+'';
     
     this.updateOptions();
 
