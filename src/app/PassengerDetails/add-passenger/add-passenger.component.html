@@ -202,7 +202,7 @@
               <span class="input-group-text"> <i class="fa fa-user"></i> </span>
             </div>
             <input type="text" id="name" name="nametext" [(ngModel)]="name" class="form-control" placeholder="Full name"
-            #nametext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nametext.invalid }" required>
+            #nametext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && nametext.invalid }">
             <div *ngIf="f.submitted && nametext.invalid" class="invalid-feedback">
               <div *ngIf="nametext.errors.required">Full Name is required</div>
               <div *ngIf="nametext.errors.minlength">
@@ -217,7 +217,7 @@
               <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
             </div>
             <input type="email" id="email" name="email" [(ngModel)]="email" class="form-control"
-              placeholder="Your E-mail" #emailtext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && emailtext.invalid }" required>
+              placeholder="Your E-mail" #emailtext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && emailtext.invalid }">
               <div *ngIf="emailtext.invalid && f.submitted" class="invalid-feedback">
                 <div *ngIf="emailtext.errors.required">Email is required</div>
             </div>
@@ -231,7 +231,7 @@
               <span class="input-group-text"> <i class="fas fa-passport"></i> </span>
             </div>
             <input type="text" id="passport" name="passport" placeholder="Passport Number" [(ngModel)]="passport"
-              class="form-control" #passporttext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && passporttext.invalid }" required>
+              class="form-control" #passporttext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && passporttext.invalid }" reuired>
               <div *ngIf="passporttext.invalid && f.submitted" class="invalid-feedback">
                 <div *ngIf="passporttext.errors.required">Passport is required</div>
             </div>
@@ -244,7 +244,7 @@
             </div>
 
             <input type="date" id="dob" name="dob" placeholder="Date of Birth" [ngModel]="dob| date:'yyyy-MM-dd'"
-              class="form-control" (ngModelChange)="dob = $event" #dobtext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dobtext.invalid }" required>
+              class="form-control" (ngModelChange)="dob = $event" #dobtext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && dobtext.invalid }">
               <div *ngIf="dobtext.invalid && f.submitted" class="invalid-feedback">
                 <div *ngIf="dobtext.errors.required">DOB is required</div>
             </div>
@@ -321,7 +321,7 @@
               <span class="input-group-text"> <i class="fas fa-baby-carriage"></i> </span>
             </div>
             <input type="text" id="infants" name="infants" placeholder="Infants count" [(ngModel)]="infants"
-              class="form-control" required>
+              class="form-control">
           </div>
         </div>
         <div class="col-md-2">
@@ -343,7 +343,7 @@
             <div class="form-group input-group">
 
               <textarea rows="4" cols="50" id="address" name="address" placeholder="Enter Full Address here" [(ngModel)]="address"
-                class="form-control"  #addresstext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && addresstext.invalid }" required></textarea>
+                class="form-control"  #addresstext="ngModel" [ngClass]="{ 'is-invalid': f.submitted && addresstext.invalid }"></textarea>
                 <div *ngIf="addresstext.invalid && f.submitted" class="invalid-feedback">
                   <div *ngIf="addresstext.errors.required">Address is required</div>
               </div>
