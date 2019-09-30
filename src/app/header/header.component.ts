@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit {
   }
   login(form: NgForm) {
     this.loading = true;
-    this.email1 = form.value.email1;
+    this.email1 = form.value.email;
     this.loginpassword = form.value.loginpassword;
     this.authenticationService.login(this.email1, this.loginpassword)
       .pipe(first())
@@ -104,7 +104,11 @@ export class HeaderComponent implements OnInit {
           // this.loading = false;
           this.loading = false;
 
+          if(error!=="Username or password is incorrect"){
           alert("Please register first");
+          }else{
+            alert(error);
+          }
         });
   }
 
@@ -134,7 +138,7 @@ export class HeaderComponent implements OnInit {
 
   signup(form: NgForm) {
 
-    this.email2 = form.value.email2;
+    this.email2 = form.value.signupemail;
     this.loginpassword2 = form.value.loginpassword2;
 
     var retrievedObject = localStorage.getItem('LoginInfo');
