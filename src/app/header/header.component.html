@@ -3,7 +3,7 @@
     <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
-    <h1>Welcome to Possible Airline!</h1>
+    <h1>Make my Airline!</h1>
     <span class="menu-spacer"></span>
     <span class="filler"></span>
     <button mat-raised-button *ngIf="currentUser" [disabled]>{{currentUser.username}}</button>
@@ -149,14 +149,22 @@
 
                   <div class="loginSeparator_3X-mB">
                     <hr>
-                    <div class="or_3koTd" style="font-weight: bold;">OR</div>
                   </div>
-                  <div class="form-group">
+                   <div class="row justify-content-center">
+                        <div id="social">
+                            <!-- <a class="facebookBtn smGlobalBtn" href="#" ></a> -->
+                            <a class="googleplusBtn smGlobalBtn" (click)="socialSignIn('google')"></a>
+                        </div>
+                      </div>
+                        <div class="airlinepolicy">
+                        <span>By signing in, you confirm that you have read and agree<br> to  our <a href="" style="color: #1976d2"> Terms & Conditions</a> and <a href="" style="color: #1976d2">Privacy Policy</a></span>
+                        </div>
+                  <!-- <div class="form-group">
                     <button type="button" class="btn btn-lg btn-block" style="background-color:rgb(223, 223, 223);"
                       (click)="socialSignIn('google')"><i class="fab fa-google fa-fw"
                         style="color:  #dd4b39;font-size: 1.2em;font-weight: bold "></i>&nbsp;&nbsp;Login with
                       Google</button>
-                  </div>
+                  </div> -->
                 </form>
               </div>
             </div>

@@ -179,7 +179,7 @@
 </form> -->
 
 
-<div class="card">
+<div class="card" style="width: 84%;margin: 0 auto;float: none;margin-bottom: 10px;">
   <h5 class="card-header" style="text-align: center;" *ngIf="!isFromEdit">Create a new Passenger</h5>
 
   <h5 class="card-header" style="text-align: center;" *ngIf="isFromEdit">Edit Passenger</h5>
@@ -194,6 +194,7 @@
               </div>
               </div>
       </div> -->
+      <!-- <div class="row"></div> -->
       <div class="row">
 
         <div class="col-md-4">
@@ -336,8 +337,8 @@
         <div class="col-md-2">
          
           <button type="button" class="form-control" [disabled]="!seatselection" class="btn btn-info"
-            style="background-color: #673AB7;" (click)="seatAllocation()">Click to select seat <i
-              class="fas fa-chevron-right" style="background-color: #673AB7;"></i></button>
+            style="background-color: #065af3;" (click)="seatAllocation()">Click to select seat <i
+              class="fas fa-chevron-right" style="background-color:#065af3;"></i></button>
 
         </div>
         <div class="col-md-2">
@@ -384,7 +385,7 @@
         </div>
         <div class="col-md-4">
           <div class="form-group input-group">
-            <button type="button" class="btn btn-info" style="background-color: #673AB7;" (click)="openDialog()"
+            <button type="button" class="btn btn-info" style="background-color: #065af3;" (click)="openDialog()"
               [disabled]="flightNo==0">Ancilary Service</button>
 
             <!-- <fieldset class="ancilary">
@@ -401,7 +402,7 @@
         </div>
       </div>
       <div style="text-align: center;">
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="submit" class="btn btn-primary">Add Passenger</button>
       </div>
     </form>
 

@@ -7,3 +7,80 @@
  input.ng-invalid.ng-touched{
    border: 1px red solid;
 }
+.mat-toolbar.mat-primary {
+   background: black;
+   color: #fff;
+}
+
+#social {
+   margin: 20px 10px;
+   text-align: center;
+ }
+ 
+ .smGlobalBtn { /* global button class */
+     display: inline-block;
+     position: relative;
+     cursor: pointer;
+     width: 50px;
+     height: 50px;
+     border:2px solid #ddd; /* add border to the buttons */
+     box-shadow: 0 3px 3px #999;
+     padding: 0px;
+     text-decoration: none;
+     text-align: center;
+     color: #fff;
+     font-size: 25px;
+     font-weight: normal;
+     line-height: 1.8em;
+     border-radius: 27px;
+     -moz-border-radius:27px;
+     -webkit-border-radius:27px;
+ }
+ .airlinepolicy{
+   font-size: 0.8em;
+   text-align: center;
+ }
+ @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+ /* facebook button class*/
+ .facebookBtn{
+   background: #4060A5;
+ }
+ 
+ .facebookBtn:before{ /* use :before to add the relevant icons */
+   font-family: "FontAwesome";
+   content: "\f09a"; /* add facebook icon */
+ }
+ 
+ .facebookBtn:hover{
+   color: #4060A5;
+   background: #fff;
+   border-color: #4060A5; /* change the border color on mouse hover */
+ }
+ /* google plus button class*/
+ .googleplusBtn{
+   background: #e64522;
+ }
+ 
+ .googleplusBtn:before{
+     font-family: "FontAwesome";
+     content: "\f0d5"; /* add googleplus icon */
+ }
+ 
+ .googleplusBtn:hover{
+     color: #e64522;
+     background: #fff;
+     border-color: #e64522;
+ }
+ 
+ @media screen and (max-width: 450px) {
+   #modal-content{
+       width:96%;
+   }
+ 
+ 
+ }
+ @media screen and (min-width: 768px) {
+   #modal-content{
+       width:86%;
+   }
+} 

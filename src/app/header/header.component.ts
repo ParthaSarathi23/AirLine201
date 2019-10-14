@@ -15,6 +15,7 @@ import { NgbTabChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../services';
 import { first } from 'rxjs/operators';
 import { User, Role } from '@/Entity';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -61,7 +62,6 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private airlineService: AirlineService, private socialAuthService: AuthService, private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-
   }
 
   ngOnInit() {
@@ -105,7 +105,7 @@ export class HeaderComponent implements OnInit {
           this.loading = false;
 
           if(error!=="Username or password is incorrect"){
-          alert("Please register first");
+          Swal.fire("Please register first");
           }else{
             alert(error);
           }
@@ -156,7 +156,7 @@ export class HeaderComponent implements OnInit {
     }
 
     if (this.isAvailable) {
-      alert("Already LoggedIn:Try using diffrent email");
+      Swal.fire("Are you already registered??","Try login using credentials;");
     } else {
       this.isAvailable = false;
       var login = new Login();
