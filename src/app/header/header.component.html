@@ -42,8 +42,27 @@
 <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
-    <div class="modal-content" style="width: 80%;">
+    <div class="modal-content" style="width: 130%;">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6">
+          <div class="card">
+              <div class="card-header" style="background-color: #feeab8;">
+                  Logged In/Registered users get MORE!
+              </div>
+              <div class="card-body" style="background-color:#fef2d8">
+                <!-- <h5 class="card-title">Special title treatment</h5> -->
+                <p class="card-text"><i class="fa fa-bookmark-o" style="font-size:1.2em;color: red;"></i> View/ Cancel/ Reschedule bookings</p>
+                <p class="card-text"><i class="fa fa-calendar-o" style="font-size:1.2em;color: red;"></i> Check booking history, manage cancellations & print eTickets</p>
+                <p class="card-text"><i class="fa fa-credit-card" style="font-size:1.2em;color: red;"></i> Book faster with Pre-Filled Forms, saved Travellers & Saved Cards</p>
+                <p class="card-text"><i class="fa fa-money" style="font-size:1.2em;color: red;"></i> Use myAirline eCash to get discounts</p>
+                <p class="card-text"><i class="fa fa-paper-plane" style="font-size:1.2em;color: red;"></i> Convert eCash to Shopping Coupons from Amazon, BookMyShow, etc.</p>
 
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
       <!--Modal cascading tabs-->
       <div class="modal-c-tabs">
 
@@ -85,10 +104,13 @@
                   <div class="form-group">
                     <button type="submit" class="btn btn-success btn-lg btn-block"
                     [disabled]="!f.valid || loading"
-                      style="background-color: rgba(0, 145, 0, 0.966)">Login</button>
+                      style="background-color:rgb(0, 80, 80);border-color: cyan">Login</button>
                       <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 
                   </div>
+                  <div class="airlinepolicy">
+                      <span>By signing in, you confirm that you have read and agree to  our <a href="" style="color: #1976d2"> Terms & Conditions</a> and <a href="" style="color: #1976d2">Privacy Policy</a></span>
+                      </div>
                 </form>
               </div>
             </div>
@@ -135,7 +157,7 @@
                     <fieldset class="checkedin">
                       <h5>User Type?</h5>
                       <label><input type="radio" id="Airline" value="Airline" name="radio" [(ngModel)]="radioData">
-                        Airline </label>
+                        Airline </label>&nbsp;
                       <label> <input type="radio" id="Admin" value="Admin" name="radio" [(ngModel)]="radioData"> Admin
                       </label>
                     </fieldset>
@@ -144,7 +166,7 @@
                   <div class="form-group">
                     <button type="submit" (click)="signup()" class="btn btn-success btn-lg btn-block"
                     [disabled]="!g.valid"
-                      style="background-color: rgba(0, 145, 0, 0.966)">Sign up</button>
+                      style="background-color: rgb(0, 80, 80);border-color: cyan">Sign up</button>
                   </div>
 
                   <div class="loginSeparator_3X-mB">
@@ -157,7 +179,7 @@
                         </div>
                       </div>
                         <div class="airlinepolicy">
-                        <span>By signing in, you confirm that you have read and agree<br> to  our <a href="" style="color: #1976d2"> Terms & Conditions</a> and <a href="" style="color: #1976d2">Privacy Policy</a></span>
+                        <span>By signing in, you confirm that you have read and agree to  our <a href="" style="color: #1976d2"> Terms & Conditions</a> and <a href="" style="color: #1976d2">Privacy Policy</a></span>
                         </div>
                   <!-- <div class="form-group">
                     <button type="button" class="btn btn-lg btn-block" style="background-color:rgb(223, 223, 223);"
@@ -171,6 +193,9 @@
           </div>
         </div>
       </div>
+    </div>
+    </div>
+    </div>
     </div>
   </div>
 </div>
